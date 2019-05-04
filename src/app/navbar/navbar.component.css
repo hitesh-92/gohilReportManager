@@ -16,6 +16,7 @@ nav{
   text-decoration: underline;
   font-size: 1.05rem;
   margin: 0 0 2rem 0.5rem;
+  font-weight: 900;
 }
 
 .links{
@@ -31,7 +32,7 @@ nav{
 }
 
 .links > li:hover{
-  background-color: rgba(109, 103, 182, 0.25)
+  background-color: rgba(155, 184, 196, 0.25)
 }
 
 a{
