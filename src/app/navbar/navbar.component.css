@@ -1,0 +1,36 @@
+nav{
+  background-color: rgb(0, 132, 172);
+  width: 15vw;
+  height: 100vh;
+  margin:0;
+  padding: 0;
+}
+
+.container{
+  padding: 2rem 0;
+  display: grid;
+  place-items: center center;
+}
+
+.title{
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  text-decoration: underline;
+  font-size: 1.2rem;
+}
+
+a{
+  margin: 1rem 0;
+  padding: 0.5rem 0.7rem;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  transition: 0.2s ease-in-out;
+  border-radius: 1rem;
+  font-weight: 100;
+  letter-spacing: 0.05rem;
+  font-family: sans-serif
+}
+
+a:hover{
+  color: rgb(147, 210, 240)
+}
