@@ -1,0 +1,66 @@
+.column-view{
+  display: grid;
+  grid-template-rows: 10vh 10vh 80vh;
+}
+
+/* .head{
+
+} */
+
+.head > h1{
+  margin-left: 1rem;
+}
+
+.title > h1{
+  /* font-size: 1.5rem; */
+}
+
+.columnInfo{
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* color: red; */
+}
+
+.switch-message{
+  color: red
+}
+
+.articles{
+  overflow-y: scroll;
+  scrollbar-color: red rgb(154, 154, 228);
+  scrollbar-width: thin;
+  background: radial-gradient(ellipse at top, #64a7e6, transparent),
+            radial-gradient(ellipse at bottom, #ac56df, transparent);
+
+}
+
+.article-info-bar{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 0 1rem;
+  background-color: white;
+  box-shadow: 0 0 5px 5px rgba(59, 80, 139, 0.5);
+  /* margin: 0 0.5em; */
+}
+
+.article-info-bar > p{
+  /* margin-left: 5px; */
+}
+
+ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.article{
+  text-decoration: none;
+  border: 1px solid rgb(238, 238, 238);
+  padding: 0.5rem;
+  margin: 0.5rem 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}

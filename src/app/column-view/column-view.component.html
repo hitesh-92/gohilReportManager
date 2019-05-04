@@ -1,0 +1,46 @@
+<div class="column-view">
+
+  <div class="head mat-headline">
+    <h1>{{columnName}}</h1>
+  </div>
+
+  <section class="columnInfo">
+    <div class="mat-body-strong">Total Articles: {{articles.length}}</div>
+    <div></div>
+    <div class="mat-small switch-message">
+      Use switch to change corresponding positions <br>
+      <span class="mat-small"><em>Changes will be reflected in <strong>Current View</strong></em></span>
+    </div>
+    <div>No switch selected</div>
+  </section>
+
+  <section class="articles">
+
+    <div class="article-info-bar mat-small">
+      <p>Position</p>
+      <p>Status</p>
+      <p>ID</p>
+      <p>Title</p>
+      <p>URL</p>
+      <p>Options</p>
+    </div>
+
+    <ul *ngFor="let article of articles">
+      <li class="article" (click)="onDrag($event)" id="article.position">
+        <p>{{article.position}}</p>
+        <p>{{article.status}}</p>
+        <p>{{article._id}}</p>
+        <p>{{article.title}}</p>
+        <p>{{article.url}}</p>
+        <div>
+          <button>edit</button>
+          <button>switch</button>
+        </div>
+      </li>
+    </ul>
+
+  </section>
+
+
+
+</div>

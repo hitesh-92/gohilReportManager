@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatInputModule} from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { ColumnComponent } from './column/column.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { OverviewComponent } from './overview/overview.component';
+import { ColumnViewComponent } from './column-view/column-view.component';
+import { ArticleEditorComponent } from './article-editor/article-editor.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { OverviewComponent } from './overview/overview.component';
     ColumnComponent,
     ArchiveComponent,
     NavbarComponent,
-    OverviewComponent
+    OverviewComponent,
+    ColumnViewComponent,
+    ArticleEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +37,7 @@ import { OverviewComponent } from './overview/overview.component';
     MatCheckboxModule,
     MatSliderModule,
     MatSidenavModule,
+    MatInputModule,
     FormsModule,
     AppRoutingModule
   ],
