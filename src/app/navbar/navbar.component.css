@@ -1,6 +1,5 @@
 nav{
-  background-color: rgb(0, 132, 172);
-  /* width: 15vw; */
+  background: linear-gradient(#3eabdd, #5d6bff);
   height: 100vh;
   margin:0;
   padding: 0;
@@ -9,28 +8,46 @@ nav{
 .container{
   padding: 2rem 0;
   display: grid;
-  place-items: center center;
 }
 
 .title{
   font-family: 'Courier New', Courier, monospace;
   color: white;
   text-decoration: underline;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  margin: 0 0 2rem 0.5rem;
+}
+
+.links{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.links > li{
+  transition: 0.5s ease-in-out;
+  padding: 1rem 0;
+}
+
+.links > li:hover{
+  background-color: rgba(109, 103, 182, 0.25)
 }
 
 a{
-  margin: 1rem 0;
-  padding: 0.5rem 0.7rem;
+  margin: 0 0 0 0.5rem;
+  padding: 0rem 0rem;
   text-decoration: none;
   color: rgb(255, 255, 255);
-  transition: 0.2s ease-in-out;
+  transition: 0.25s ease-in-out;
   border-radius: 1rem;
   font-weight: 100;
   letter-spacing: 0.05rem;
-  font-family: sans-serif
+  font-family: sans-serif;
+  font-size: 0.8rem;
 }
 
 a:hover{
-  color: rgb(147, 210, 240)
+  color: rgb(0, 128, 192);
+  text-shadow: 1px 0px 1px #032cf7;
 }

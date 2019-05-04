@@ -1,12 +1,26 @@
 <nav>
   <div class="container">
     <p class="title">Gohil Report</p>
-    <a href="/dashboard">Dashboard</a>
-    <a href="#">Current View</a>
-    <a href="#">Left Articles</a>
-    <a href="#">Center Articles</a>
-    <a href="#">Right Articles</a>
-    <a href="#">Archived Articles</a>
-    <a href="#">Users</a>
+    <ul class="links">
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="#">Current View</a></li>
+      <li><a href="#">Left Articles</a></li>
+      <li><a href="#">Center Articles</a></li>
+      <li><a href="#">Right Articles</a></li>
+      <li><a href="#">Archived Articles</a></li>
+      <li><a href="#">Users</a></li>
+
+
+      <hr><hr>
+      <button (click)="onSelectThing()" >clickMe</button>
+      {{wasClicked}}
+      <input type="text" (input)="inputSomething($event)">
+      <br>
+      {{someInput}}
+      <br>
+      <input type="text" [(ngModel)]="twoWay">
+      {{twoWay}}
+    </ul>
+
   </div>
 </nav>
