@@ -1,6 +1,13 @@
 #overview{
   display: grid;
   grid-template-rows: 10vh 25vh 35vh 30vh;
+
+  /* background: repeating-linear-gradient(
+    1deg,
+    #3f87a6,
+    #d2e7f5 1%,
+    #ffffff 1%
+  ); */
 }
 
 .title{
@@ -16,8 +23,6 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 0.5rem;
   padding: 0 0.5rem;
-
-  /* border: 1px solid rgb(251, 201, 255); */
 }
 
 #activeArticles > section> div{
@@ -25,6 +30,7 @@
   box-shadow: 0 0 5px 0px rgb(231, 231, 231);
   border-radius: 10px;
   padding: 0.5rem;
+  transition: 0.25s ease-in-out;
 }
 
 #article-count{
@@ -37,6 +43,12 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0.5rem;
+}
+
+#article-count > div:hover, #article-status > div:hover{
+  background-color: rgb(236, 237, 241);
+  border: 1px solid rgba(255, 255, 255, 0.658);
+  box-shadow: 0 0 0 0 white;
 }
 
 #alerts{
@@ -60,14 +72,14 @@
 }
 
 .newAlert{
-  border:1px solid red;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
 }
 
 
-
-
-
-
-
-
-#last{border:1px solid green}
+#last{
+  border-top: 1px solid rgb(226, 226, 226);
+  background-color: #ccc;
+  padding: 1rem;
+}
