@@ -24,9 +24,10 @@
   overflow-y: scroll;
   scrollbar-color: red rgb(154, 154, 228);
   scrollbar-width: thin;
-  background: radial-gradient(ellipse at top, #64a7e6, transparent),
-            radial-gradient(ellipse at bottom, #ac56df, transparent);
-
+  background: 
+    radial-gradient(ellipse at top, #64a7e6, transparent),
+    radial-gradient(ellipse at bottom, #ac56df, transparent);
+  
 }
 
 .article-info-bar{
@@ -46,7 +47,6 @@ ul{
 
 .article{
   text-decoration: none;
-  border-bottom: 1px solid rgb(201, 201, 201);
   padding: 0 1rem;
   margin: 0rem;
   background-color: white;
@@ -56,8 +56,7 @@ ul{
 }
 
 .article:hover{
-  background: rgb(238, 238, 238);
-  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  background: rgb(245, 245, 245);
 }
 
 .article > p{
