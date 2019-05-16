@@ -5,8 +5,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatInputModule} from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +41,9 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
     MatSliderModule,
     MatSidenavModule,
     MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    MatButtonModule,
     FormsModule,
     AppRoutingModule
   ],
