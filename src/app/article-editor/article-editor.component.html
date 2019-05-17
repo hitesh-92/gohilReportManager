@@ -68,20 +68,35 @@
       <div class="right-side">
         <!-- SET DEFAULT PIC FOR NO IMG -->
           <img
-            class="editor-img"
+            class="article-img"
             src="https://tinyurl.com/y2kabrx3"
             alt=""
           >
 
           <!-- constants -->
-          <ul>
-            <!-- could show title of articles in positions infront and behind -->
-            <li>Position: 1</li>
-            <li>Created At</li>
-            <li>Updated At</li>
-            <!-- Status, show how long the article has been up/archived| -->
-            <li>Status</li>
-          </ul>
+          <div class="article-constants">
+            <!-- could show title of articles in positions infront and behind (desktop?) -->
+            <div class="const-data">
+              <small>Position</small>
+              <p>{{ '1' }}</p>
+            </div>
+            <div class="const-data">
+              <small>Created At</small>
+              <p> 01/01/2019 </p>
+            </div>
+            <div class="const-data">
+              <small>Updated At</small>
+              <p>17/05/2019</p>
+            </div>
+            <div class="const-data">
+              <!-- Status, show how long the article has been up/archived -->
+              <small>Status</small>
+              <div class="status-data">
+                <p>2</p>
+                <p>123 months old</p>
+              </div>
+            </div>
+          </div>
       </div>
 
     </section>
