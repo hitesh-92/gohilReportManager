@@ -1,49 +1,61 @@
 <div class="article-editor">
-
   <main class="editor">
-
     <div class="article-id">
       <small>#<strong>5cd93d2bd4a444372ceeb9cf</strong></small>
     </div>
 
     <section class="editor-body">
-
       <div class="left-side">
         <!-- if alert: add check box -->
 
         <!-- variables -->
         <form class="article-form">
-
           <div class="articleInput">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe ipsam vel sed facilis delectus reiciendis fuga dicta debitis animi fugiat!</p>
-              <mat-form-field class="input">
-                <textarea matInput placeholder="Edit title" value=""></textarea>
-              </mat-form-field>
-            </div>
-
+            <span class="title">Title</span>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+              ipsam vel sed facilis delectus reiciendis fuga dicta debitis animi
+              fugiat!
+            </p>
+            <mat-form-field class="input">
+              <textarea matInput placeholder="Edit title" value=""></textarea>
+            </mat-form-field>
+          </div>
+          
           <div class="articleInput">
+            <span class="title">Article Url</span>
             <p>https://www.example.com</p>
-              <mat-form-field class="input">
-                <textarea matInput placeholder="Edit url" value=""></textarea>
-              </mat-form-field>
-            </div>
+            <mat-form-field class="input">
+              <textarea matInput placeholder="Edit article url" value=""></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="articleInput">
+            <span class="title">Image Url</span>
+            <p>https://www.imageimageimage.com</p>
+            <mat-form-field class="input">
+              <textarea matInput placeholder="Edit image url" value=""></textarea>
+            </mat-form-field>
+          </div>
 
           <div class="columnSelect">
-            
-            <p> Column: <span class="currentColumn">Left</span> </p>
+            <span class="title">Column</span>
+            <p>Left</p>
 
-             <mat-form-field>
-               <mat-label>Re-assign column</mat-label>
-               <mat-select [(ngModel)]="selectedColumn" name="column">
-                 <mat-option *ngFor="let column of columns" [value]="column.value">
-                   {{column.viewValue}}
-                 </mat-option>
-               </mat-select>
-             </mat-form-field>
+            <mat-form-field>
+              <mat-label>Re-assign column</mat-label>
+              <mat-select [(ngModel)]="selectedColumn" name="column">
+                <mat-option
+                  *ngFor="let column of columns"
+                  [value]="column.value"
+                >
+                  {{ column.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
           <div class="buttons">
-
             <button mat-raised-button color="primary">
               Update
             </button>
@@ -55,52 +67,39 @@
             <button mat-stroked-button color="warn">
               Archive
             </button>
-
-
           </div>
-
         </form>
-
-
-
       </div>
 
       <div class="right-side">
         <!-- SET DEFAULT PIC FOR NO IMG -->
-          <img
-            class="article-img"
-            src="https://tinyurl.com/y2kabrx3"
-            alt=""
-          >
+        <img class="article-img" src="https://tinyurl.com/y2kabrx3" alt="" />
 
-          <!-- constants -->
-          <div class="article-constants">
-            <!-- could show title of articles in positions infront and behind (desktop?) -->
-            <div class="const-data">
-              <small>Position</small>
-              <p>{{ '1' }}</p>
-            </div>
-            <div class="const-data">
-              <small>Created At</small>
-              <p> 01/01/2019 </p>
-            </div>
-            <div class="const-data">
-              <small>Updated At</small>
-              <p>17/05/2019</p>
-            </div>
-            <div class="const-data">
-              <!-- Status, show how long the article has been up/archived -->
-              <small>Status</small>
-              <div class="status-data">
-                <p>2</p>
-                <p>123 months old</p>
-              </div>
+        <!-- constants -->
+        <div class="article-constants">
+          <!-- could show title of articles in positions infront and behind (desktop?) -->
+          <div class="const-data">
+            <small>Position</small>
+            <p>{{ "1" }}</p>
+          </div>
+          <div class="const-data">
+            <small>Created At</small>
+            <p>01/01/2019</p>
+          </div>
+          <div class="const-data">
+            <small>Updated At</small>
+            <p>17/05/2019</p>
+          </div>
+          <div class="const-data">
+            <!-- Status, show how long the article has been up/archived -->
+            <small>Status</small>
+            <div class="status-data">
+              <p>2</p>
+              <p>123 months old</p>
             </div>
           </div>
+        </div>
       </div>
-
     </section>
-
   </main>
-
 </div>
