@@ -9,38 +9,55 @@
         <!-- if alert: add check box -->
 
         <!-- variables -->
-        <form class="article-form">
+        <form class="article-form" [ngStyle]="{backgroundColor: colorEditor()}" >
+
+
           <div class="articleInput">
-            <span class="title">Title</span>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-              ipsam vel sed facilis delectus reiciendis fuga dicta debitis animi
-              fugiat!
-            </p>
+            <div class="article-current-info">
+              <p class="title">Title</p>
+              <p class="article-title">{{articleTitle}}</p>
+            </div>
             <mat-form-field class="input">
-              <textarea matInput placeholder="Edit title" value=""></textarea>
-            </mat-form-field>
-          </div>
-          
-          <div class="articleInput">
-            <span class="title">Article Url</span>
-            <p>https://www.example.com</p>
-            <mat-form-field class="input">
-              <textarea matInput placeholder="Edit article url" value=""></textarea>
+              <textarea
+                matInput
+                placeholder="Edit article url"
+                class="textInput"
+                value=""
+                (input)="onUpdateArticleTitle($event)"
+                >
+              </textarea>
             </mat-form-field>
           </div>
 
           <div class="articleInput">
-            <span class="title">Image Url</span>
-            <p>https://www.imageimageimage.com</p>
+            <div class="article-current-info">
+              <p class="title">Article url</p>
+              <p class="article-title">{{articleUrl}}</p>
+            </div>
             <mat-form-field class="input">
-              <textarea matInput placeholder="Edit image url" value=""></textarea>
+              <textarea matInput placeholder="Edit article url" class="textInput"></textarea>
             </mat-form-field>
           </div>
 
-          <div class="columnSelect">
-            <span class="title">Column</span>
-            <p>Left</p>
+          <div class="articleInput">
+            <div class="article-current-info">
+              <p class="title">Image url</p>
+              <p class="article-title">{{imageUrl}}</p>
+            </div>
+            <mat-form-field class="input">
+              <textarea matInput placeholder="Edit article url" class="textInput"></textarea>
+            </mat-form-field>
+          </div>
+
+
+
+
+          <!-- <div class="columnSelect"> -->
+          <div class="articleInput">
+            <div class="article-current-info">
+              <p class="title">Column</p>
+              <p class="article-title">{{articleColumn}}</p>
+            </div>
 
             <mat-form-field>
               <mat-label>Re-assign column</mat-label>
@@ -56,17 +73,39 @@
           </div>
 
           <div class="buttons">
-            <button mat-raised-button color="primary">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!allowUpdate"
+              (click)="onUpdate()"
+            >
               Update
             </button>
 
-            <button mat-flat-button color="warn">
+            <button mat-flat-button color="warn" (click)="onDelete()">
               Delete
             </button>
 
-            <button mat-stroked-button color="warn">
+            <button
+              *ngIf="!isArchived; else unarchive"
+              mat-stroked-button
+              color="warn"
+              (click)="onArchive()"
+            >
               Archive
             </button>
+
+            <ng-template #unarchive>
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="onUnarchive()"
+              >
+                UnArchive
+              </button>
+            </ng-template>
+
+
           </div>
         </form>
       </div>
@@ -80,7 +119,7 @@
           <!-- could show title of articles in positions infront and behind (desktop?) -->
           <div class="const-data">
             <small>Position</small>
-            <p>{{ "1" }}</p>
+            <p>{{ "1 / colLength" }}</p>
           </div>
           <div class="const-data">
             <small>Created At</small>
