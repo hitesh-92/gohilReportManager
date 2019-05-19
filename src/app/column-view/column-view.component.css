@@ -22,12 +22,13 @@
 
 .articles{
   overflow-y: scroll;
-  scrollbar-color: red rgb(154, 154, 228);
+  scrollbar-color: white rgb(154, 154, 228);
+  /* scrollbar-color: #197ee3 #e6e8eb; */
   scrollbar-width: thin;
-  background: 
+  background:
     radial-gradient(ellipse at top, #64a7e6, transparent),
     radial-gradient(ellipse at bottom, #ac56df, transparent);
-  
+
 }
 
 .article-info-bar{

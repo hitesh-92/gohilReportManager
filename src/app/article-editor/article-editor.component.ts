@@ -26,7 +26,7 @@ export class ArticleEditorComponent implements OnInit {
   articleUrl = 'http://www.example.com';
   imageUrl = 'http://somwhere.com/someimageLink';
   articleColumn = 'left';
-  isArchived = true;
+  isArchived = false;
 
   allowUpdate = true; //allow if validated
 

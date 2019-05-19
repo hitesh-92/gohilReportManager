@@ -21,6 +21,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { OverviewComponent } from './overview/overview.component';
 import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
     NavbarComponent,
     OverviewComponent,
     ColumnViewComponent,
-    ArticleEditorComponent
+    ArticleEditorComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
