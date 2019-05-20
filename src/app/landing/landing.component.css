@@ -8,11 +8,53 @@
   background-image: url("/assets/background.jpg");
 }
 
-
 .title{
-  border: 1px solid red;
   grid-column: 3/6;
+  grid-row: 2/3;
 
   display: grid;
   place-items: center center;
+}
+
+h1{
+  color: white;
+  text-shadow: 2px 2px 2px #ccc;
+}
+
+.auth{
+  /* border: 1px solid red; */
+  grid-column: 4/5;
+  grid-row: 3/4;
+  display: grid;
+  place-items: center center;
+}
+
+footer{
+  grid-column: 2/7;
+  grid-row: 5/6;
+  place-items: center;
+
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+footer > p {
+  color: #ccc;
+}
+
+.links{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  place-items: center;
+}
+
+a{
+  color: #0af9f6;
+  text-decoration: none;
+  transition: 0.5s ease-in-out;
+}
+
+a:hover{
+  color: white;
 }
