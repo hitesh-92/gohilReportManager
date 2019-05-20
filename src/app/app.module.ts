@@ -22,6 +22,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { LandingComponent } from './landing/landing.component';
+import { UserAuthComponent } from './user-auth/user-auth.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LandingComponent } from './landing/landing.component';
     OverviewComponent,
     ColumnViewComponent,
     ArticleEditorComponent,
-    LandingComponent
+    LandingComponent,
+    UserAuthComponent
   ],
   imports: [
     BrowserModule,
