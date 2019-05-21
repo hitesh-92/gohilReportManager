@@ -26,6 +26,7 @@ import { LandingComponent } from './landing/landing.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { UserSignUpForm } from './user-signup/user-signup.component';
 
 @NgModule({
   declarations: [

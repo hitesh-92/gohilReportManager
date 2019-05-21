@@ -1,3 +1,23 @@
-<p>
-  user-signup works!
-</p>
+<!-- <button
+  mat-raised-button
+  color="primary"
+  class="signup"
+  (click)="openDialog()"
+>
+  Sign Up
+</button> -->
+
+
+<ol>
+  <li>
+    <mat-form-field>
+      <input matInput [(ngModel)]="name" placeholder="name?">
+    </mat-form-field>
+  </li>
+  <li>
+    <button mat-raised-button (click)="openDialog()">Pick one</button>
+  </li>
+  <li *ngIf="animal">
+    You chose: <i>{{animal}}</i>
+  </li>
+</ol>

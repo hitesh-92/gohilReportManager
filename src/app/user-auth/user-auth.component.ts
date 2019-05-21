@@ -19,10 +19,6 @@ export class UserAuthComponent implements OnInit {
 
   constructor() { }
 
-  onSignUp(){
-    console.log('sing uppp')
-  }
-
   // onLogIn(){
   //   console.log('Hi')
   // }
