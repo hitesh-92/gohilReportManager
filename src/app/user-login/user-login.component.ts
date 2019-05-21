@@ -1,4 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject
+} from '@angular/core';
+
+import { Router } from '@angular/router';
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
+
+export interface DialogData {
+  password: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-user-login',
@@ -7,9 +24,93 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor() { }
+  name: string = '';
+  password: string = '';
+
+  constructor(public dialog: MatDialog, private router: Router) {}
+
+  openDialog(): void {
+
+    console.log('Log In Opened');
+
+    const dialogRef = this.dialog.open(UserLoginForm, {
+      data: {name: this.name, password: this.password}
+    });
+
+    dialogRef.afterClosed()
+    .subscribe(({
+      name, password
+    } = {}) => {
+      this.name = name;
+      this.password = password;
+
+      console.log(`name:${name}, password:${password}`);
+
+      // login in request
+
+      if( this.name && this.password ){
+
+        (async(email, password) => {
+
+          const url: string = 'http://localhost:8000/user/login';
+          const ops: object = {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email, password
+            })
+          };
+
+          const saved: object = await fetch(url, ops)
+          .then(r => r.json())
+          .then(res => {
+
+            // console.log(`email:${email}, loggedIn:${loggedIn}, token:${token}`);
+            const {token, email, loggedIn} = res;
+
+            if(loggedIn){
+              window.sessionStorage.setItem('token', token);
+              this.router.navigate(['/dashboard']);
+            } else {
+              console.log('errrrr logging in')
+            }
+          })
+
+
+        })(this.name, this.password);
+
+
+      }
+
+
+
+
+
+    })
+
+  };
 
   ngOnInit() {
+  }
+
+}
+
+///////
+
+@Component({
+  selector: 'user-login-form',
+  templateUrl: 'userLoginForm.html',
+})
+export class UserLoginForm {
+
+  constructor(
+    public dialogRef: MatDialogRef<UserLoginForm>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(e): void {
+    this.dialogRef.close();
   }
 
 }

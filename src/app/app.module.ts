@@ -25,7 +25,7 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
 import { LandingComponent } from './landing/landing.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
 import { UserSignupComponent, UserSignUpForm } from './user-signup/user-signup.component';
-import { UserLoginComponent } from './user-login/user-login.component';
+import { UserLoginComponent, UserLoginForm } from './user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +42,10 @@ import { UserLoginComponent } from './user-login/user-login.component';
     UserAuthComponent,
     UserSignupComponent,
     UserLoginComponent,
-    UserSignUpForm
+    UserSignUpForm,
+    UserLoginForm
   ],
-  entryComponents: [UserSignUpForm],
+  entryComponents: [UserSignUpForm, UserLoginForm],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -1,0 +1,30 @@
+
+<h1 mat-dialog-title>Log In</h1>
+
+<div mat-dialog-content>
+
+  <p><em>Enter your deatils</em></p>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.name" placeholder="Email">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.password" placeholder="Password">
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+
+  <button mat-button (click)="onNoClick()">
+    No Thanks
+  </button>
+
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    Send
+  </button>
+
+</div>
