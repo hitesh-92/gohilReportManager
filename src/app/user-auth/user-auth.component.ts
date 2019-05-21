@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject
+} from '@angular/core';
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
 
 @Component({
   selector: 'app-user-auth',
@@ -9,9 +19,13 @@ export class UserAuthComponent implements OnInit {
 
   constructor() { }
 
-  openDialog(){
-    console.log('Hi')
+  onSignUp(){
+    console.log('sing uppp')
   }
+
+  // onLogIn(){
+  //   console.log('Hi')
+  // }
 
 
   ngOnInit() {

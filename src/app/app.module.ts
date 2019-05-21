@@ -24,6 +24,8 @@ import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { LandingComponent } from './landing/landing.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
+import { UserSignupComponent } from './user-signup/user-signup.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { UserAuthComponent } from './user-auth/user-auth.component';
     ColumnViewComponent,
     ArticleEditorComponent,
     LandingComponent,
-    UserAuthComponent
+    UserAuthComponent,
+    UserSignupComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
