@@ -43,32 +43,29 @@ export class UserSignupComponent {
         console.log(`email:${this.name}, passowrd: ${this.password}`);
 
         //validate properly
-        if ( this.name != undefined && this.password != undefined ){
+        if ( this.name && this.password ){
 
           //MAKE REQUEST TO SINGUP HERE
           (async (email, password) => {
-            // const url = 'https://jsonplaceholder.typicode.com/users'
-            // const saved = await fetch(url).then(r => r.json())
-            // console.log(saved[0])
 
-            const url = 'http://localhost:8000/user/signup'
-            const ops = {
+            const url: string = 'http://localhost:8000/user/signup';
+            const ops: object = {
               method: 'POST',
               mode: 'cors',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 email, password
               })
-            }
-            const saved = await fetch(url, ops).then(res => res.json())
+            };
 
-            console.log(saved)
+            const saved: object = await fetch(url, ops).then(res => res.json());
+            console.log(saved);
 
           })(this.name, this.password);
 
 
         } else {
-          console.log('need in put')
+          console.log('need input')
         }
 
 
