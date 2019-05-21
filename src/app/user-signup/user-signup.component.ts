@@ -22,22 +22,22 @@ export interface DialogData {
 })
 export class UserSignupComponent {
 
-  animal: string;
-    name: string = 'Panda';
+    name: string = '';
+    password: string;
 
     constructor(public dialog: MatDialog) {}
 
     openDialog(): void {
       console.log('OPNEDDD')
       const dialogRef = this.dialog.open(UserSignUpForm, {
-        width: '250px',
-        height: '500px',
-        data: {name: this.name, animal: this.animal}
+        width: '25wv',
+        height: '40vh',
+        data: {name: this.name, password: this.password}
       });
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        this.animal = result;
+        this.password = result;
       });
     }
 
@@ -55,13 +55,14 @@ export class UserSignupComponent {
 @Component({
   selector: 'user-signup-form',
   templateUrl: 'userSignUpForm.html',
-  styleUrls: 'userSignUpForm.css'
+  // styleUrls: 'userSignUpForm.css'
 })
 export class UserSignUpForm {
 
   constructor(
     public dialogRef: MatDialogRef<UserSignUpForm>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
