@@ -1,16 +1,30 @@
 
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Sign Up</h1>
+
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+
+  <p><em>Enter your deatils</em></p>
+
   <mat-form-field>
-    <input matInput [(ngModel)]="data.password">
+    <input matInput [(ngModel)]="data.name" placeholder="Email">
   </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.password" placeholder="Password">
+  </mat-form-field>
+
 </div>
+
 <div mat-dialog-actions>
+
   <button mat-button (click)="onNoClick()">
     No Thanks
   </button>
-  <button mat-button [mat-dialog-close]="data.password" cdkFocusInitial>
-    Go
+
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    Send
   </button>
+
 </div>

@@ -11,7 +11,7 @@ import {
 } from '@angular/material';
 
 export interface DialogData {
-  animal: string;
+  password: string;
   name: string;
 }
 
@@ -23,22 +23,59 @@ export interface DialogData {
 export class UserSignupComponent {
 
     name: string = '';
-    password: string;
+    password: string = '';
 
     constructor(public dialog: MatDialog) {}
 
     openDialog(): void {
       console.log('OPNEDDD')
       const dialogRef = this.dialog.open(UserSignUpForm, {
-        width: '25wv',
-        height: '40vh',
         data: {name: this.name, password: this.password}
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed()
+      .subscribe(({
+        name, password
+      } = {}) => {
         console.log('The dialog was closed');
-        this.password = result;
+        this.password = password;
+        this.name = name;
+        console.log(`email:${this.name}, passowrd: ${this.password}`);
+
+        //validate properly
+        if ( this.name != undefined && this.password != undefined ){
+
+          //MAKE REQUEST TO SINGUP HERE
+          (async (email, password) => {
+            // const url = 'https://jsonplaceholder.typicode.com/users'
+            // const saved = await fetch(url).then(r => r.json())
+            // console.log(saved[0])
+
+            const url = 'http://localhost:8000/user/signup'
+            const ops = {
+              method: 'POST',
+              mode: 'cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email, password
+              })
+            }
+            const saved = await fetch(url, ops).then(res => res.json())
+
+            console.log(saved)
+
+          })(this.name, this.password);
+
+
+        } else {
+          console.log('need in put')
+        }
+
+
+
+
       });
+
     }
 
 }
@@ -55,7 +92,6 @@ export class UserSignupComponent {
 @Component({
   selector: 'user-signup-form',
   templateUrl: 'userSignUpForm.html',
-  // styleUrls: 'userSignUpForm.css'
 })
 export class UserSignUpForm {
 
@@ -64,7 +100,7 @@ export class UserSignUpForm {
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
-  onNoClick(): void {
+  onNoClick(e): void {
     this.dialogRef.close();
   }
 
