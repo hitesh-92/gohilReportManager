@@ -30,6 +30,7 @@ h1{
   grid-row: 3/4;
   display: grid;
   place-items: center center;
+  grid-template-columns: 1fr 1fr;
 }
 
 footer{

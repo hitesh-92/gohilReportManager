@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ import { UserAuthComponent } from './user-auth/user-auth.component';
     MatSelectModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     FormsModule,
     AppRoutingModule
   ],

@@ -9,6 +9,11 @@ export class UserAuthComponent implements OnInit {
 
   constructor() { }
 
+  openDialog(){
+    console.log('Hi')
+  }
+
+
   ngOnInit() {
   }
 
