@@ -62,7 +62,7 @@ export class UserLoginComponent implements OnInit {
             })
           };
 
-          const saved: object = await fetch(url, ops)
+          await fetch(url, ops)
           .then(r => r.json())
           .then(res => {
 
@@ -76,6 +76,8 @@ export class UserLoginComponent implements OnInit {
             } else {
               console.log('errrrr logging in')
             }
+
+            
           })
 
 
