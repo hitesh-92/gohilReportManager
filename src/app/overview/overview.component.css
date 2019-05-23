@@ -74,12 +74,12 @@
 .newAlert{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 
 #last{
   border-top: 1px solid rgb(226, 226, 226);
   background-color: #ccc;
-  padding: 1rem;
+  /* padding: 1rem; */
 }

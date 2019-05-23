@@ -19,12 +19,16 @@ export class UserAuthComponent implements OnInit {
 
   constructor() { }
 
-  // onLogIn(){
-  //   console.log('Hi')
-  // }
-
-
   ngOnInit() {
-  }
+    const email:any = checkForEmail();
+
+    if(email) console.log(`user-auth email: ${email}`);
+
+    function checkForEmail(){
+      let email = window.sessionStorage.getItem('email');
+      return email
+    };
+
+  };
 
 }
