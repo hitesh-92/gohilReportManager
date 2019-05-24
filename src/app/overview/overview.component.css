@@ -1,17 +1,10 @@
 #overview{
   display: grid;
-  grid-template-rows: 10vh 25vh 35vh 30vh;
-
-  /* background: repeating-linear-gradient(
-    1deg,
-    #3f87a6,
-    #d2e7f5 1%,
-    #ffffff 1%
-  ); */
+  grid-template-rows: 10vh 25vh 40vh 25vh;
 }
 
 .title{
-  height: 10vh;
+  /* height: 10vh; */
 }
 
 .title > h1{
@@ -35,7 +28,7 @@
 
 #article-count{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0.5rem;
 }
 
@@ -52,15 +45,22 @@
 }
 
 #alerts{
-  display: grid;
+  border:1px solid red;
 
+
+  /* margin: 1rem; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .current-alerts{
-  padding: 1rem;
-  display: grid;
-  gap: 0.5rem;
+  /* padding: 1rem; */
+  /* display: grid; */
+  /* gap: 0.1rem; */
 
+
+
+border: 1px solid green;
 }
 
 .current-alerts > p{
@@ -73,13 +73,15 @@
 
 .newAlert{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* padding: 1rem; */
+  grid-template-rows: 1fr 1fr;
+
+
+
+  border: 1px solid purple;
 }
 
 
 #last{
   border-top: 1px solid rgb(226, 226, 226);
   background-color: #ccc;
-  /* padding: 1rem; */
 }
