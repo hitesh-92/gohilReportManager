@@ -25,13 +25,13 @@ export class DashboardComponent implements OnInit {
     };
 
     async function getAllData(token){
-      const url = 'http://localhost:8000/column/';
-      const ops = {
+      const url: string = 'http://localhost:8000/column/';
+      const ops: object = {
         method: 'GET',
         mode: 'cors',
         headers: {'x-auth': token}
       }
-      return await fetch(url, ops).then(r => r.json())
+      return await fetch(url, ops).then(r => r.json());
     };
 
   };
