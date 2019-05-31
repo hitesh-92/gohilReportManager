@@ -74,10 +74,11 @@ export class UserLoginComponent implements OnInit {
               window.sessionStorage.setItem('email', email);
               this.router.navigate(['/dashboard']);
             } else {
-              console.log('errrrr logging in')
+              console.log('errrrr logging in');
+              this.password = '';
             }
 
-            
+
           })
 
 
