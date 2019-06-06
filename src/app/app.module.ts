@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,6 +27,11 @@ import { LandingComponent } from './landing/landing.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
 import { UserSignupComponent, UserSignUpForm } from './user-signup/user-signup.component';
 import { UserLoginComponent, UserLoginForm } from './user-login/user-login.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule } from '@angular/material';
+import { MainOverviewComponent } from './main-overview/main-overview.component';
+import { OverviewNewAlertComponent } from './overview-new-alert/overview-new-alert.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,10 @@ import { UserLoginComponent, UserLoginForm } from './user-login/user-login.compo
     UserSignupComponent,
     UserLoginComponent,
     UserSignUpForm,
-    UserLoginForm
+    UserLoginForm,
+    MainNavComponent,
+    MainOverviewComponent,
+    OverviewNewAlertComponent
   ],
   entryComponents: [UserSignUpForm, UserLoginForm],
   imports: [
@@ -60,7 +68,14 @@ import { UserLoginComponent, UserLoginForm } from './user-login/user-login.compo
     MatDialogModule,
     MatListModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatRadioModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
