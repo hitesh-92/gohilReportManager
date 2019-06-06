@@ -24,8 +24,8 @@ export interface DialogData {
 })
 export class UserLoginComponent implements OnInit {
 
-  name: string = '';
-  password: string = '';
+  name: string = 'test@email.com';
+  password: string = 'password';
 
   constructor(public dialog: MatDialog, private router: Router) {}
 

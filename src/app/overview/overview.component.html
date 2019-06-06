@@ -7,7 +7,10 @@
   <section id="activeArticles">
 
     <section id="article-count">
-      <div>Alert</div>
+      <div>
+        <p>Alert</p>
+        <p>{{this.data.alert.length}}</p>
+      </div>
       <div>Left</div>
       <div>Center</div>
       <div>Right</div>
@@ -28,22 +31,36 @@
 
     <div class="current-alerts">
       <h4>Alerts</h4>
-      <article>Beijing pioneering citizens' 'points' system critics brand 'Orwellian'</article>
-      <article>Almost Half of U.S. Births Happen Outside Marriage, Signaling Cultural Shift</article>
+       <!-- {{ articles[0].title }} -->
     </div>
 
     <div class="newAlert">
-      <div>
-        <label for="title">Description:</label>
-        <input type="text" name="title" id="title">
+
+      <h4>Create New Alert</h4>
+
+      <div class="alertInputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="" [(ngModel)]="newAlert_title">
+        <mat-icon matSuffix>add_alert</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Url</mat-label>
+        <input matInput placeholder="" [(ngModel)]="newAlert_url">
+        <mat-icon matSuffix>link</mat-icon>
+      </mat-form-field>
       </div>
 
-      <div>
-        <label for="url">Link:</label>
-        <input type="url" name="url" id="url">
+      <div class="formButtons">
+        <button mat-raised-button color="warn" (click)="clearInputs()">
+          Clear
+        </button>
+        <button mat-raised-button id="create" (click)="submitArticle()">
+          Add
+        </button>
       </div>
-      <!-- <small>Add new Active Alert</small>
-      <p>Add in material component</p> -->
+
     </div>
 
   </section>
