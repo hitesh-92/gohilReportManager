@@ -1,18 +1,24 @@
 .column-view{
   display: grid;
-  grid-template-rows: 5vh 10vh 85vh;
+  grid-template-rows: 100% 110% 100%;
 }
 
-.head > h1{
-  font-size: 1.75rem;
-  padding-left: 1rem;
-  border-bottom: 1px solid #ccc;
+#title, .columnInfo {
+  padding: 1rem;
+  /* border: 1px solid red; */
+}
+
+#title{
+  display: flex;
+  justify-content: space-between;
+  place-items: center;
+  margin: 0;
 }
 
 .columnInfo{
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  place-items: center center;
+  display: flex;
+  justify-content: space-between;
+  place-items: center;
 }
 
 .switch-message{
@@ -21,14 +27,15 @@
 }
 
 .articles{
+  min-height: 85vh;
   overflow-y: scroll;
   scrollbar-color: white rgb(154, 154, 228);
-  /* scrollbar-color: #197ee3 #e6e8eb; */
   scrollbar-width: thin;
   background:
     radial-gradient(ellipse at top, #64a7e6, transparent),
     radial-gradient(ellipse at bottom, #ac56df, transparent);
 
+  /* border: 1px solid red; */
 }
 
 .article-info-bar{
@@ -63,10 +70,6 @@ ul{
 .article > p{
   font-size: 0.8rem;
 }
-
-/* .position{
-
-} */
 
 .buttons{
   display: grid;

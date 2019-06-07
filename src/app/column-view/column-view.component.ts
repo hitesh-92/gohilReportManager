@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColumnViewComponent implements OnInit {
 
-  columnName = 'column name';
+  columnName = '{name} column';
   articles = [
     {
       _id: '123qwe',
@@ -34,7 +34,7 @@ export class ColumnViewComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
       status: 0,
-      position: 2
+      position: 3
     },
     {
       _id: '789uio',
@@ -43,7 +43,7 @@ export class ColumnViewComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
       status: 0,
-      position: 2
+      position: 4
     },
     {
       _id: '789uio',
@@ -52,7 +52,7 @@ export class ColumnViewComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
       status: 0,
-      position: 2
+      position: 5
     },
     {
       _id: '789uio',
@@ -61,7 +61,7 @@ export class ColumnViewComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
       status: 0,
-      position: 2
+      position: 6
     },
     {
       _id: '789uio',
@@ -70,7 +70,7 @@ export class ColumnViewComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
       status: 0,
-      position: 2
+      position: 7
     }
   ];
 

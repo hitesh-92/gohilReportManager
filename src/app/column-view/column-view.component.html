@@ -1,24 +1,17 @@
 <div class="column-view">
 
-  <div class="head mat-title">
-    <h1>{{columnName}}</h1>
+  <div id="title">
+    <h1 class="mat-title">{{columnName}}</h1>
   </div>
 
   <section class="columnInfo">
     <div class="mat-body-strong">Total Articles: {{articles.length}}</div>
-    <div>empty</div>
-    <div class="switch-message">
-      <p>
-        <span class="mat-small">
-          <em>
-            switch changes will be reflected in <strong>Current View</strong>
-          </em>
-        </span>
-      </p>
-    </div>
-    <div>No switch selected</div>
-    <div>1</div>
-    <div>2</div>
+    <!-- make add new button green -->
+    <button mat-flat-button color="primary">Add new Article</button>
+    <div><small>Use switch button to change article positions</small></div>
+    <div>switch select: --truncate title-- </div>
+    <div>switch to: -</div>
+    <div> <button mat-stroked-button disabled color="primary">Confirm Switch</button> </div>
   </section>
 
   <section class="articles">
