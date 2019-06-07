@@ -1,74 +1,78 @@
 <div id="overview">
 
   <div class="title">
-    <h1>Dashboard</h1>
+    <h1 class="mat-display-1">Dashboard</h1>
   </div>
 
   <section id="activeArticles">
     <section id="article-count">
-      <div>
-        <p>Alert</p>
-        <p>{{this.data.alert.length}}</p>
-      </div>
-      <div>Left</div>
-      <div>Center</div>
-      <div>Right</div>
-      <div>Total</div>
+      <mat-card>1</mat-card>
+      <mat-card>2</mat-card>
+      <mat-card>3</mat-card>
+      <mat-card>4</mat-card>
+      <mat-card>5</mat-card>
     </section>
     <section id="article-status">
-        <div>new</div>
-        <div>1 month +</div>
-        <div>3 months +</div>
-        <div>6 months +</div>
-        <div>Archived</div>
+        <mat-card>new</mat-card>
+        <mat-card>1+</mat-card>
+        <mat-card>3+</mat-card>
+        <mat-card>6+</mat-card>
+        <mat-card>Archived</mat-card>
     </section>
   </section>
 
   <section id="alerts">
 
-    <div class="current-alerts">
-      <h4>Alerts</h4>
-       <!-- {{ articles[0].title }} -->
-    </div>
+    <mat-card class="current-alerts">
+      <h4 class="mat-headline">Alerts</h4>
+       <div>
+         <p>{{ articles[0].title }}</p>
+         <p>{{ articles[1].title }}</p>
+       </div>
+    </mat-card>
 
     <div class="newAlert">
 
-      <h4>Create New Alert</h4>
+      <mat-card class="alertInputs">
 
-      <div class="alertInputs">
-      <mat-form-field appearance="outline">
-        <mat-label>Title</mat-label>
-        <input matInput placeholder="" [(ngModel)]="newAlert_title">
-        <mat-icon matSuffix>add_alert</mat-icon>
-      </mat-form-field>
+        <h4 class="mat-headline">Create New Alert</h4>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Url</mat-label>
-        <input matInput placeholder="" [(ngModel)]="newAlert_url">
-        <mat-icon matSuffix>link</mat-icon>
-      </mat-form-field>
-      </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="" [(ngModel)]="newAlert_title">
+          <mat-icon matSuffix>add_alert</mat-icon>
+        </mat-form-field>
 
-      <div class="formButtons">
-        <button mat-raised-button color="warn" (click)="clearInputs()">
-          Clear
-        </button>
-        <button mat-raised-button id="create" (click)="submitArticle()">
-          Add
-        </button>
-      </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Url</mat-label>
+          <input matInput placeholder="" [(ngModel)]="newAlert_url">
+          <mat-icon matSuffix>link</mat-icon>
+        </mat-form-field>
+
+        <div class="formButtons">
+          <button mat-raised-button color="warn" (click)="clearInputs()">
+            Clear
+          </button>
+          <button mat-raised-button id="create" (click)="submitArticle()">
+            Add
+          </button>
+        </div>
+
+      </mat-card>
 
     </div>
 
   </section>
 
-  <div id="last">
-    <p>more info</p>
-    <br>
-    <p>db url</p>
-    <p>db data</p>
+  <div>
+    <mat-card id="last">
+      <!-- use flex box -->
+      <p>more info</p>
+      <p>db url</p>
+      <p>db data</p>
 
-    <a href="http://www.gohilreport.com">Gohil Report</a>
+      <p> <a href="http://www.gohilreport.com">Gohil Report</a> </p>
+      <p> <a href="#">Gohil Report API</a> </p>
+    </mat-card>
   </div>
-
 </div>
