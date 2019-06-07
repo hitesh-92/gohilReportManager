@@ -31,8 +31,9 @@
         <p>{{article.title}}</p>
         <p>{{article.url}}</p>
         <div class="buttons">
-          <button class="btn btn-edit">edit</button>
-          <button class="btn btn-switch">switch</button>
+          <!-- TODO: buttons only show on hover, help avoid switching wrong article -->
+          <button mat-flat-button color="accent" class="btn btn-edit">edit</button>
+          <button mat-flat-button color="primary" class="btn btn-switch">switch</button>
         </div>
       </li>
     </ul>
