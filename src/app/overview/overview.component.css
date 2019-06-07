@@ -1,6 +1,7 @@
 #overview{
   display: grid;
   grid-template-rows: 10vh 25vh 50vh 15vh;
+  margin: 1rem;
 }
 
 .title > h1{

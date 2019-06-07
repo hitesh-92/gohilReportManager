@@ -26,7 +26,6 @@ export class MainOverviewComponent {
 
       return [
         { title: 'Current Articles', cols: 2, rows: 1 },
-        // <app-overview></app-overview>,
         { title: 'Alerts', cols: 1, rows: 1 },
         { title: 'Add Alert', cols: 1, rows: 1 },
         { title: 'Card 4', cols: 2, rows: 1 }

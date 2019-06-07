@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+// import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,6 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule } from '@angular/material';
 import { MainOverviewComponent } from './main-overview/main-overview.component';
-import { OverviewNewAlertComponent } from './overview-new-alert/overview-new-alert.component';
 
 @NgModule({
   declarations: [
@@ -51,8 +51,7 @@ import { OverviewNewAlertComponent } from './overview-new-alert/overview-new-ale
     UserSignUpForm,
     UserLoginForm,
     MainNavComponent,
-    MainOverviewComponent,
-    OverviewNewAlertComponent
+    MainOverviewComponent
   ],
   entryComponents: [UserSignUpForm, UserLoginForm],
   imports: [
