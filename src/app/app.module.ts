@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
@@ -12,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule } from '@angular/material';
 // import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,8 +32,6 @@ import { UserAuthComponent } from './user-auth/user-auth.component';
 import { UserSignupComponent, UserSignUpForm } from './user-signup/user-signup.component';
 import { UserLoginComponent, UserLoginForm } from './user-login/user-login.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule } from '@angular/material';
 import { MainOverviewComponent } from './main-overview/main-overview.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { MainOverviewComponent } from './main-overview/main-overview.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatCheckboxModule,
     MatSliderModule,
     MatSidenavModule,
