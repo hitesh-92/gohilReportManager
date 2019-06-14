@@ -4,6 +4,12 @@ import {
   Inject
 } from '@angular/core';
 
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
 import { Router } from '@angular/router';
 
 import {
@@ -26,8 +32,9 @@ export class UserLoginComponent implements OnInit {
 
   name: string = 'test@email.com';
   password: string = 'password';
+  loginuUrl: string = 'http://localhost:8000/user/login';
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient) {}
 
   openDialog(): void {
 
@@ -41,57 +48,28 @@ export class UserLoginComponent implements OnInit {
     .subscribe(({
       name, password
     } = {}) => {
+
       this.name = name;
       this.password = password;
-
       console.log(`name:${name}, password:${password}`);
 
-      // login in request
-
-      if( this.name && this.password ){
-
-        (async(email, password) => {
-
-          const url: string = 'http://localhost:8000/user/login';
-          const ops: object = {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email, password
-            })
-          };
-
-          await fetch(url, ops)
-          .then(r => r.json())
-          .then(res => {
-
-            // console.log(`email:${email}, loggedIn:${loggedIn}, token:${token}`);
-            const {token, email, loggedIn} = res;
-
-            if(loggedIn){
-              window.sessionStorage.setItem('token', token);
-              window.sessionStorage.setItem('email', email);
-              this.router.navigate(['/app/home']);
-            } else {
-              console.log('errrrr logging in');
-              this.password = '';
-            }
-
-
-          })
-
-
-        })(this.name, this.password);
-
-
+      const userData: { email: string, password: string } = {
+        email: this.name.trim(),
+        password: this.password.trim()
       }
 
+      this.http.post(this.loginuUrl, userData)
+      .subscribe(res => {
 
+        const {email, loggedIn, token} = res;
 
+        if(!loggedIn) return;
 
-
-    })
+        window.sessionStorage.setItem('email', email);
+        window.sessionStorage.setItem('token', token);
+        this.router.navigate(['/app/home']);
+      })
+    });
 
   };
 
