@@ -3,11 +3,11 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar class="title">G.R.M</mat-toolbar>
+    <mat-toolbar class="title"><a href="http://www.gohilreport.com" target="_blank">Gohil Report</a></mat-toolbar>
     <mat-nav-list class="links">
-      <a mat-list-item color="accent" class="link" href="#">Link 1</a>
-      <a mat-list-item class="link" href="#">Link 2</a>
-      <a mat-list-item class="link" href="#">Link 3</a>
+      <a mat-list-item class="link" routerLink="/app/home">Overview</a>
+      <a mat-list-item class="link" routerLink="/app/editor">Editor</a>
+      <a mat-list-item class="link" >Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,13 +22,7 @@
       </button>
       <span>Gohil Report Manager</span>
     </mat-toolbar>
-
     <!-- Add Content Here -->
-    <!-- <app-main-overview></app-main-overview> -->
-    <!-- <app-overview></app-overview> -->
     <router-outlet></router-outlet>
-    <!-- <app-column-view></app-column-view> -->
-    <!-- <app-archive></app-archive> -->
-
   </mat-sidenav-content>
 </mat-sidenav-container>

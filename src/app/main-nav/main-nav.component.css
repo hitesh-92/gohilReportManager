@@ -24,6 +24,10 @@
   font-weight: 900;
 }
 
+.title > a:hover{
+  text-shadow: none;
+}
+
 .links > li{
   transition: 0.5s ease-in-out;
 }
