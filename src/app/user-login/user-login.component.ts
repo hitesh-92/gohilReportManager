@@ -61,12 +61,10 @@ export class UserLoginComponent implements OnInit {
       this.http.post(this.loginuUrl, userData)
       .subscribe(res => {
 
-        const {email, loggedIn, token} = res;
+        if(!res.loggedIn) return;
 
-        if(!loggedIn) return;
-
-        window.sessionStorage.setItem('email', email);
-        window.sessionStorage.setItem('token', token);
+        window.sessionStorage.setItem('email', res.email);
+        window.sessionStorage.setItem('token', res.token);
         this.router.navigate(['/app/home']);
       })
     });
