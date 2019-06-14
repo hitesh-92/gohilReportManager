@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-overview',
@@ -23,15 +24,18 @@ export class OverviewComponent implements OnInit {
     alert: {}
   };
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    fetch('http://localhost:8000/column/')
-    .then(r => r.json())
-    .then(res => {
-      this.data = res;
-    })
-    .catch(err => console.log('ERrr', err))
+    this.fetchColumns()
+  }
+
+  private fetchColumns(){
+
+    this.http
+    .get('http://localhost:8000/column/')
+    .subscribe(res => console.log(res))
+
   }
 
   clearInputs(){
