@@ -38,8 +38,6 @@ export class UserLoginComponent implements OnInit {
 
   openDialog(): void {
 
-    console.log('Log In Opened');
-
     const dialogRef = this.dialog.open(UserLoginForm, {
       data: {name: this.name, password: this.password}
     });
@@ -51,22 +49,14 @@ export class UserLoginComponent implements OnInit {
 
       this.name = name;
       this.password = password;
-      console.log(`name:${name}, password:${password}`);
 
       const userData: { email: string, password: string } = {
         email: this.name.trim(),
         password: this.password.trim()
       }
 
-      this.http.post(this.loginuUrl, userData)
-      .subscribe(res => {
+      this.onLogin(userData);
 
-        if(!res.loggedIn) return;
-
-        window.sessionStorage.setItem('email', res.email);
-        window.sessionStorage.setItem('token', res.token);
-        this.router.navigate(['/app/home']);
-      })
     });
 
   };
@@ -74,9 +64,29 @@ export class UserLoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  private onLogin(body: {email: string, password: string}){
+    this.http
+    .post<{loggedIn: boolean, email: string, token: string}>('http://localhost:8000/user/login', body)
+    .subscribe(resp => {
+
+      if(!resp.loggedIn){
+        // Handle log in error
+
+        this.name = '';
+        this.password = '';
+        return;
+      }
+
+      //Log in success
+      window.sessionStorage.setItem('token', resp.token);
+      window.sessionStorage.setItem('email', resp.email);
+      this.router.navigate(['/app/home']);
+    })
+  }
+
 }
 
-///////
+// -----
 
 @Component({
   selector: 'user-login-form',
