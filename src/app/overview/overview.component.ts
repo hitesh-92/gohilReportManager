@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -16,13 +16,19 @@ export class OverviewComponent implements OnInit {
   newAlert_title: string = '';
   newAlert_url: string = '';
 
-  data: object = {
+  data: any = {
     left: {},
     center: {},
     right: {},
     archive: {},
     alert: {}
   };
+
+  /*
+  *
+  *   Display with databinding
+  *
+  */
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +39,14 @@ export class OverviewComponent implements OnInit {
     this.fetchColumn('alert');
     this.fetchColumn('archive');
     console.log(this.data)
+  }
+
+  ngOnChanges(){
+    this.fetchColumn('left');
+    this.fetchColumn('center');
+    this.fetchColumn('right');
+    this.fetchColumn('alert');
+    this.fetchColumn('archive');
   }
 
   private fetchColumn(title: string){
@@ -47,11 +61,14 @@ export class OverviewComponent implements OnInit {
   }
 
   submitNewAlertArticle(){
+    let columnId = '';
+    if( this.data.hasOwnProperty('alert') ) columnId = this.data.alert.columnData._id
+
     const body: { title: string, url:string, position: number, column: string } = {
       title: this.newAlert_title.trim(),
       url: this.newAlert_url.trim(),
       position: 1,
-      column: this.data.alert.columnData._id
+      column: columnId
     }
     const token: string = window.sessionStorage.getItem('token')
 
@@ -66,12 +83,15 @@ export class OverviewComponent implements OnInit {
         })
       }
     )
-    .subscribe(resp => {
+    .subscribe((resp:any) => {
       console.log('success ==> ', resp)
 
       if(!resp.articleSaved) return;
       this.fetchColumn('alert');
-      console.log(this.data.alert.articles)
+      // console.log(this.data.alert.articles);
+
+      this.newAlert_title = '';
+      this.newAlert_url = '';
     })
 
     return;

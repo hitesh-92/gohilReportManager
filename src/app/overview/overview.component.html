@@ -10,7 +10,7 @@
       <mat-card>
         <div>
           <span>Alert - </span>
-          <span *ngIf="data.alert.articles">{{data.alert.articles.length}}</span>
+          <span *ngIf="data.alert.articles">{{[data.alert.articles.length]}}</span>
         </div>
       </mat-card>
 
@@ -57,7 +57,7 @@
     <mat-card class="current-alerts">
       <h4 class="mat-headline">Alerts</h4>
        <div *ngIf="data.alert.articles">
-         <p>{{data.alert.articles[0].title}}</p>
+         <p>{{ [data.alert.articles[0].title] }}</p>
          <p>{{data.alert.articles[1].title}}</p>
          <p>{{data.alert.articles[2].title}}</p>
          <p>{{data.alert.articles[3].title}}</p>
