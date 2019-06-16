@@ -4,6 +4,12 @@ import {
   Inject
 } from '@angular/core';
 
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
 import {
   MatDialog,
   MatDialogRef,
@@ -25,10 +31,10 @@ export class UserSignupComponent {
     name: string = '';
     password: string = '';
 
-    constructor(public dialog: MatDialog) {}
+    constructor(public dialog: MatDialog, private http: HttpClient) {}
 
     openDialog(): void {
-      console.log('OPNEDDD')
+
       const dialogRef = this.dialog.open(UserSignUpForm, {
         data: {name: this.name, password: this.password}
       });
@@ -37,54 +43,35 @@ export class UserSignupComponent {
       .subscribe(({
         name, password
       } = {}) => {
-        console.log('The dialog was closed');
+
         this.password = password;
         this.name = name;
-        console.log(`email:${this.name}, passowrd: ${this.password}`);
 
-        //validate properly
-        if ( this.name && this.password ){
-
-          //MAKE REQUEST TO SINGUP HERE
-          (async (email, password) => {
-
-            const url: string = 'http://localhost:8000/user/signup';
-            const ops: object = {
-              method: 'POST',
-              mode: 'cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                email, password
-              })
-            };
-
-            const saved: object = await fetch(url, ops).then(res => res.json());
-            console.log(saved);
-
-          })(this.name, this.password);
-
-
-        } else {
-          console.log('need input')
+        const userData: {email: string, password: string} = {
+          email: this.name.trim(),
+          password: this.password.trim()
         }
 
-
-
+        this.onSignUp(userData);
 
       });
+    };
+
+    ngOnInit(){
+    }
+
+    private onSignUp(body: {email: string, password: string}){
+      this.http
+      .post('http://localhost:8000/user/signup', body)
+      .subscribe(resp => {
+        console.log('signup/ ==> ', resp);
+      })
 
     }
 
 }
 
-
-  // ngOnInit() {
-  // }
-
-// }
-
-///////
-
+// -----
 
 @Component({
   selector: 'user-signup-form',
