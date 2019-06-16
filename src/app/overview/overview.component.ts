@@ -47,6 +47,33 @@ export class OverviewComponent implements OnInit {
   }
 
   submitNewAlertArticle(){
+    const body: { title: string, url:string, position: number, column: string } = {
+      title: this.newAlert_title.trim(),
+      url: this.newAlert_url.trim(),
+      position: 1,
+      column: this.data.alert.columnData._id
+    }
+    const token: string = window.sessionStorage.getItem('token')
+
+    this.http
+    .post(
+      'http://localhost:8000/article/',
+      body,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth': window.sessionStorage.getItem('token')
+        })
+      }
+    )
+    .subscribe(resp => {
+      console.log('success ==> ', resp)
+
+      if(!resp.articleSaved) return;
+      this.fetchColumn('alert');
+      console.log(this.data.alert.articles)
+    })
+
     return;
   }
 
