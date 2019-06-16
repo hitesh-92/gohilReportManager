@@ -6,11 +6,42 @@
 
   <section id="activeArticles">
     <section id="article-count">
-      <mat-card>1</mat-card>
-      <mat-card>2</mat-card>
-      <mat-card>3</mat-card>
-      <mat-card>4</mat-card>
-      <mat-card>5</mat-card>
+
+      <mat-card>
+        <div>
+          <span>Alert - </span>
+          <span *ngIf="data.alert.articles">{{data.alert.articles.length}}</span>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div>
+          <span>Left - </span>
+          <span *ngIf="data.left.articles">{{data.left.articles.length}}</span>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div>
+          <span>center - </span>
+          <span *ngIf="data.center.articles">{{data.center.articles.length}}</span>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div>
+          <span>right - </span>
+          <span *ngIf="data.right.articles">{{data.right.articles.length}}</span>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div>
+          <span>archive - </span>
+          <span *ngIf="data.archive.articles">{{data.archive.articles.length}}</span>
+        </div>
+      </mat-card>
+
     </section>
     <section id="article-status">
         <mat-card>new</mat-card>
@@ -25,9 +56,11 @@
 
     <mat-card class="current-alerts">
       <h4 class="mat-headline">Alerts</h4>
-       <div>
-         <p>{{ articles[0].title }}</p>
-         <p>{{ articles[1].title }}</p>
+       <div *ngIf="data.alert.articles">
+         <p>{{data.alert.articles[0].title}}</p>
+         <p>{{data.alert.articles[1].title}}</p>
+         <p>{{data.alert.articles[2].title}}</p>
+         <p>{{data.alert.articles[3].title}}</p>
        </div>
     </mat-card>
 

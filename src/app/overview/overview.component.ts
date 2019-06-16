@@ -32,6 +32,7 @@ export class OverviewComponent implements OnInit {
     this.fetchColumn('right');
     this.fetchColumn('alert');
     this.fetchColumn('archive');
+    console.log(this.data)
   }
 
   private fetchColumn(title: string){
