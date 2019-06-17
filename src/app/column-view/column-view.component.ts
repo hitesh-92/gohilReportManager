@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -23,7 +24,7 @@ export class ColumnViewComponent implements OnInit {
   switch: number = -1;
   moveTo: number = -1;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private location: Location) { }
 
   ngOnInit() {
   }
@@ -33,13 +34,11 @@ export class ColumnViewComponent implements OnInit {
 
     if(this.switch_selected !== null && this.switch_moveTo !== null) this.allowSwitch = true;
     else this.allowSwitch = false;
-
   }
 
   onEdit(event: any){
     let article = this.findArticleFromEvent(event);
-
-    console.log(article);
+    return;
     //navigate to editor with article data
   }
 
@@ -61,11 +60,6 @@ export class ColumnViewComponent implements OnInit {
 
     if(this.switch !== -1 && this.moveTo !== -1) this.allowSwitch = true;
     else this.allowSwitch = false;
-
-    // console.log(`switch: ${this.articles[index].title}, moveTo: ${this.articles[index].title}`);
-
-    // then set click event listnr on confirm btn
-    // test it works and re-renders the articles in new order
   }
 
   findArticleFromEvent(event:any){
@@ -94,7 +88,6 @@ export class ColumnViewComponent implements OnInit {
   }
 
   onConfirmSwitch(event:any){
-    console.log(event.target)
 
     if(this.switch === -1 && this.moveTo === -1) return;
 
@@ -107,16 +100,18 @@ export class ColumnViewComponent implements OnInit {
   }
 
   private submitSwitchRequest(body: any){
-    let url: string = 'http://localhost:8000/article/switch';
+    const url: string = 'http://localhost:8000/article/switch';
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-auth': window.sessionStorage.getItem('token')
-    })
+    });
 
     this.http
     .patch(url, body, { headers })
     .subscribe( (resp:any) => {
       console.log('Switch Success ==>', resp)
+      if(resp.status) location.reload();
+
     })
   }
 
