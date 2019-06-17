@@ -5,11 +5,11 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar class="title"><a href="http://www.gohilreport.com" target="_blank">Gohil Report</a></mat-toolbar>
     <mat-nav-list class="links">
-      <a mat-list-item class="link" routerLink="/app/home">Overview</a>
-      <a mat-list-item class="link" routerLink="/app/editor">Editor</a>
-      <a mat-list-item class="link" routerLink="/app/">Alerts</a>
+      <a mat-list-item class="link" routerLink="/app/overview" routerLinkActive="activeLink" >Overview</a>
+      <a mat-list-item class="link" routerLink="/app/editor" routerLinkActive="activeLink" >Editor</a>
+      <!-- <a mat-list-item class="link" routerLink="/app/" routerLinkActive="activeLink" >Alerts</a> -->
       <p mat-list-item>Columns</p>
-      <a mat-list-item class="link" routerLink="/app/left-column">Left</a>
+      <a mat-list-item class="link" routerLink="/app/left-column" routerLinkActive="activeLink">Left</a>
       <a mat-list-item class="link" routerLink="/app/">Center</a>
       <a mat-list-item class="link" routerLink="/app/">Right</a>
       <a mat-list-item class="link" routerLink="/app/">Archives</a>

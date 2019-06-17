@@ -47,3 +47,8 @@ a:hover{
   color: rgb(0, 128, 192) !important;
   text-shadow: 1px 0px 1px #032cf7;
 }
+
+.activeLink{
+  color: rgba(2, 48, 84, 0.75) !important;
+  background-color: rgba(237, 231, 238, 0.3);
+}

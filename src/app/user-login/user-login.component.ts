@@ -80,7 +80,7 @@ export class UserLoginComponent implements OnInit {
       //Log in success
       window.sessionStorage.setItem('token', resp.token);
       window.sessionStorage.setItem('email', resp.email);
-      this.router.navigate(['/app/home']);
+      this.router.navigate(['/app/overview']);
     })
   }
 

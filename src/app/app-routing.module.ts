@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'app',
     component: MainNavComponent,
     children: [
-      { path: 'home', component: OverviewComponent },
+      { path: 'overview', component: OverviewComponent },
       { path: 'articles', component: ColumnViewComponent },
       { path: 'editor', component: ArticleEditorComponent },
       { path: 'left-column', component: LeftColumnComponent }
