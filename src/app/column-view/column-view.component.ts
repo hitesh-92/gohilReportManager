@@ -59,7 +59,6 @@ export class ColumnViewComponent implements OnInit {
       else if(this.moveTo === index) this.moveTo = -1
     }
 
-
     if(this.switch !== -1 && this.moveTo !== -1) this.allowSwitch = true;
     else this.allowSwitch = false;
 

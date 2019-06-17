@@ -26,7 +26,11 @@
     </div>
 
     <ul>
-      <li class="article" *ngFor="let article of articles">
+      <li
+        class="article"
+        *ngFor="let article of articles"
+        [ngClass]="{selected: article.position === switch+1, moveTo: article.position===moveTo+1}"
+      >
         <p class="position">{{article.position}}</p>
         <p class="status">{{article.status}}</p>
         <p>{{article.title}}</p>
