@@ -12,75 +12,9 @@ export class ColumnViewComponent implements OnInit {
   @Input() articles: any;
 
   totalArticles: number = 0;
-
-  columnName = '{name} column';
-  /*
-  articles = [
-    {
-      _id: '123qwe',
-      title: 'article name',
-      url: 'www.webone.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 1
-    },
-    {
-      _id: '456rty',
-      title: 'another article',
-      url: 'www.ttwwoo.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 2
-    },
-    {
-      _id: '789uio',
-      title: 'yet another article',
-      url: 'www.three.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 3
-    },
-    {
-      _id: '789uio',
-      title: 'yet another article',
-      url: 'www.three.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 4
-    },
-    {
-      _id: '789uio',
-      title: 'yet another article',
-      url: 'www.three.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 5
-    },
-    {
-      _id: '789uio',
-      title: 'yet another article',
-      url: 'www.three.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 6
-    },
-    {
-      _id: '789uio',
-      title: 'yet another article',
-      url: 'www.three.com',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 0,
-      position: 7
-    }
-  ];
-  */
+  switch_selected: any = null;
+  switch_moveTo: any =null;
+  allowSwitch: boolean = false;
 
   constructor() { }
 
@@ -88,12 +22,25 @@ export class ColumnViewComponent implements OnInit {
   }
 
   ngOnChanges(){
-    if(this.articles.length > 0) this.totalArticles = this.articles.length
+    if(this.articles.length > 0) this.totalArticles = this.articles.length;
+
+    if(this.switch_selected !== null && this.switch_moveTo !== null) this.allowSwitch = true;
+    else this.allowSwitch = false;
+
   }
 
-  onDrag(e: Event){
-    return;
-    // console.log(e)
+  onEdit(event: any){
+    let article = this.findArticleFromEvent(event);
+
+    console.log(article);
+    //navigate to editor with article data
+  }
+
+  findArticleFromEvent(event:any){
+    let position: any = event.target.parentNode.parentNode.childNodes[0].innerText
+    let index = parseInt(position) - 1;
+    // console.log( this.articles[index] );
+    return this.articles[index];
   }
 
 }
