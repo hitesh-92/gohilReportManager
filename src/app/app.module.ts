@@ -33,6 +33,7 @@ import { UserSignupComponent, UserSignUpForm } from './user-signup/user-signup.c
 import { UserLoginComponent, UserLoginForm } from './user-login/user-login.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { MainOverviewComponent } from './main-overview/main-overview.component';
+import { LeftColumnComponent } from './left-column/left-column.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MainOverviewComponent } from './main-overview/main-overview.component';
     UserSignUpForm,
     UserLoginForm,
     MainNavComponent,
-    MainOverviewComponent
+    MainOverviewComponent,
+    LeftColumnComponent
   ],
   entryComponents: [UserSignUpForm, UserLoginForm],
   imports: [

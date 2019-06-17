@@ -7,6 +7,7 @@ import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { OverviewComponent } from './overview/overview.component';
+import { LeftColumnComponent } from './left-column/left-column.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
     children: [
       { path: 'home', component: OverviewComponent },
       { path: 'articles', component: ColumnViewComponent },
-      { path: 'editor', component: ArticleEditorComponent }
+      { path: 'editor', component: ArticleEditorComponent },
+      { path: 'left-column', component: LeftColumnComponent }
     ]
   }
 ];
