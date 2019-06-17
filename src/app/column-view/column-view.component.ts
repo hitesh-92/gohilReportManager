@@ -64,7 +64,6 @@ export class ColumnViewComponent implements OnInit {
 
     // console.log(`switch: ${this.articles[index].title}, moveTo: ${this.articles[index].title}`);
 
-    // set display for switch and moveTo
     // then set click event listnr on confirm btn
     // test it works and re-renders the articles in new order
   }
@@ -92,6 +91,39 @@ export class ColumnViewComponent implements OnInit {
       : `${this.moveTo + 1}`
     }
 
+  }
+
+  onConfirmSwitch(event:any){
+    console.log(event.target)
+
+    if(this.switch === -1 && this.moveTo === -1) return;
+
+    let body: any = {
+      selected: {
+        position: this.articles[this.switch].position,
+        id: this.articles[this.switch]._id
+      },
+      moveTo: {
+        position: this.articles[this.moveTo].position,
+        id: this.articles[this.moveTo]._id
+      }
+    };
+
+    this.submitSwitchRequest(body);
+  }
+
+  private submitSwitchRequest(body: any){
+    let url: string = 'http://localhost:8000/article/switch';
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-auth': window.sessionStorage.getItem('token')
+    })
+
+    this.http
+    .patch(url, body, { headers })
+    .subscribe( (resp:any) => {
+      console.log('Switch Success ==>', resp)
+    })
   }
 
 }

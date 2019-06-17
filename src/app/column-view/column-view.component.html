@@ -18,7 +18,16 @@
       [ngClass]="{moveTo: moveTo !== -1}"
     >
       switch to: {{  switchPositionDisplay('moveTo') }} </div>
-    <div> <button mat-stroked-button [disabled]="!allowSwitch" color="primary">Confirm Switch</button> </div>
+    <div>
+      <button
+        mat-stroked-button
+        [disabled]="!allowSwitch"
+        color="primary"
+        (click)="onConfirmSwitch($event)"
+      >
+        Confirm Switch
+      </button>
+    </div>
   </section>
 
   <section class="articles">
