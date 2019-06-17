@@ -1,6 +1,6 @@
 .column-view{
   display: grid;
-  grid-template-rows: 100% 110% 100%;
+  grid-template-rows: 1fr 1fr 10fr;
 }
 
 #title, .columnInfo {
