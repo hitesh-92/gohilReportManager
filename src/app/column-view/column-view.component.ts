@@ -99,14 +99,8 @@ export class ColumnViewComponent implements OnInit {
     if(this.switch === -1 && this.moveTo === -1) return;
 
     let body: any = {
-      selected: {
-        position: this.articles[this.switch].position,
-        id: this.articles[this.switch]._id
-      },
-      moveTo: {
-        position: this.articles[this.moveTo].position,
-        id: this.articles[this.moveTo]._id
-      }
+      selected: this.articles[this.switch]._id,
+      moveTo: this.articles[this.moveTo]._id
     };
 
     this.submitSwitchRequest(body);
