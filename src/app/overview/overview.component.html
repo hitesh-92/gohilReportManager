@@ -10,45 +10,45 @@
       <mat-card>
         <div>
           <span>Alert - </span>
-          <span *ngIf="data.alert.articles">{{[data.alert.articles.length]}}</span>
+          <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span>
         </div>
       </mat-card>
 
       <mat-card>
         <div>
           <span>Left - </span>
-          <span *ngIf="data.left.articles">{{data.left.articles.length}}</span>
+          <span *ngIf="counts.left !== null">{{ [counts.left] }}</span>
         </div>
       </mat-card>
 
       <mat-card>
         <div>
           <span>center - </span>
-          <span *ngIf="data.center.articles">{{data.center.articles.length}}</span>
+          <span *ngIf="counts.center !== null">{{ [counts.center] }}</span>
         </div>
       </mat-card>
 
       <mat-card>
         <div>
           <span>right - </span>
-          <span *ngIf="data.right.articles">{{data.right.articles.length}}</span>
+          <span *ngIf="counts.right !== null">{{ [counts.right] }}</span>
         </div>
       </mat-card>
 
       <mat-card>
         <div>
           <span>archive - </span>
-          <span *ngIf="data.archive.articles">{{data.archive.articles.length}}</span>
+          <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span>
         </div>
       </mat-card>
 
     </section>
     <section id="article-status">
-        <mat-card>new</mat-card>
-        <mat-card>1+</mat-card>
-        <mat-card>3+</mat-card>
-        <mat-card>6+</mat-card>
-        <mat-card>Archived</mat-card>
+        <mat-card>new : {{ [status.new] }}</mat-card>
+        <mat-card>1 month+ : {{ [status.oneMonth] }}</mat-card>
+        <mat-card>3 month+ : {{ [status.threeMonth] }}</mat-card>
+        <mat-card>6 month+ : {{ [status.sixMonth] }}</mat-card>
+        <mat-card>Total: {{[counts.total]}}</mat-card>
     </section>
   </section>
 
@@ -58,9 +58,10 @@
       <h4 class="mat-headline">Alerts</h4>
        <div *ngIf="data.alert.articles">
          <p>{{ [data.alert.articles[0].title] }}</p>
-         <p>{{data.alert.articles[1].title}}</p>
-         <p>{{data.alert.articles[2].title}}</p>
-         <p>{{data.alert.articles[3].title}}</p>
+         <p>{{ [data.alert.articles[1].title] }}</p>
+         <p>{{ [data.alert.articles[2].title] }}</p>
+         <p>{{ [data.alert.articles[3].title] }}</p>
+         <p>{{ [data.alert.articles[4].title] }}</p>
        </div>
     </mat-card>
 
