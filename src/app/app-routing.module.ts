@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'overview', component: OverviewComponent },
       { path: 'articles', component: ColumnViewComponent },
-      { path: 'editor', component: ArticleEditorComponent },
+      { path: 'editor/:id', component: ArticleEditorComponent },
       { path: 'left-column', component: LeftColumnComponent }
     ]
   }

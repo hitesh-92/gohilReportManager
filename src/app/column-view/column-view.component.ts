@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -24,7 +25,7 @@ export class ColumnViewComponent implements OnInit {
   switch: number = -1;
   moveTo: number = -1;
 
-  constructor(private http: HttpClient, private location: Location) { }
+  constructor(private http: HttpClient, private location: Location, private router: Router) { }
 
   ngOnInit() {
   }
@@ -37,9 +38,19 @@ export class ColumnViewComponent implements OnInit {
   }
 
   onEdit(event: any){
-    let article = this.findArticleFromEvent(event);
-    return;
-    //navigate to editor with article data
+
+    let id: string = event.target.parentElement.parentElement.children[0].innerText;
+    if(id === 'edit') id = event.target.parentElement.parentElement.parentElement.children[0].innerText;
+
+    const index: number = parseInt(id) - 1;
+
+    const articleId = this.articles[index]._id;
+    const url = `/app/editor/${articleId}`;
+    this.router.navigate([url]);
+  }
+
+  onAddNewArticle(){
+    this.router.navigate(['/app/editor/new'])
   }
 
   onSwitch(event: any){
@@ -62,7 +73,7 @@ export class ColumnViewComponent implements OnInit {
     else this.allowSwitch = false;
   }
 
-  findArticleFromEvent(event:any){
+  findArticleFromEvent(event:any, from:string){
 
     let position: any = event.target.id === ""
     ? event.target.parentElement.parentElement.parentElement.children["0"].innerText
@@ -110,6 +121,7 @@ export class ColumnViewComponent implements OnInit {
     .patch(url, body, { headers })
     .subscribe( (resp:any) => {
       console.log('Switch Success ==>', resp)
+      let loc: string = `/app/${this.columnTitle}-column`;
       if(resp.status) location.reload();
 
     })
