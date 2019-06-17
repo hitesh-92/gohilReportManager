@@ -10,8 +10,14 @@
     <button mat-flat-button color="primary">Add new Article</button>
     <!-- <div><small>Use switch button to change article positions</small></div> -->
     <div><small>Click switch on selected article to undo</small></div>
-    <div>switch select: {{ switchPositionDisplay('selected') }} </div>
-    <div>switch to: {{  switchPositionDisplay('moveTo') }} </div>
+    <div
+      [ngClass]="{selected: switch !== -1}"
+    >
+      switch select: {{ switchPositionDisplay('selected') }} </div>
+    <div
+      [ngClass]="{moveTo: moveTo !== -1}"
+    >
+      switch to: {{  switchPositionDisplay('moveTo') }} </div>
     <div> <button mat-stroked-button [disabled]="!allowSwitch" color="primary">Confirm Switch</button> </div>
   </section>
 
