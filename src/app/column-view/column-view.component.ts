@@ -43,34 +43,41 @@ export class ColumnViewComponent implements OnInit {
     //navigate to editor with article data
   }
 
-  onSwitch($event: any){
+  onSwitch(event: any){
+    // console.log(event)
+    // console.log( event )
     let article = this.findArticleFromEvent(event);
-    let index = article.position - 1;
+    console.log(article.title)
+    // let index = article.position - 1;
 
-    if(this.switch == 0) this.switch = index;
-    else if(this.switch>0 && index == this.switch) this.switch = 0;
-    else {
-      if(this.moveTo>0 && index == this.moveTo) this.moveTo = 0
-      else if(this.switch>0) this.moveTo = index;
-    }
+    // if(this.switch == 0) this.switch = index;
+    // else if(this.switch>0 && index == this.switch) this.switch = 0;
+    // else {
+    //   if(this.moveTo>0 && index == this.moveTo) this.moveTo = 0
+    //   else if(this.switch>0) this.moveTo = index;
+    // }
 
 
     // console.log(article.title)
 
-    if(this.switch>0 && this.moveTo>0) this.allowSwitch = true;
-    else this.allowSwitch = false;
+    // if(this.switch>0 && this.moveTo>0) this.allowSwitch = true;
+    // else this.allowSwitch = false;
 
-    console.log(`switch: ${this.articles[this.switch].title}, moveTo: ${this.articles[this.moveTo].title}`);
+    // console.log(`switch: ${this.articles[this.switch].title}, moveTo: ${this.articles[this.moveTo].title}`);
 
-    // bind confirm btton disable attr
+    // set display for switch and moveTo
     // then set click event listnr on confirm btn
     // test it works and re-renders the articles in new order
   }
 
   findArticleFromEvent(event:any){
-    let position: any = event.target.parentNode.parentNode.childNodes[0].innerText
+
+    let position: any = event.target.id === ""
+    ? event.target.parentElement.parentElement.parentElement.children["0"].innerText
+    : event.target.id
+
     let index = parseInt(position) - 1;
-    // console.log( this.articles[index] );
+
     return this.articles[index];
   }
 

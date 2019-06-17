@@ -9,9 +9,9 @@
     <!-- make add new button green -->
     <button mat-flat-button color="primary">Add new Article</button>
     <div><small>Use switch button to change article positions</small></div>
-    <div>switch select: --truncate title-- </div>
-    <div>switch to: -</div>
-    <div> <button mat-stroked-button disabled color="primary">Confirm Switch</button> </div>
+    <div>switch select: {{switch}} </div>
+    <div>switch to: {{moveTo}} </div>
+    <div> <button mat-stroked-button [disabled]="!allowSwitch" color="primary">Confirm Switch</button> </div>
   </section>
 
   <section class="articles">
@@ -25,7 +25,7 @@
     </div>
 
     <ul>
-      <li class="article" id="article.position" *ngFor="let article of articles">
+      <li class="article" *ngFor="let article of articles">
         <p class="position">{{article.position}}</p>
         <p class="status">{{article.status}}</p>
         <p>{{article.title}}</p>
@@ -35,7 +35,7 @@
           <button mat-flat-button color="accent" class="btn btn-edit" (click)="onEdit($event)">
             edit
           </button>
-          <button mat-flat-button color="primary" class="btn btn-switch" (click)="onSwitch($event)">
+          <button mat-flat-button color="primary" class="btn btn-switch" (click)="onSwitch($event)" [id]="article.position">
             switch
           </button>
         </div>
