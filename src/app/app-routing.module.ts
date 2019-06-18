@@ -18,7 +18,8 @@ const routes: Routes = [
       { path: 'overview', component: OverviewComponent },
       { path: 'articles', component: ColumnViewComponent },
       { path: 'editor/:id', component: ArticleEditorComponent },
-      { path: 'left-column', component: LeftColumnComponent }
+      { path: 'left-column', component: LeftColumnComponent },
+      { path: ':column/editor/:id', component: ArticleEditorComponent }
     ]
   }
 ];

@@ -28,6 +28,7 @@ export class ColumnViewComponent implements OnInit {
   constructor(private http: HttpClient, private location: Location, private router: Router) { }
 
   ngOnInit() {
+    // console.log(this.location)
   }
 
   ngOnChanges(){
@@ -45,12 +46,16 @@ export class ColumnViewComponent implements OnInit {
     const index: number = parseInt(id) - 1;
 
     const articleId = this.articles[index]._id;
-    const url = `/app/editor/${articleId}`;
-    this.router.navigate([url]);
+    // const url = `/app/editor/${articleId}`;
+    // this.router.navigate([url]);
+
+    let navigateTo: string = `${this.location._platformLocation.pathname}/editor/${articleId}`;
+    this.router.navigate([navigateTo]);
   }
 
   onAddNewArticle(){
-    this.router.navigate(['/app/editor/new'])
+    let navigateTo: string = `${this.location._platformLocation.pathname}/editor/new`;
+    this.router.navigate([navigateTo]);
   }
 
   onSwitch(event: any){

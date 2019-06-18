@@ -50,10 +50,8 @@ export class ArticleEditorComponent implements OnInit {
       this.setUpCreateNewArticle();
     }
     else {
-      this.newArticle = false;
-      this.pageTitle = `#${id}`;
 
-      // this.setUpEditExistingArticle()
+      // this.setUpEditExistingArticle(id)
       //if articles does not exist route to overview / check token valid
       //get article and update current
     }
@@ -72,6 +70,14 @@ export class ArticleEditorComponent implements OnInit {
       url: 'Add URL To Article',
       image: 'Add Link To Relevent Image or Leave Blank'
     }
+
+  }
+
+  setUpEditExistingArticle(id: string){
+    this.newArticle = false;
+    this.pageTitle = `#${id}`;
+
+    // const article = this.fetchArticle(id)
 
   }
 
