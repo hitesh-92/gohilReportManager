@@ -28,7 +28,7 @@ export class ColumnViewComponent implements OnInit {
   constructor(private http: HttpClient, private location: Location, private router: Router) { }
 
   ngOnInit() {
-    // console.log(this.location)
+
   }
 
   ngOnChanges(){
@@ -40,21 +40,20 @@ export class ColumnViewComponent implements OnInit {
 
   onEdit(event: any){
 
-    let id: string = event.target.parentElement.parentElement.children[0].innerText;
-    if(id === 'edit') id = event.target.parentElement.parentElement.parentElement.children[0].innerText;
+    let position: string = event.target.parentElement.parentElement.children[0].innerText;
+    if(position === 'edit') position = event.target.parentElement.parentElement.parentElement.children[0].innerText;
 
-    const index: number = parseInt(id) - 1;
-
+    const index: number = parseInt(position) - 1;
     const articleId = this.articles[index]._id;
-    // const url = `/app/editor/${articleId}`;
-    // this.router.navigate([url]);
 
-    let navigateTo: string = `${this.location._platformLocation.pathname}/editor/${articleId}`;
+    let current: string = location.pathname;
+    let navigateTo: string = `${current}/editor/${articleId}`;
     this.router.navigate([navigateTo]);
   }
 
   onAddNewArticle(){
-    let navigateTo: string = `${this.location._platformLocation.pathname}/editor/new`;
+    let current: string = location.pathname;
+    let navigateTo: string = `${current}/editor/new`;
     this.router.navigate([navigateTo]);
   }
 
