@@ -9,21 +9,21 @@
         <!-- if alert: add check box -->
 
         <!-- variables -->
-        <form class="article-form" [ngStyle]="{backgroundColor: colorEditor()}" >
+        <form class="article-form" >
 
 
           <div class="articleInput">
             <div class="article-current-info">
               <p class="title">Title</p>
-              <p class="article-title">{{articleTitle}}</p>
+              <p class="article-title">{{ article.title || articleTitle}}</p>
             </div>
             <mat-form-field class="input">
               <textarea
                 matInput
-                placeholder="Edit article url"
+                placeholder="Enter article title"
                 class="textInput"
-                value=""
-                (input)="onUpdateArticleTitle($event)"
+                [(ngModel)]="input_title"
+                name="title"
                 >
               </textarea>
             </mat-form-field>
@@ -32,31 +32,47 @@
           <div class="articleInput">
             <div class="article-current-info">
               <p class="title">Article url</p>
-              <p class="article-title">{{articleUrl}}</p>
+              <p class="article-title">{{article.url || articleUrl}}</p>
             </div>
             <mat-form-field class="input">
-              <textarea matInput placeholder="Edit article url" class="textInput"></textarea>
+              <textarea
+                matInput
+                placeholder="Enter article url"
+                class="textInput"
+                [(ngModel)]="input_url"
+                name="url"
+              >
+              </textarea>
             </mat-form-field>
           </div>
 
           <div class="articleInput">
             <div class="article-current-info">
               <p class="title">Image url</p>
-              <p class="article-title">{{imageUrl}}</p>
+              <p class="article-title">{{article.image || imageUrl}}</p>
             </div>
             <mat-form-field class="input">
-              <textarea matInput placeholder="Edit article url" class="textInput"></textarea>
+              <textarea
+                matInput
+                placeholder="Enter image url"
+                class="textInput"
+                [(ngModel)]="input_image"
+                name="image"
+              >
+              </textarea>
             </mat-form-field>
           </div>
-
-
 
 
           <!-- <div class="columnSelect"> -->
           <div class="articleInput">
             <div class="article-current-info">
               <p class="title">Column</p>
-              <p class="article-title">{{articleColumn}}</p>
+              <p
+                *ngIf="articleType === 'new'"
+                class="article-title"
+              >Default: {{defaultColumn}}
+              </p>
             </div>
 
             <mat-form-field>
@@ -72,41 +88,46 @@
             </mat-form-field>
           </div>
 
-          <div class="buttons">
+          <div *ngIf="articleType === 'new'">
+            <div class="buttons">
+            <div></div>
             <button
               mat-raised-button
-              color="primary"
-              [disabled]="!allowUpdate"
-              (click)="onUpdate()"
+              class="createButton"
+              (click)="onCreateNewArticle()"
             >
+              Create
+            </button>
+            <div></div>
+            </div>
+          </div>
+
+          <div *ngIf="articleType === 'existing'">
+              <div class="buttons">
+                <button mat-raised-button color="primary" [disabled]="!allowUpdate" (click)="onUpdate()">
+                  Update
+                </button>
+                <button mat-flat-button color="warn" (click)="onDelete()"> Delete </button>
+                <button mat-stroked-button color="warn" (click)="onArchive()"> Archive </button>
+              </div>
+          </div>
+
+          <div *ngIf="articleType === 'archive'">
+            <div class="buttons">
+              <div></div>
+              <div>something</div>
+              <div></div>
+            </div>
+          </div>
+
+          <!-- <div class="buttons">
+            <button mat-raised-button color="primary" [disabled]="!allowUpdate" (click)="onUpdate()">
               Update
             </button>
+            <button mat-flat-button color="warn" (click)="onDelete()"> Delete </button>
+            <button mat-stroked-button color="warn" (click)="onArchive()"> Archive </button>
+          </div> -->
 
-            <button mat-flat-button color="warn" (click)="onDelete()">
-              Delete
-            </button>
-
-            <button
-              *ngIf="!isArchived; else unarchive"
-              mat-stroked-button
-              color="warn"
-              (click)="onArchive()"
-            >
-              Archive
-            </button>
-
-            <ng-template #unarchive>
-              <button
-                mat-stroked-button
-                color="primary"
-                (click)="onUnarchive()"
-              >
-                UnArchive
-              </button>
-            </ng-template>
-
-
-          </div>
         </form>
       </div>
 
