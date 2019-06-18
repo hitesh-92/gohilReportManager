@@ -12,14 +12,6 @@ export class ArticleEditorComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
-  selectedColumn: string;
-  columns: any = [
-    { value: 'Left', viewValue: 'Left' },
-    { value: 'Center', viewValue: 'Center' },
-    { value: 'Right', viewValue: 'Right' },
-    { value: 'Alert', viewValue: 'Alert' }
-  ];
-
   articleTitle = 'Color-hex.com also generates a simple css code for the selected color. Html element samples are also shown below the color detail page.';
   articleUrl = 'http://www.example.com';
   imageUrl = 'http://somwhere.com/someimageLink';
@@ -47,6 +39,15 @@ export class ArticleEditorComponent implements OnInit {
   input_title: string;
   input_url: string;
   input_image: string;
+
+  selectedColumn: string;
+  columns: any = [
+    { value: 'Left', viewValue: 'Left' },
+    { value: 'Center', viewValue: 'Center' },
+    { value: 'Right', viewValue: 'Right' },
+    { value: 'Alert', viewValue: 'Alert' }
+  ];
+
 
   ngOnInit() {
     const id: any = this.route.snapshot.params['id'];
@@ -166,6 +167,8 @@ export class ArticleEditorComponent implements OnInit {
   onCreateNewArticle(){
     //this.selectedColumn==undefind if not selected
     console.log('ABOUT TO CREATE NEW ARTICLE')
+
+    //add validations
 
     const token: string = window.sessionStorage.getItem('token');
 
