@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,20 +12,6 @@ export class ArticleEditorComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
-  articleTitle = 'Color-hex.com also generates a simple css code for the selected color. Html element samples are also shown below the color detail page.';
-  articleUrl = 'http://www.example.com';
-  imageUrl = 'http://somwhere.com/someimageLink';
-  articleColumn = 'left';
-  isArchived = false;
-
-  allowUpdate = true; //allow if validated
-
-  //update article values
-  updatedArticleURL = '';
-  updatedImageURL = '';
-
-  ////////////////////////////////////////////////////////////////////////
-  tmpColumnId: any;
   // ----
 
   pathFrom: string;
@@ -42,7 +28,9 @@ export class ArticleEditorComponent implements OnInit {
     position: '',
     createdAt: '',
     updatedAt: '',
-    status: ''
+    status: '',
+    _id: '',
+    column: ''
   }
 
   input_title: string;
@@ -51,11 +39,13 @@ export class ArticleEditorComponent implements OnInit {
 
   selectedColumn: string;
   columns: any = [
-    { value: 'Left', viewValue: 'Left' },
+    { value: 'left', viewValue: 'Left' },
     { value: 'Center', viewValue: 'Center' },
     { value: 'Right', viewValue: 'Right' },
     { value: 'Alert', viewValue: 'Alert' }
   ];
+
+  allowUpdateExisting: any = true;
 
 
   ngOnInit() {
@@ -77,6 +67,9 @@ export class ArticleEditorComponent implements OnInit {
       //get article and update current
 
     //else if (archive) ....
+  }
+
+  ngOnChanges(){
   }
 
   getRouteUrl(route: string){
@@ -103,17 +96,15 @@ export class ArticleEditorComponent implements OnInit {
     }
   }
 
-  private fetchColumnIds(){
-
-    const token: string = window.sessionStorage.getItem('token');
-    const headers: any = new HttpHeaders({'x-auth': token})
-
-    this.http.get('http://localhost:8000/column/left', { headers })
-    .subscribe((resp:any) => {
-      this.tmpColumnId = resp.columnData._id
-    })
-
+  colorEditor(){
+    // return this.isArchived == false ? 'white' : '#fbf6d9';
+    //color the background to show its an archived file
+    // edit editor body color if archived
   }
+
+  /*
+  * Editor Set Up
+  */
 
   setUpCreateNewArticle(){
     this.articleType = 'new';
@@ -128,11 +119,6 @@ export class ArticleEditorComponent implements OnInit {
 
   }
 
-  validateRouteUrls(routes){
-    if(routes.fetch == false) this.router.navigate(['/app/overview']);
-    // check token etc....
-  }
-
   setUpEditExistingArticle(id: string){
     this.articleType = 'existing';
     this.pageTitle = `#${id}`;
@@ -145,68 +131,22 @@ export class ArticleEditorComponent implements OnInit {
 
   }
 
-  private setExisitingArticle(id:string){
+  // -----
 
-    const token: string = window.sessionStorage.getItem('token');
-    const url: string = `http://localhost:8000/article/${id}`;
-    const headers = new HttpHeaders({'x-auth':token});
 
-    this.http.get(url,headers, {headers})
-    .subscribe( (resp:any) => {
-      console.log('GOT ARTICLE ==> ', resp)
-      if(!resp.found) return; //HANDLE ERROR
-
-      this.defaultColumn = resp.column.title;
-
-      this.article.title = resp.article.title;
-      this.article.url = resp.article.url;
-      this.article.image = resp.article.image;
-      this.article.position = resp.article.position;
-      this.article.createdAt = resp.article.createdAt;
-      this.article.updatedAt = resp.article.updatedAt;
-      this.article._id = resp.article._id;
-      this.article.status = resp.article.status;
-    });
-
-  }
-
-  onUpdateArticleTitle({target: {value}}){
-
-    // console.log(value)
-    // this.input_title = value;
-    return;
-  }
-
-  onUpdate(){
-    // console.log('DO you really want to UPDATE this?');
-    console.log(this.input_title)
-    console.log(this.input_url)
-    console.log(this.input_image)
-  }
-
-  onArchive(){
-    console.log('DO you really want to ARCHIVE this?');
-  }
-
-  onDelete(){
-    console.log('DO you really want to DELETE this?');
-  }
-
-  onUnarchive(){
-    console.log('DO you really want to UN-ARCHIVE this?')
-  }
-
-  colorEditor(){
-    // return this.isArchived == false ? 'white' : '#fbf6d9';
-    //color the background to show its an archived file
-    // edit editor body color if archived
-  }
+  /*
+  * Buttons
+  */
 
   onCreateNewArticle(){
     //this.selectedColumn==undefind if not selected
     console.log('ABOUT TO CREATE NEW ARTICLE')
 
     //add validations
+
+    const column: string = this.selectedColumn===undefined
+    ? this.article.column // set to same as pathFrom
+    : this.selectedColumn;
 
     const token: string = window.sessionStorage.getItem('token');
 
@@ -215,7 +155,7 @@ export class ArticleEditorComponent implements OnInit {
       title: this.input_title,
       url: this.input_url,
       image: 'www.testimage.com',
-      column: this.tmpColumnId,
+      column: column,
       position: 1
     };
 
@@ -230,5 +170,139 @@ export class ArticleEditorComponent implements OnInit {
 
   }
 
+  onUpdateExisting(){
+
+    // console.log('DO you really want to UPDATE this?');
+    // ADD VALIDATIONS
+
+    // console.log(this.input_title, this.input_url, this.input_image);
+
+    let body: any = {};
+    body.id = this.article._id;
+    console.log(this.article._id)
+    if(this.input_title !== undefined) body.title = this.input_title;
+    if(this.input_url   !== undefined) body.url = this.input_url;
+    if(this.input_image !== undefined) body.image = this.input_image;
+
+    const column: string = this.selectedColumn===undefined
+    ? this.article.column
+    : this.selectedColumn;
+
+    const token = window.sessionStorage.getItem('token');
+    const url: string = 'http://localhost:8000/article/';
+    const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'})
+
+    this.http.patch(url, body, {headers})
+    .subscribe( (resp:any) => {
+      console.log('PATCHED ==> ', resp)
+    });
+
+  }
+
+  onArchiveExisting(){
+    console.log('DO you really want to ARCHIVE this?');
+  }
+
+  onDeleteExisting(){
+    console.log('DO you really want to DELETE this?');
+  }
+
+  onUnarchive(){
+    console.log('DO you really want to UN-ARCHIVE this?')
+  }
+
+  // -----
+
+
+  /*
+  * HTTP
+  */
+
+  private fetchColumnIds(){
+
+    const token: string = window.sessionStorage.getItem('token');
+    const headers: any = new HttpHeaders({'x-auth': token})
+
+    this.http.get('http://localhost:8000/column/ids', { headers })
+    .subscribe((resp:any) => {
+      // this.tmpColumnId = resp.columnData._id
+      // console.log('IDS ==> ', resp)
+
+      if(resp.error) return; //HANDLE ERROR
+
+      this.columnIds = resp.columns;
+      // console.log(resp)
+
+      resp.columns.forEach(column => {
+        const id = column._id
+
+        if(column.title == 'left') {
+          this.columns[0].value = id;
+          this.columnIds.left = id;
+        }
+        else if(column.title == 'center') {
+          this.columns[1].value = id;
+          this.columnIds.center = id;
+        }
+        else if(column.title == 'right') {
+          this.columns[2].value = id;
+          this.columnIds.right = id;
+        }
+        else if(column.title == 'alert') {
+          this.columns[3].value = id;
+          this.columnIds.alert = id;
+        }
+        else if(column.title == 'archive') {
+          this.columnIds.archive = id;
+        }
+
+      })
+
+    })
+
+  }
+
+  private setExisitingArticle(id:string){
+
+    const token: string = window.sessionStorage.getItem('token');
+    const url: string = `http://localhost:8000/article/${id}`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    this.http.get(url, {headers})
+    .subscribe( (resp:any) => {
+      // console.log('GOT ARTICLE ==> ', resp)
+      if(!resp.found) return; //HANDLE ERROR
+
+      this.defaultColumn = resp.column.title;
+
+      this.article.title = resp.article.title;
+      this.article.url = resp.article.url;
+      this.article.image = resp.article.image;
+      this.article.position = resp.article.position;
+      this.article.createdAt = new Date(resp.article.createdAt).toLocaleDateString();
+      this.article.updatedAt = new Date(resp.article.updatedAt).toLocaleDateString();
+      this.article._id = resp.article._id;
+      this.article.status = resp.article.status;
+      this.article.column = resp.article.column;
+    });
+
+  }
+
+  // -----
+
+  /*
+  * Valdiations
+  */
+
+  validateRouteUrls(routes){
+    if(routes.fetch == false) this.router.navigate(['/app/overview']);
+    // check token etc....
+  }
+
+  allowUpdate(){
+    return;
+  }
+
+  // -----
 
 }

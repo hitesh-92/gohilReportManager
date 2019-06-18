@@ -103,11 +103,12 @@
 
           <div *ngIf="articleType === 'existing'">
               <div class="buttons">
-                <button mat-raised-button color="primary" [disabled]="!allowUpdate" (click)="onUpdate()">
-                  Update
+                <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting"
+                (click)="onUpdateExisting()">
+                Update
                 </button>
-                <button mat-flat-button color="warn" (click)="onDelete()"> Delete </button>
-                <button mat-stroked-button color="warn" (click)="onArchive()"> Archive </button>
+                <button mat-flat-button color="warn" (click)="onDeleteExisting()"> Delete </button>
+                <button mat-stroked-button color="warn" (click)="onArchiveExisting()"> Archive </button>
               </div>
           </div>
 
@@ -118,14 +119,6 @@
               <div></div>
             </div>
           </div>
-
-          <!-- <div class="buttons">
-            <button mat-raised-button color="primary" [disabled]="!allowUpdate" (click)="onUpdate()">
-              Update
-            </button>
-            <button mat-flat-button color="warn" (click)="onDelete()"> Delete </button>
-            <button mat-stroked-button color="warn" (click)="onArchive()"> Archive </button>
-          </div> -->
 
         </form>
 
@@ -159,7 +152,7 @@
             </div>
           </div>
         </div>
-        
+
       </div>
 
     </section>
