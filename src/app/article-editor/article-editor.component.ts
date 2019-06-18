@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-export interface Column {
-  value: string;
-  viewValue: string;
-}
 @Component({
   selector: 'app-article-editor',
   templateUrl: './article-editor.component.html',
@@ -11,11 +8,15 @@ export interface Column {
 })
 export class ArticleEditorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   selectedColumn: string;
 
-  columns: Column[] = [
+  newArticle: boolean = true;
+
+  article: any;
+
+  columns: any = [
     { value: 'Left', viewValue: 'Left' },
     { value: 'Center', viewValue: 'Center' },
     { value: 'Right', viewValue: 'Right' },
@@ -30,8 +31,10 @@ export class ArticleEditorComponent implements OnInit {
 
   allowUpdate = true; //allow if validated
 
+  pageTitle: string;
+
   //update article values
-  updatedArticleTitle = '';
+  input_title = '';
   updatedArticleURL = '';
   updatedImageURL = '';
 
@@ -41,17 +44,46 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    let id = this.route.snapshot.params['id'];
+
+    if( id === 'new' ) {
+      this.setUpCreateNewArticle();
+    }
+    else {
+      this.newArticle = false;
+      this.pageTitle = `#${id}`;
+
+      // this.setUpEditExistingArticle()
+      //if articles does not exist route to overview / check token valid
+      //get article and update current
+    }
+
+
+    //get all columnIds
+    // this.fetchColumnIds()
+  }
+
+  setUpCreateNewArticle(){
+
+    this.pageTitle = 'New Article';
+
+    this.article = {
+      title: 'Set Title To Display',
+      url: 'Add URL To Article',
+      image: 'Add Link To Relevent Image or Leave Blank'
+    }
+
   }
 
   //  article update data
   onUpdateArticleTitle({target: {value}}){
 
     // console.log(value)
-    this.updatedArticleTitle = value;
+    // this.input_title = value;
+    return;
   }
 
   //  buttons
-
   onUpdate(){
     console.log('DO you really want to UPDATE this?');
   }
@@ -67,5 +99,6 @@ export class ArticleEditorComponent implements OnInit {
   onUnarchive(){
     console.log('DO you really want to UN-ARCHIVE this?')
   }
+
 
 }

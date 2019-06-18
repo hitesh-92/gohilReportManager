@@ -73,7 +73,7 @@ export class ColumnViewComponent implements OnInit {
     else this.allowSwitch = false;
   }
 
-  findArticleFromEvent(event:any, from:string){
+  findArticleFromEvent(event:any){
 
     let position: any = event.target.id === ""
     ? event.target.parentElement.parentElement.parentElement.children["0"].innerText
