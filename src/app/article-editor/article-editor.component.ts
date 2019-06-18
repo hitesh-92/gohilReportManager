@@ -32,9 +32,18 @@ export class ArticleEditorComponent implements OnInit {
   articleType: string;
   defaultColumn: string;
   postRoute: string;
+  columnIds: any;
 
   pageTitle: string;
-  article: any;
+  article: any = {
+    title: '',
+    url: '',
+    image: '',
+    position: '',
+    createdAt: '',
+    updatedAt: '',
+    status: ''
+  }
 
   input_title: string;
   input_url: string;
@@ -62,9 +71,12 @@ export class ArticleEditorComponent implements OnInit {
     //update this.fetchColumnIds to behave as expected
 
     if( id === 'new' ) this.setUpCreateNewArticle();
+
     else this.setUpEditExistingArticle(id)
       //if articles does not exist route to overview / check token valid
       //get article and update current
+
+    //else if (archive) ....
   }
 
   getRouteUrl(route: string){
@@ -124,13 +136,40 @@ export class ArticleEditorComponent implements OnInit {
   setUpEditExistingArticle(id: string){
     this.articleType = 'existing';
     this.pageTitle = `#${id}`;
+
+    this.setExisitingArticle(id)
+
     return;
 
     // const article = this.fetchArticle(id)
 
   }
 
-  //  article update data
+  private setExisitingArticle(id:string){
+
+    const token: string = window.sessionStorage.getItem('token');
+    const url: string = `http://localhost:8000/article/${id}`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    this.http.get(url,headers, {headers})
+    .subscribe( (resp:any) => {
+      console.log('GOT ARTICLE ==> ', resp)
+      if(!resp.found) return; //HANDLE ERROR
+
+      this.defaultColumn = resp.column.title;
+
+      this.article.title = resp.article.title;
+      this.article.url = resp.article.url;
+      this.article.image = resp.article.image;
+      this.article.position = resp.article.position;
+      this.article.createdAt = resp.article.createdAt;
+      this.article.updatedAt = resp.article.updatedAt;
+      this.article._id = resp.article._id;
+      this.article.status = resp.article.status;
+    });
+
+  }
+
   onUpdateArticleTitle({target: {value}}){
 
     // console.log(value)
@@ -138,7 +177,6 @@ export class ArticleEditorComponent implements OnInit {
     return;
   }
 
-  //  buttons
   onUpdate(){
     // console.log('DO you really want to UPDATE this?');
     console.log(this.input_title)
@@ -158,10 +196,10 @@ export class ArticleEditorComponent implements OnInit {
     console.log('DO you really want to UN-ARCHIVE this?')
   }
 
-  // edit editor body color if archived
   colorEditor(){
     // return this.isArchived == false ? 'white' : '#fbf6d9';
     //color the background to show its an archived file
+    // edit editor body color if archived
   }
 
   onCreateNewArticle(){

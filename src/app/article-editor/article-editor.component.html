@@ -69,9 +69,8 @@
             <div class="article-current-info">
               <p class="title">Column</p>
               <p
-                *ngIf="articleType === 'new'"
                 class="article-title"
-              >Default: {{defaultColumn}}
+              >Default: {{ defaultColumn }}
               </p>
             </div>
 
@@ -129,6 +128,7 @@
           </div> -->
 
         </form>
+
       </div>
 
       <div class="right-side">
@@ -140,26 +140,28 @@
           <!-- could show title of articles in positions infront and behind (desktop?) -->
           <div class="const-data">
             <small>Position</small>
-            <p>{{ "1 / colLength" }}</p>
+            <p>{{ article.position || '-' }}</p>
           </div>
           <div class="const-data">
             <small>Created At</small>
-            <p>01/01/2019</p>
+            <p>{{ article.createdAt || '-' }}</p>
           </div>
           <div class="const-data">
             <small>Updated At</small>
-            <p>17/05/2019</p>
+            <p>{{ article.updatedAt || '-' }}</p>
           </div>
           <div class="const-data">
             <!-- Status, show how long the article has been up/archived -->
             <small>Status</small>
             <div class="status-data">
-              <p>2</p>
-              <p>123 months old</p>
+              <p>{{ article.status }}</p>
+              <p>{{ "123 months old" }}</p>
             </div>
           </div>
         </div>
+        
       </div>
+
     </section>
   </main>
 </div>
