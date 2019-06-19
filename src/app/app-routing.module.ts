@@ -10,6 +10,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { CenterColumnComponent } from './center-column/center-column.component';
 import { RightColumnComponent } from './right-column/right-column.component';
+import { AlertsComponent } from './alerts/alerts.component';
 import { ArchiveComponent } from './archive/archive.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'left-column', component: LeftColumnComponent },
       { path: 'center-column', component: CenterColumnComponent },
       { path: 'right-column', component: RightColumnComponent },
+      { path: 'alerts', component: AlertsComponent },
       { path: 'archives', component: ArchiveComponent },
       { path: ':column/editor/:id', component: ArticleEditorComponent }
     ]
