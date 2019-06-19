@@ -9,6 +9,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { CenterColumnComponent } from './center-column/center-column.component';
+import { RightColumnComponent } from './right-column/right-column.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'editor/:id', component: ArticleEditorComponent },
       { path: 'left-column', component: LeftColumnComponent },
       { path: 'center-column', component: CenterColumnComponent },
+      { path: 'right-column', component: RightColumnComponent },
       { path: ':column/editor/:id', component: ArticleEditorComponent }
     ]
   }
