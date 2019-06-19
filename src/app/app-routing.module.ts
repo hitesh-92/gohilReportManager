@@ -8,6 +8,7 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
+import { CenterColumnComponent } from './center-column/center-column.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'articles', component: ColumnViewComponent },
       { path: 'editor/:id', component: ArticleEditorComponent },
       { path: 'left-column', component: LeftColumnComponent },
+      { path: 'center-column', component: CenterColumnComponent },
       { path: ':column/editor/:id', component: ArticleEditorComponent }
     ]
   }

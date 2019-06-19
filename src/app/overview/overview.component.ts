@@ -39,12 +39,12 @@ export class OverviewComponent implements OnInit {
     threeMonth: 0,
     sixMonth: 0
   }
-  
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.fetchAllColumns();
-    console.log(this.data)
+    // console.log(this.data)
   }
 
   ngOnChanges(){

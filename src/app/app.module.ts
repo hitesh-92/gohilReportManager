@@ -34,6 +34,7 @@ import { UserLoginComponent, UserLoginForm } from './user-login/user-login.compo
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { MainOverviewComponent } from './main-overview/main-overview.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
+import { CenterColumnComponent } from './center-column/center-column.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { LeftColumnComponent } from './left-column/left-column.component';
     UserLoginForm,
     MainNavComponent,
     MainOverviewComponent,
-    LeftColumnComponent
+    LeftColumnComponent,
+    CenterColumnComponent
   ],
   entryComponents: [UserSignUpForm, UserLoginForm],
   imports: [
