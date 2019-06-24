@@ -68,8 +68,11 @@ export class OverviewComponent implements OnInit {
   }
 
   private fetchColumn(title: string){
+    const url: string = `http://localhost:8000/column/${title}`;
+    const headers: any = new HttpHeaders({ 'x-auth': window.sessionStorage.getItem('token') });
+
     return this.http
-    .get(`http://localhost:8000/column/${title}`)
+    .get(url, { headers })
     .subscribe((resp:any) => {
       this.data[title] = resp
       this.counts[title] = resp.articles.length;

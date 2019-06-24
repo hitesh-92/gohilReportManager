@@ -1,4 +1,4 @@
-#overview{
+/* #overview{
   display: grid;
   grid-template-rows: 10vh 25vh 100% 15vh;
   row-gap: 2rem;
@@ -90,4 +90,12 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   background-color: #ccc;
+} */
+
+/* -------------------------------------- */
+
+#container{
+  /* background-color: red; */
+  margin: 0 0.5rem;
+  /* padding: 0; */
 }

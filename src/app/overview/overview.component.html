@@ -1,48 +1,17 @@
-<div id="overview">
+<!-- <div id="overview">
 
-  <div class="title">
-    <h1 class="mat-display-1">Dashboard</h1>
-  </div>
+  <div class="title"> <h1 class="mat-display-1">Dashboard</h1> </div>
 
   <section id="activeArticles">
+
     <section id="article-count">
-
-      <mat-card>
-        <div>
-          <span>Alert - </span>
-          <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span>
-        </div>
-      </mat-card>
-
-      <mat-card>
-        <div>
-          <span>Left - </span>
-          <span *ngIf="counts.left !== null">{{ [counts.left] }}</span>
-        </div>
-      </mat-card>
-
-      <mat-card>
-        <div>
-          <span>center - </span>
-          <span *ngIf="counts.center !== null">{{ [counts.center] }}</span>
-        </div>
-      </mat-card>
-
-      <mat-card>
-        <div>
-          <span>right - </span>
-          <span *ngIf="counts.right !== null">{{ [counts.right] }}</span>
-        </div>
-      </mat-card>
-
-      <mat-card>
-        <div>
-          <span>archive - </span>
-          <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span>
-        </div>
-      </mat-card>
-
+      <mat-card> <div> <span>Alert - </span> <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span>  </div> </mat-card>
+      <mat-card> <div> <span>Left - </span> <span *ngIf="counts.left !== null">{{ [counts.left] }}</span> </div> </mat-card>
+      <mat-card> <div> <span>center - </span> <span *ngIf="counts.center !== null">{{ [counts.center] }}</span> </div> </mat-card>
+      <mat-card> <div> <span>right - </span> <span *ngIf="counts.right !== null">{{ [counts.right] }}</span> </div> </mat-card>
+      <mat-card> <div> <span>archive - </span> <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span> </div> </mat-card>
     </section>
+
     <section id="article-status">
         <mat-card>new : {{ [status.new] }}</mat-card>
         <mat-card>1 month+ : {{ [status.oneMonth] }}</mat-card>
@@ -100,7 +69,7 @@
 
   <div>
     <mat-card id="last">
-      <!-- use flex box -->
+
       <p>more info</p>
       <p>db url</p>
       <p>db data</p>
@@ -109,4 +78,23 @@
       <p> <a href="#">Gohil Report API</a> </p>
     </mat-card>
   </div>
+</div> -->
+
+<div id="container" fxLayout="column">
+
+  <div fxFlex="100"> <h1 class="mat-display-1">Overview</h1> </div>
+
+  <!-- <div  > -->
+    <section fxFlex="100"
+      fxLayout="row" fxLayoutAlign="space-evenly"
+
+      >
+      <mat-card> <div> <span>Alert - </span> <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span>  </div> </mat-card>
+      <mat-card> <div> <span>Left - </span> <span *ngIf="counts.left !== null">{{ [counts.left] }}</span> </div> </mat-card>
+      <mat-card> <div> <span>center - </span> <span *ngIf="counts.center !== null">{{ [counts.center] }}</span> </div> </mat-card>
+      <mat-card> <div> <span>right - </span> <span *ngIf="counts.right !== null">{{ [counts.right] }}</span> </div> </mat-card>
+      <mat-card> <div> <span>archive - </span> <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span> </div> </mat-card>
+    </section>
+  <!-- </div> -->
+
 </div>
