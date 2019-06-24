@@ -1,44 +1,63 @@
-<!-- <div id="overview">
+<div id="container" fxLayout="column" fxLayoutGap="1rem">
 
-  <div class="title"> <h1 class="mat-display-1">Dashboard</h1> </div>
+  <div fxFlex="100">
+    <h1 class="mat-display-1">Overview</h1>
+  </div>
 
-  <section id="activeArticles">
+  <div id="article-count" gdGap="0.5rem">
 
-    <section id="article-count">
-      <mat-card> <div> <span>Alert - </span> <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span>  </div> </mat-card>
-      <mat-card> <div> <span>Left - </span> <span *ngIf="counts.left !== null">{{ [counts.left] }}</span> </div> </mat-card>
-      <mat-card> <div> <span>center - </span> <span *ngIf="counts.center !== null">{{ [counts.center] }}</span> </div> </mat-card>
-      <mat-card> <div> <span>right - </span> <span *ngIf="counts.right !== null">{{ [counts.right] }}</span> </div> </mat-card>
-      <mat-card> <div> <span>archive - </span> <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span> </div> </mat-card>
+    <div gdColumn="1fr">
+      <p class="mat-title">Article Count</p>
+    </div>
+
+    <section gdColumns.xl="repeat(5, 1fr)" gdColumns.lg="repeat(5, 1fr)" gdColumns.md="repeat(5, 1fr)" fxLayout.xs="column" gdGap="0.5rem">
+      <mat-card>
+        <div> <span>Alert - </span> <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span> </div>
+      </mat-card>
+      <mat-card>
+        <div> <span>Left - </span> <span *ngIf="counts.left !== null">{{ [counts.left] }}</span> </div>
+      </mat-card>
+      <mat-card>
+        <div> <span>center - </span> <span *ngIf="counts.center !== null">{{ [counts.center] }}</span> </div>
+      </mat-card>
+      <mat-card>
+        <div> <span>right - </span> <span *ngIf="counts.right !== null">{{ [counts.right] }}</span> </div>
+      </mat-card>
+      <mat-card>
+        <div> <span>archive - </span> <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span> </div>
+      </mat-card>
     </section>
 
-    <section id="article-status">
-        <mat-card>new : {{ [status.new] }}</mat-card>
-        <mat-card>1 month+ : {{ [status.oneMonth] }}</mat-card>
-        <mat-card>3 month+ : {{ [status.threeMonth] }}</mat-card>
-        <mat-card>6 month+ : {{ [status.sixMonth] }}</mat-card>
-        <mat-card>Total: {{[counts.total]}}</mat-card>
+    <section gdColumns.xl="repeat(5, 1fr)" gdColumns.lg="repeat(5, 1fr)" gdColumns.md="repeat(5, 1fr)" fxLayout.xs="column" gdGap="0.5rem">
+      <mat-card>new : {{ [status.new] }}</mat-card>
+      <mat-card>1 month+ : {{ [status.oneMonth] }}</mat-card>
+      <mat-card>3 month+ : {{ [status.threeMonth] }}</mat-card>
+      <mat-card>6 month+ : {{ [status.sixMonth] }}</mat-card>
+      <mat-card>Total: {{[counts.total]}}</mat-card>
     </section>
-  </section>
+  </div>
 
-  <section id="alerts">
+  <div id="alert" gdColumns="repeat(2, 1fr)" gdColumns.sm="" gdColumns.xs="" gdRows.sm="repeat(2, 1fr)" gdRows.xs="repeat(2, 1fr)" gdGap="0.5rem">
 
-    <mat-card class="current-alerts">
-      <h4 class="mat-headline">Alerts</h4>
-       <div *ngIf="data.alert.articles">
-         <p>{{ [data.alert.articles[0].title] }}</p>
-         <p>{{ [data.alert.articles[1].title] }}</p>
-         <p>{{ [data.alert.articles[2].title] }}</p>
-         <p>{{ [data.alert.articles[3].title] }}</p>
-         <p>{{ [data.alert.articles[4].title] }}</p>
-       </div>
-    </mat-card>
+    <section id="alert-display">
+      <h4 class="mat-title">Alerts</h4>
+      <mat-card>
+        <div *ngIf="data.alert.articles">
+          <p>{{ [data.alert.articles[0].title] }}</p>
+          <p>{{ [data.alert.articles[1].title] }}</p>
+          <p>{{ [data.alert.articles[2].title] }}</p>
+          <p>{{ [data.alert.articles[3].title] }}</p>
+          <p>{{ [data.alert.articles[4].title] }}</p>
+        </div>
+      </mat-card>
+    </section>
 
-    <div class="newAlert">
 
-      <mat-card class="alertInputs">
+    <section id="alert-create">
+      <h4 class="mat-title">Create New Alert</h4>
 
-        <h4 class="mat-headline">Create New Alert</h4>
+
+      <mat-card fxLayout="column">
 
         <mat-form-field appearance="outline">
           <mat-label>Title</mat-label>
@@ -52,49 +71,25 @@
           <mat-icon matSuffix>link</mat-icon>
         </mat-form-field>
 
-        <div class="formButtons">
-          <button mat-raised-button color="warn" (click)="clearInputs()">
-            Clear
-          </button>
-          <button mat-raised-button id="create" (click)="submitNewAlertArticle()">
-            Add
-          </button>
+        <div fxLayoutAlign="space-between">
+          <div></div>
+          <button mat-raised-button color="warn" (click)="clearInputs()"> Clear </button>
+          <button mat-raised-button id="create" (click)="submitNewAlertArticle()" class="addButton"> Add </button>
         </div>
 
       </mat-card>
 
-    </div>
-
-  </section>
-
-  <div>
-    <mat-card id="last">
-
-      <p>more info</p>
-      <p>db url</p>
-      <p>db data</p>
-
-      <p> <a href="http://www.gohilreport.com">Gohil Report</a> </p>
-      <p> <a href="#">Gohil Report API</a> </p>
-    </mat-card>
-  </div>
-</div> -->
-
-<div id="container" fxLayout="column">
-
-  <div fxFlex="100"> <h1 class="mat-display-1">Overview</h1> </div>
-
-  <!-- <div  > -->
-    <section fxFlex="100"
-      fxLayout="row" fxLayoutAlign="space-evenly"
-
-      >
-      <mat-card> <div> <span>Alert - </span> <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span>  </div> </mat-card>
-      <mat-card> <div> <span>Left - </span> <span *ngIf="counts.left !== null">{{ [counts.left] }}</span> </div> </mat-card>
-      <mat-card> <div> <span>center - </span> <span *ngIf="counts.center !== null">{{ [counts.center] }}</span> </div> </mat-card>
-      <mat-card> <div> <span>right - </span> <span *ngIf="counts.right !== null">{{ [counts.right] }}</span> </div> </mat-card>
-      <mat-card> <div> <span>archive - </span> <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span> </div> </mat-card>
     </section>
-  <!-- </div> -->
+
+
+  </div>
+
+  <div class="links" fxLayout="row" fxLayoutAlign="space-evenly" fxLayout.sm="column" fxLayout.xs="column">
+    <p> <a href="http://www.gohilreport.com">Gohil Report</a> </p>
+    <p> <a href="https://github.com/hitesh-92/archReport">Gohil Report source code</a></p>
+    <p>REST API url : ---- </p>
+    <p> <a href="https://github.com/hitesh-92/gohilReport-api">REST API source code</a> </p>
+    <p> <a href="https://github.com/hitesh-92/gohilReportManager">Gohil Report Manager source code</a> </p>
+  </div>
 
 </div>
