@@ -1,33 +1,25 @@
-h1{
+h1 {
   color: white;
   text-shadow: 2px 2px 2px #ccc;
 }
 
-.auth{
-  grid-column: 4/5;
-  grid-row: 3/4;
-  display: grid;
-  place-items: center center;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-p{
+p {
   color: white;
 }
 
-
-a{
+a {
   color: white;
   text-decoration: none;
   transition: 0.25s ease-in-out;
 }
 
-a:hover{
+a:hover {
   color: #55aaff;
 }
 
-
-#container{
+#container {
   background-image: url("/assets/background.jpg");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
