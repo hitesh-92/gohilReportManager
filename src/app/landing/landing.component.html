@@ -1,41 +1,29 @@
-<div class="landing">
+<div fxLayout="column" fxFill id="container">
 
-  <header class="title">
-    <h1 class="mat-display-3">Gohil Report Manager</h1>
-  </header>
+  <div fxFlex="100" fxFlexAlign="center"></div>
 
-  <app-user-auth class="auth"></app-user-auth>
+  <div fxFlex="100" fxFlexAlign="center">
+    <header>
+      <h1 class="mat-display-3">Gohil Report Manager</h1>
+    </header>
+  </div>
 
-  <footer>
+  <div fxFlex="100" fxFlexAlign="center"></div>
 
-    <p class="mat-subheading-1">Related Links</p>
+  <div fxFlex="100" fxFlexAlign="center">
+    <app-user-auth class="auth"></app-user-auth>
+  </div>
 
-    <div class="links">
+  <div fxFlex="100" fxFlexAlign="center"></div>
 
-      <p>
-        <a href="http://www.gohilreport.com" target="_blank">
-          Gohil Report
-        </a>
-      </p>
-
-      <p>
-        <a href="https://github.com/hitesh-92/gohilReportManager" target="_blank">
-          Gohil Report Manager souce code
-        </a>
-      </p>
-
-      <p>
-        <a href="https://github.com/hitesh-92/gohilReport-api" target="_blank">
-          API source code
-        </a>
-      </p>
-
-    </div>
-
-
-
-  </footer>
-
-
+  <div
+    fxFlex="100"
+    fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
+    fxLayoutAlign="space-evenly"
+  >
+    <p><a href="http://www.gohilreport.com" target="_blank">Gohil Report</a></p>
+    <p><a href="https://github.com/hitesh-92/gohilReportManager" target="_blank">GR Manager source code</a></p>
+    <p><a href="https://github.com/hitesh-92/gohilReport-api" target="_blank">API source code</a></p>
+  </div>
 
 </div>
