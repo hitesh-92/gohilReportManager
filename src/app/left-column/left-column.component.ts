@@ -24,15 +24,12 @@ export class LeftColumnComponent implements OnInit {
   }
 
   fetchColumn(){
+
+    const url: string = 'http://localhost:8000/column/left';
+    const headers: any = new HttpHeaders({ 'x-auth': window.sessionStorage.getItem('token') });
+
     this.http
-    .get(
-      'http://localhost:8000/column/left',
-      {
-        headers: new HttpHeaders({
-          'auth': window.sessionStorage.getItem('token')
-        })
-      }
-    )
+    .get( url, { headers } )
     .subscribe( (resp: any) => {
       // console.log('/left succes ==> ', resp)
 

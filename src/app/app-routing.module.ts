@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LandingComponent } from './landing/landing.component';
 import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';

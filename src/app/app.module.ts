@@ -19,11 +19,9 @@ import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatR
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { CurrentArticlesComponent } from './current-articles/current-articles.component';
-import { ColumnComponent } from './column/column.component';
 import { ArchiveComponent } from './archive/archive.component';
-import { NavbarComponent } from './navbar/navbar.component';
+// import { NavbarComponent } from './navbar/navbar.component';
 import { OverviewComponent } from './overview/overview.component';
 import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
@@ -32,7 +30,6 @@ import { UserAuthComponent } from './user-auth/user-auth.component';
 import { UserSignupComponent, UserSignUpForm } from './user-signup/user-signup.component';
 import { UserLoginComponent, UserLoginForm } from './user-login/user-login.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { MainOverviewComponent } from './main-overview/main-overview.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { CenterColumnComponent } from './center-column/center-column.component';
 import { RightColumnComponent } from './right-column/right-column.component';
@@ -41,11 +38,9 @@ import { AlertsComponent } from './alerts/alerts.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     CurrentArticlesComponent,
-    ColumnComponent,
     ArchiveComponent,
-    NavbarComponent,
+    // NavbarComponent,
     OverviewComponent,
     ColumnViewComponent,
     ArticleEditorComponent,
@@ -56,7 +51,6 @@ import { AlertsComponent } from './alerts/alerts.component';
     UserSignUpForm,
     UserLoginForm,
     MainNavComponent,
-    MainOverviewComponent,
     LeftColumnComponent,
     CenterColumnComponent,
     RightColumnComponent,
