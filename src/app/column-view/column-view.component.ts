@@ -216,7 +216,7 @@ export class ColumnViewComponent implements OnInit {
 
     }
 
-    console.log(`TYPE:${this.requestType}, selected:${this.selected}, moveTo:${this.moveTo}`);
+    // console.log(`TYPE:${this.requestType}, selected:${this.selected}, moveTo:${this.moveTo}`);
 
     this.handleAllowConfirm();
     this.updateSwitchIcons();
@@ -225,6 +225,16 @@ export class ColumnViewComponent implements OnInit {
   handleAllowConfirm(){
     if(this.selected !== -1 && this.moveTo !== -1) this.allowSwitch = true;
     else this.allowSwitch = false;
+  }
+
+  leftButtonRender(){
+    return this.edit ? 'edit' :'keyboard_backspace';
+  }
+
+  rightButtonRender(position: any){
+    if( this.selected === position ) return 'clear';
+    else if( this.edit ) return 'swap_vertical_circle';
+    else return 'swap_vert';
   }
 
 }
