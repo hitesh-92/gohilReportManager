@@ -29,7 +29,7 @@ export class CenterColumnComponent implements OnInit {
       'http://localhost:8000/column/center',
       {
         headers: new HttpHeaders({
-          'auth': window.sessionStorage.getItem('token')
+          'x-auth': window.sessionStorage.getItem('token')
         })
       }
     )

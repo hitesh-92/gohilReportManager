@@ -1,92 +1,31 @@
-.column-view{
-  display: grid;
-  grid-template-rows: 1fr 1fr 10fr;
-}
-
-#title, .columnInfo {
-  padding: 1rem;
-  /* border: 1px solid red; */
-}
-
-#title{
-  display: flex;
-  justify-content: space-between;
-  place-items: center;
-  margin: 0;
-}
-
-.columnInfo{
-  display: flex;
-  justify-content: space-between;
-  place-items: center;
-}
-
-.switch-message{
-  color: red;
-  font-size: 0.5rem;
-}
-
-.articles{
-  min-height: 85vh;
-  overflow-y: scroll;
+#column-view{
   scrollbar-color: white rgb(154, 154, 228);
   scrollbar-width: thin;
-  background:
-    radial-gradient(ellipse at top, #64a7e6, transparent),
-    radial-gradient(ellipse at bottom, #ac56df, transparent);
-
-  /* border: 1px solid red; */
+  background: radial-gradient(ellipse at top, #64a7e6, transparent), radial-gradient(ellipse at bottom, #ac56df, transparent);
+  min-height: 95vh;
 }
 
-.article-info-bar{
-  display: grid;
-  grid-template-columns: 1fr 1fr 4fr 4fr 2fr;
-  padding: 0 1rem;
-  background-color: white;
-  box-shadow: 0 0 5px 5px rgba(59, 80, 139, 0.5);
-  font-size: 0.8rem;
+#header > *{
+  margin: 0.25rem 0;
 }
 
-ul{
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+table {
+  width: 100%;
 }
 
-.article{
-  text-decoration: none;
-  padding: 0 1rem;
-  margin: 0rem;
-  background-color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr 4fr 4fr 2fr;
-  transition: 0.3s ease-in-out;
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }
 
-.article:hover{
-  background: rgb(245, 245, 245);
+.btn{
+  cursor: pointer;
 }
 
-.article > p{
-  font-size: 0.8rem;
+.switch-btn{
+  color: green;
 }
 
-.buttons{
-  display: grid;
-  gap: 1rem;
-  position: center center;
-  grid-template-columns: 1fr 1fr;
-  margin: 0.5rem;
-  padding: 0;
-}
-
-
-.selected{
-  color: red;
-  background-color: #ffcccc;
-}
-
-.moveTo{
-  background-color: #e6ffe6;
-  color: green
+.edit-btn{
+  color: grey;
 }

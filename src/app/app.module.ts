@@ -15,13 +15,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
-import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule } from '@angular/material';
+import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CurrentArticlesComponent } from './current-articles/current-articles.component';
 import { ArchiveComponent } from './archive/archive.component';
-// import { NavbarComponent } from './navbar/navbar.component';
 import { OverviewComponent } from './overview/overview.component';
 import { ColumnViewComponent } from './column-view/column-view.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
@@ -40,7 +40,6 @@ import { AlertsComponent } from './alerts/alerts.component';
     AppComponent,
     CurrentArticlesComponent,
     ArchiveComponent,
-    // NavbarComponent,
     OverviewComponent,
     ColumnViewComponent,
     ArticleEditorComponent,
@@ -77,9 +76,13 @@ import { AlertsComponent } from './alerts/alerts.component';
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
+    MatDividerModule,
     MatMenuModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -29,7 +29,7 @@ export class RightColumnComponent implements OnInit {
       'http://localhost:8000/column/right',
       {
         headers: new HttpHeaders({
-          'auth': window.sessionStorage.getItem('token')
+          'x-auth': window.sessionStorage.getItem('token')
         })
       }
     )

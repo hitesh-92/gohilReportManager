@@ -28,7 +28,7 @@ export class AlertsComponent implements OnInit {
       'http://localhost:8000/column/alert',
       {
         headers: new HttpHeaders({
-          'auth': window.sessionStorage.getItem('token')
+          'x-auth': window.sessionStorage.getItem('token')
         })
       }
     )

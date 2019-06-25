@@ -28,7 +28,7 @@ export class ArchiveComponent implements OnInit {
       'http://localhost:8000/column/archive',
       {
         headers: new HttpHeaders({
-          'auth': window.sessionStorage.getItem('token')
+          'x-auth': window.sessionStorage.getItem('token')
         })
       }
     )
