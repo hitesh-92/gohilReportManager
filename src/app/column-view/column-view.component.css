@@ -13,6 +13,10 @@ table {
   width: 100%;
 }
 
+.mat-row:hover{
+  color: red !important;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -20,6 +24,15 @@ table {
 
 .btn{
   cursor: pointer;
+  border-radius: 50px;
+  transition: 0.25s ease-in-out;
+  opacity: 0.5;
+  transition: 0.5s ease-in-out;
+}
+
+.btn:hover{
+  /* background-color: #ccc; */
+  opacity: 1;
 }
 
 .switch-btn{
@@ -28,4 +41,8 @@ table {
 
 .edit-btn{
   color: grey;
+}
+
+#rowww: hover{
+  color: red !important;
 }

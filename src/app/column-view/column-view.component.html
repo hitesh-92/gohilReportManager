@@ -1,43 +1,3 @@
-<!-- <div class="column-view">
-
-  <section class="articles">
-
-    <div class="article-info-bar">
-      <p>Position</p>
-      <p>Status</p>
-      <p>Title</p>
-      <p>URL</p>
-      <p>Options</p>
-    </div>
-
-    <ul>
-      <li
-        class="article"
-        *ngFor="let article of articles"
-        [ngClass]="{selected: article.position === switch+1, moveTo: article.position===moveTo+1}"
-      >
-        <p class="position">{{ [article.position] }}</p>
-        <p class="status">{{ [article.status] }}</p>
-        <p>{{ [article.title] }}</p>
-        <p>{{ [article.url] }}</p>
-        <div class="buttons">
-
-          <button mat-flat-button color="accent" class="btn btn-edit" (click)="onEdit($event)">
-            edit
-          </button>
-          <button mat-flat-button color="primary" class="btn btn-switch" (click)="onSwitch($event)" [id]="article.position">
-            switch
-          </button>
-        </div>
-      </li>
-    </ul>
-
-  </section>
-
-</div> -->
-
-
-
 <div id="column-view">
 
   <mat-card id="column-title">
@@ -51,7 +11,13 @@
 
       <button fxFlex.sm="50" fxFlex.xs="50" mat-flat-button color="primary" (click)="onAddNewArticle()">Add new Article</button>
 
-      <div fxFlex.sm="100" fxFlex.xs="100"><small>Click switch on selected article to undo</small></div>
+      <div fxFlex.sm="100" fxFlex.xs="100">
+        <small>Click switch on selected article to undo</small>
+        <!-- render message conditionally to help user -->
+        <!-- 1. Begin switching articles using icon  -->
+        <!-- 2. Insert or Switch. Select again to undo -->
+      </div>
+
 
       <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{selected: switch !== -1}" >
         switch select: {{ switchPositionDisplay('selected') }}
@@ -83,7 +49,7 @@
     <div fxFlexLayout="column">
 
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by Title/URL/Id">
       </mat-form-field>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
@@ -117,17 +83,8 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let article">
             <div fxLayoutGap="10px" fxLayoutAlign="end center">
-
-              <div>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onEdit(article.position)" class="edit-btn btn">edit</mat-icon>
-                <!-- (click)="onEdit($event)" -->
-              </div>
-
-              <div>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onSwitch(article.position)" class="switch-btn btn">autorenew</mat-icon>
-                <!-- (click)="onSwitch($event)" -->
-              </div>
-
+              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onEdit(article.position)" class="edit-btn btn">{{ edit && 'edit' || 'keyboard_backspace'}}</mat-icon>
+              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onSwitch(article.position)" class="switch-btn btn">swap_horiz</mat-icon>
             </div>
            </td>
         </ng-container>
