@@ -82,7 +82,7 @@ import { AlertsComponent } from './alerts/alerts.component';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

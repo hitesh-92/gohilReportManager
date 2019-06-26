@@ -12,20 +12,22 @@ background: repeating-linear-gradient(3deg,
   min-height: 90vh;
 }
 
-section>div {
+#init-display>div{
+  padding: 1rem 0;
+}
+
+section>div, aside>div {
   padding: 2rem 0.5rem;
   transition: 0.3s ease-in-out;
 }
 
-section>div:hover {
+section>div:hover, aside>div:hover {
   background-color: #f4f4f4;
 }
 
-#editor-form {
-  overflow-y: scroll;
-  scrollbar-color: #197ee3 #e6e8eb;
-  scrollbar-width: thin;
-}
+/* #editor-form{} */
+
+
 
 .image-container {
   padding: 0.5rem;
@@ -39,6 +41,7 @@ section>div:hover {
 .n-pm {
   margin: 0;
   padding: 0;
+  /* border:1px solid red */
 }
 
 .btn-create {

@@ -37,6 +37,10 @@ export class ArticleEditorComponent implements OnInit {
   input_url: string;
   input_image: string;
 
+  // actionUpdate: boolean = false;
+  actionType: string;
+  actions: string[] = ['Update', 'Delete', 'Archive'];
+
   selectedColumn: string;
   columns: any = [
     { value: 'left', viewValue: 'Left' },
@@ -70,6 +74,7 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   ngOnChanges(){
+
   }
 
   getRouteUrl(route: string){
@@ -270,7 +275,7 @@ export class ArticleEditorComponent implements OnInit {
 
     this.http.get(url, {headers})
     .subscribe( (resp:any) => {
-      // console.log('GOT ARTICLE ==> ', resp)
+      console.log('GOT ARTICLE ==> ', resp)
       if(!resp.found) return; //HANDLE ERROR
 
       this.defaultColumn = resp.column.title;

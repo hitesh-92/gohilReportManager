@@ -7,80 +7,125 @@
 
     <main fxFlex="100" gdColumns.gt-sm="1fr 1fr" fxLayout.lt-md="column" gdInline>
 
-      <section id="editor-form" fxLayout="column">
+      <section id="main" *ngIf="articleType !== 'new'" fxLayout="column">
 
-        <div id="form-column" fxFlex="100" fxLayout.gt-sm="row" fxLayout.lt-md="column">
-          <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20%">
-            <p fxFlex="" class="mat-title n-pm">Column</p>
-            <p fxFlex="" class="mat-body-2">Default: {{ defaultColumn }} </p>
+        <section>
+          <div id="action-selector">
+            <label>Pick an action</label>
+            <mat-radio-group
+              aria-labelledby="actionType"
+              fxLayout="column"
+              fxLayoutAlign="space-evenly"
+              [(ngModel)]="actionType">
+              <mat-radio-button *ngFor="let action of actions" [value]="action">
+                {{action}}
+              </mat-radio-button>
+            </mat-radio-group>
           </div>
-          <div fxFlex="100" fxLayoutAlign.gt-sm="center center" fxLayoutAlign.lt-md="end center">
-            <mat-form-field>
-              <mat-label>Re-assign column</mat-label>
-              <mat-select [(ngModel)]="selectedColumn" name="column">
-                <mat-option *ngFor="let column of columns" [value]="column.value">
-                  {{ column.viewValue }}
-                </mat-option>
-              </mat-select>
+
+          <div *ngIf="actionType !== 'Update'" id="init-display" fxLayout="column">
+
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
+              <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Title</p>
+              <p  fxFlex="70" fxLayoutAlign="center center">{{article.title}}</p>
+            </div>
+
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
+              <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Url</p>
+              <p  fxFlex="70" fxLayoutAlign="center center">{{article.url}}</p>
+            </div>
+
+            <div *ngIf="article.image" fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
+              <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Image</p>
+              <p  fxFlex="70" fxLayoutAlign="center center">{{article.image}}</p>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- <div>Action: {{actionType}}</div> -->
+
+
+
+        <section id="editor-form" *ngIf="articleType === 'new' || actionType === 'Update'" fxLayout="column">
+
+          <div id="form-column" fxFlex="100" fxLayout.gt-sm="row" fxLayout.lt-md="column">
+            <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20%">
+              <p fxFlex="" class="mat-title n-pm">Column</p>
+              <p fxFlex="" class="mat-body-2">Default: {{ defaultColumn }} </p>
+            </div>
+            <div fxFlex="100" fxLayoutAlign.gt-sm="center center" fxLayoutAlign.lt-md="end center">
+              <mat-form-field>
+                <mat-label>Re-assign column</mat-label>
+                <mat-select [(ngModel)]="selectedColumn" name="column">
+                  <mat-option *ngFor="let column of columns" [value]="column.value">
+                    {{ column.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div id="form-title" fxFlex="100" fxLayout="column">
+            <p fxFlex="100" class="mat-h3">{{ article.title || articleTitle}}</p>
+            <mat-form-field fxFlex="100">
+              <textarea matInput placeholder="Enter article Title" class="textInput" [(ngModel)]="input_title" name="title">
+              </textarea>
             </mat-form-field>
           </div>
-        </div>
 
-        <div id="form-title" fxFlex="100" fxLayout="column">
-          <p fxFlex="100" class="mat-h3">{{ article.title || articleTitle}}</p>
-          <mat-form-field fxFlex="100">
-            <textarea matInput placeholder="Enter article Title" class="textInput" [(ngModel)]="input_title" name="title">
-            </textarea>
-          </mat-form-field>
-        </div>
+          <div id="form-url" fxFlex="100" fxLayout="column">
+            <p fxFlex="100" class="mat-h3">{{article.url || articleUrl}}</p>
+            <mat-form-field fxFlex="100">
+              <textarea matInput placeholder="Enter article url" class="textInput" [(ngModel)]="input_url" name="url">
+              </textarea>
+            </mat-form-field>
+          </div>
 
-        <div id="form-url" fxFlex="100" fxLayout="column">
-          <p fxFlex="100" class="mat-h3">{{article.url || articleUrl}}</p>
-          <mat-form-field fxFlex="100">
-            <textarea matInput placeholder="Enter article url" class="textInput" [(ngModel)]="input_url" name="url">
-            </textarea>
-          </mat-form-field>
-        </div>
+          <div id="form-image" fxFlex="100" fxLayout="column">
+            <p fxFlex="100" class="mat-h3">{{article.image || articleImage}}</p>
+            <mat-form-field fxFlex="100">
+              <textarea matInput placeholder="Enter article image url" class="textInput" [(ngModel)]="input_image" name="image">
+              </textarea>
+            </mat-form-field>
+          </div>
 
-        <div id="form-image" fxFlex="100" fxLayout="column">
-          <p fxFlex="100" class="mat-h3">{{article.image || articleImage}}</p>
-          <mat-form-field fxFlex="100">
-            <textarea matInput placeholder="Enter article image url" class="textInput" [(ngModel)]="input_image" name="image">
-            </textarea>
-          </mat-form-field>
-        </div>
+          <div id="buttons">
 
-        <div id="buttons">
-
-          <div *ngIf="articleType === 'new'">
-            <div fxLayout="row" fxLayoutAlign="space-evenly">
-              <button mat-raised-button class="btn-create" (click)="onCreateNewArticle()">
-                Create
-              </button>
+            <div *ngIf="articleType === 'new'">
+              <div fxLayout="row" fxLayoutAlign="space-evenly">
+                <button mat-raised-button class="btn-create" (click)="onCreateNewArticle()">
+                  Create
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div *ngIf="articleType === 'existing'">
-            <div fxLayout="row" fxLayoutAlign="space-evenly">
-              <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting" (click)="onUpdateExisting()">
-                Update
-              </button>
-              <button mat-flat-button color="warn" (click)="onDeleteExisting()"> Delete </button>
-              <button mat-stroked-button color="warn" (click)="onArchiveExisting()"> Archive </button>
+            <div *ngIf="articleType === 'existing'">
+              <div fxLayout="row" fxLayoutAlign="space-evenly">
+                <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting" (click)="onUpdateExisting()">
+                  Update
+                </button>
+                <button mat-flat-button color="warn" (click)="onDeleteExisting()"> Delete </button>
+                <button mat-stroked-button color="warn" (click)="onArchiveExisting()"> Archive </button>
+              </div>
             </div>
+
+            <div *ngIf="articleType === 'archive'">
+              <div>delete</div>
+              <div>unarchive</div>
+            </div>
+
           </div>
 
-          <div *ngIf="articleType === 'archive'">
-            <div>delete</div>
-            <div>unarchive</div>
-          </div>
 
-        </div>
-
+        </section>
 
       </section>
 
-      <section id="editor-display" fxLayout="column">
+
+
+      <aside id="info" fxLayout="column">
 
         <div class="image-container" fxLayoutAlign="center center">
           <img class="article-img" src="https://tinyurl.com/y2kabrx3" alt="" />
@@ -111,7 +156,7 @@
           <p>{{ article.updatedAt || '-' }}</p>
         </div>
 
-      </section>
+      </aside>
 
     </main>
 
