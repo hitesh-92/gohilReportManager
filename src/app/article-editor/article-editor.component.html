@@ -7,45 +7,79 @@
 
     <main fxFlex="100" gdColumns.gt-sm="1fr 1fr" fxLayout.lt-md="column" gdInline>
 
-      <section id="main" *ngIf="articleType !== 'new'" fxLayout="column">
+      <section id="main" fxLayout="column">
 
-        <section>
-          <div id="action-selector">
-            <label>Pick an action</label>
-            <mat-radio-group
-              aria-labelledby="actionType"
-              fxLayout="column"
-              fxLayoutAlign="space-evenly"
-              [(ngModel)]="actionType">
+        <section *ngIf="articleType !== 'new'">
+
+          <div id="action-selector" fxLayout="column" fxLayoutGap="30px">
+            <label *ngIf="!actionType" fxLayoutAlign="center center">Select an opition</label>
+            <mat-radio-group aria-labelledby="actionType" fxLayout="column" fxLayoutAlign="space-evenly" fxLayoutGap="20px" [(ngModel)]="actionType">
               <mat-radio-button *ngFor="let action of actions" [value]="action">
                 {{action}}
               </mat-radio-button>
             </mat-radio-group>
           </div>
 
-          <div *ngIf="actionType !== 'Update'" id="init-display" fxLayout="column">
-
-            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
-              <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Title</p>
-              <p  fxFlex="70" fxLayoutAlign="center center">{{article.title}}</p>
-            </div>
-
-            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
-              <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Url</p>
-              <p  fxFlex="70" fxLayoutAlign="center center">{{article.url}}</p>
-            </div>
-
-            <div *ngIf="article.image" fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
-              <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Image</p>
-              <p  fxFlex="70" fxLayoutAlign="center center">{{article.image}}</p>
-            </div>
-
-          </div>
-
         </section>
 
-        <!-- <div>Action: {{actionType}}</div> -->
 
+        <section id="button-auth" *ngIf="actionType === 'Delete' || actionType==='Archive'">
+          <div *ngIf="articleType === 'existing'">
+
+            <div fxLayout="column">
+              <p>Please enter the last 4 characters of the id:</p>
+              <p fxLayoutAlign="center">{{article._id}}</p>
+              <mat-form-field>
+                <input matInput placeholder="Enter here"  (input)="buttonAtuhValidate($event)">
+              </mat-form-field>
+              <p>{{ [buttonAuthValidation] }}</p>
+            </div>
+
+            <div id="buttons-auth-apply" fxLayout="row" fxLayoutAlign="space-evenly">
+
+              <button *ngIf="actionType === 'Delete'"
+                      mat-flat-button color="warn"
+                      (click)="onDeleteExisting()"
+                      [disabled]="!allowButtonAuthApply" >
+                Delete
+              </button>
+
+              <button *ngIf="actionType === 'Archive'"lass="textInput"
+                      mat-stroked-button color="warn"
+                      (click)="onArchiveExisting()"
+                      [disabled]="!allowButtonAuthApply" >
+                Archive
+              </button>
+
+            </div>
+
+            <!-- <div *ngIf="articleType === 'archive'">
+              <div>delete</div>
+              <div>unarchive</div>
+            </div> -->
+
+          </div>
+        </section>
+
+
+        <div id="init-display" *ngIf="articleType !== 'new' && actionType !== 'Update'" fxLayout="column">
+
+          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
+            <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Title</p>
+            <p fxFlex="70" fxLayoutAlign="center center">{{article.title}}</p>
+          </div>
+
+          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
+            <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Url</p>
+            <p fxFlex="70" fxLayoutAlign="center center">{{article.url}}</p>
+          </div>
+
+          <div *ngIf="article.image" fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
+            <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Image</p>
+            <p fxFlex="70" fxLayoutAlign="center center">{{article.image}}</p>
+          </div>
+
+        </div>
 
 
         <section id="editor-form" *ngIf="articleType === 'new' || actionType === 'Update'" fxLayout="column">
@@ -70,7 +104,7 @@
           <div id="form-title" fxFlex="100" fxLayout="column">
             <p fxFlex="100" class="mat-h3">{{ article.title || articleTitle}}</p>
             <mat-form-field fxFlex="100">
-              <textarea matInput placeholder="Enter article Title" class="textInput" [(ngModel)]="input_title" name="title">
+              <textarea matInput placeholder="Enter article Title" [(ngModel)]="input_title" name="title">
               </textarea>
             </mat-form-field>
           </div>
@@ -78,7 +112,7 @@
           <div id="form-url" fxFlex="100" fxLayout="column">
             <p fxFlex="100" class="mat-h3">{{article.url || articleUrl}}</p>
             <mat-form-field fxFlex="100">
-              <textarea matInput placeholder="Enter article url" class="textInput" [(ngModel)]="input_url" name="url">
+              <textarea matInput placeholder="Enter article url" [(ngModel)]="input_url" name="url">
               </textarea>
             </mat-form-field>
           </div>
@@ -101,19 +135,10 @@
               </div>
             </div>
 
-            <div *ngIf="articleType === 'existing'">
-              <div fxLayout="row" fxLayoutAlign="space-evenly">
-                <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting" (click)="onUpdateExisting()">
-                  Update
-                </button>
-                <button mat-flat-button color="warn" (click)="onDeleteExisting()"> Delete </button>
-                <button mat-stroked-button color="warn" (click)="onArchiveExisting()"> Archive </button>
-              </div>
-            </div>
-
-            <div *ngIf="articleType === 'archive'">
-              <div>delete</div>
-              <div>unarchive</div>
+            <div *ngIf="actionType === 'Update'" fxLayout="row" fxLayoutAlign="space-evenly">
+              <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting" (click)="onUpdateExisting()">
+                Update
+              </button>
             </div>
 
           </div>

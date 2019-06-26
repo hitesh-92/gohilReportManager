@@ -50,7 +50,8 @@ export class ArticleEditorComponent implements OnInit {
   ];
 
   allowUpdateExisting: any = true;
-
+  allowButtonAuthApply: boolean = false;
+  buttonAuthValidation: string;
 
   ngOnInit() {
     const id: any = this.route.snapshot.params['id'];
@@ -74,7 +75,6 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   ngOnChanges(){
-
   }
 
   getRouteUrl(route: string){
@@ -275,7 +275,7 @@ export class ArticleEditorComponent implements OnInit {
 
     this.http.get(url, {headers})
     .subscribe( (resp:any) => {
-      console.log('GOT ARTICLE ==> ', resp)
+      // console.log('GOT ARTICLE ==> ', resp)
       if(!resp.found) return; //HANDLE ERROR
 
       this.defaultColumn = resp.column.title;
@@ -306,6 +306,18 @@ export class ArticleEditorComponent implements OnInit {
 
   allowUpdate(){
     return;
+  }
+
+  buttonAtuhValidate(event: any){
+    const input: string = event.target.value.toLowerCase();
+
+    if(input.length > 4) return;
+
+    const id: string = this.article._id;
+    const idValidation: string = this.article._id.slice(id.length-4, id.length);
+    if(input === idValidation) this.allowButtonAuthApply = true;
+
+    console.log(`id:${idValidation}, input:${input}`)
   }
 
   // -----
