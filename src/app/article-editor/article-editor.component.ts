@@ -113,7 +113,7 @@ export class ArticleEditorComponent implements OnInit {
     this.article = {
       title: 'Set Title To Display',
       url: 'Add Link To Article',
-      image: 'Add Link To Relevent Image or Leave Blank',
+      image: 'Add Link To Image or Leave Blank',
       position: 0
     }
 

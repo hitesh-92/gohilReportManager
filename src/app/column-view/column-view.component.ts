@@ -139,6 +139,7 @@ export class ColumnViewComponent implements OnInit {
       this.selected = -1;
       this.moveTo = -1;
       this.dataSource = new MatTableDataSource(this.articles);
+      this.allowSwitch = false;
     });
   }
 
