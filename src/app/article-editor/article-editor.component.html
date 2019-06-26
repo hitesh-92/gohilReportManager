@@ -14,14 +14,16 @@
             <p fxFlex="" class="mat-title n-pm">Column</p>
             <p fxFlex="" class="mat-body-2">Default: {{ defaultColumn }} </p>
           </div>
-          <mat-form-field fxFlex="50" fxLayoutAlign.gt-sm="end" fxLayout.lt-md="center center">
-            <mat-label>Re-assign column</mat-label>
-            <mat-select [(ngModel)]="selectedColumn" name="column">
-              <mat-option *ngFor="let column of columns" [value]="column.value">
-                {{ column.viewValue }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div fxFlex="100" fxLayoutAlign.gt-sm="center center" fxLayoutAlign.lt-md="end center">
+            <mat-form-field>
+              <mat-label>Re-assign column</mat-label>
+              <mat-select [(ngModel)]="selectedColumn" name="column">
+                <mat-option *ngFor="let column of columns" [value]="column.value">
+                  {{ column.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
 
         <div id="form-title" fxFlex="100" fxLayout="column">
@@ -51,17 +53,21 @@
         <div id="buttons">
 
           <div *ngIf="articleType === 'new'">
-            <button mat-raised-button class="createButton" (click)="onCreateNewArticle()">
-              Create
-            </button>
+            <div fxLayout="row" fxLayoutAlign="space-evenly">
+              <button mat-raised-button class="btn-create" (click)="onCreateNewArticle()">
+                Create
+              </button>
+            </div>
           </div>
 
           <div *ngIf="articleType === 'existing'">
-            <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting" (click)="onUpdateExisting()">
-              Update
-            </button>
-            <button mat-flat-button color="warn" (click)="onDeleteExisting()"> Delete </button>
-            <button mat-stroked-button color="warn" (click)="onArchiveExisting()"> Archive </button>
+            <div fxLayout="row" fxLayoutAlign="space-evenly">
+              <button mat-raised-button color="primary" [disabled]="!allowUpdateExisting" (click)="onUpdateExisting()">
+                Update
+              </button>
+              <button mat-flat-button color="warn" (click)="onDeleteExisting()"> Delete </button>
+              <button mat-stroked-button color="warn" (click)="onArchiveExisting()"> Archive </button>
+            </div>
           </div>
 
           <div *ngIf="articleType === 'archive'">
@@ -80,31 +86,29 @@
           <img class="article-img" src="https://tinyurl.com/y2kabrx3" alt="" />
         </div>
 
-        <div class="const-data">
+        <div class="info" fxLayout="row" fxLayoutAlign="space-between center">
           <small>Position</small>
           <p>{{ article.position || '-' }}</p>
         </div>
 
-        <div class="const-data">
-          <small>Created At</small>
-          <p>{{ article.createdAt || '-' }}</p>
-        </div>
-
-        <div class="const-data">
-          <small>Updated At</small>
-          <p>{{ article.updatedAt || '-' }}</p>
-        </div>
-
-        <div class="const-data">
+        <div class="info" fxLayout="row" fxLayoutAlign="space-between center">
           <small>Status</small>
           <div class="status-data">
-            <!-- <p>{{ article.status }}</p>
-            <p>{{ "123 months old" }}</p> -->
-            <p *ngIf="article.status > -1; else no">{{article.status}} / {{ "2 weeks old" }}</p>
+            <p *ngIf="article.status > -1; else no">{{article.status}} / {{ "x weeks/months old" }}</p>
             <ng-template #no>
               <p>-</p>
             </ng-template>
           </div>
+        </div>
+
+        <div class="info" fxLayout="row" fxLayoutAlign="space-between center">
+          <small>Created At</small>
+          <p>{{ article.createdAt || '-' }}</p>
+        </div>
+
+        <div class="info" fxLayout="row" fxLayoutAlign="space-between center">
+          <small>Updated At</small>
+          <p>{{ article.updatedAt || '-' }}</p>
         </div>
 
       </section>

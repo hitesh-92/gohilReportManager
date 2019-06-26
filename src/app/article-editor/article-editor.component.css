@@ -3,39 +3,45 @@ background: repeating-linear-gradient(3deg,
 #83bbd3,
 #536977 1%,
 #ff0901 1%);
-
-overflow-y: scroll;
-scrollbar-color: #197ee3 #e6e8eb;
-scrollbar-width: thin;
-
-.article-form > div:hover
-background-color: rgba(240, 240, 240, 0.479);
 */
-
-#editor{
+#editor {
   padding: 1rem;
 }
 
-#editor-body{
+#editor-body {
   min-height: 90vh;
 }
 
-section > div{
+section>div {
   padding: 2rem 0.5rem;
+  transition: 0.3s ease-in-out;
 }
 
-section > div:hover{
+section>div:hover {
   background-color: #f4f4f4;
 }
 
-.image-container{
+#editor-form {
+  overflow-y: scroll;
+  scrollbar-color: #197ee3 #e6e8eb;
+  scrollbar-width: thin;
+}
+
+.image-container {
   padding: 0.5rem;
 }
-.article-img{
+
+.article-img {
   max-width: 100%;
   width: 75%;
 }
 
-.n-pm{
-  margin:0; padding: 0;
+.n-pm {
+  margin: 0;
+  padding: 0;
+}
+
+.btn-create {
+  background-color: green;
+  color: white;
 }
