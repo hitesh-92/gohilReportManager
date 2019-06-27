@@ -11,7 +11,7 @@
 
       <button *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" mat-flat-button color="primary" (click)="onAddNewArticle()">Add new Article</button>
 
-      <div fxFlex.sm="100" fxFlex.xs="100">
+      <div *ngIf="columnTitle !== 'archive'" fxFlex.sm="100" fxFlex.xs="100">
         <small>Click switch on selected article to undo</small>
         <!-- render message conditionally to help user -->
         <!-- 1. Begin switching articles using icon  -->
@@ -19,14 +19,15 @@
       </div>
 
 
-      <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{selected: switch !== -1}">
+      <div *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{selected: switch !== -1}">
         switch select: {{ switchPositionDisplay('selected') }}
       </div>
 
-      <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{moveTo: moveTo !== -1}">
-        switch to: {{ switchPositionDisplay('moveTo') }} </div>
+      <div *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{moveTo: moveTo !== -1}">
+        switch to: {{ switchPositionDisplay('moveTo') }}
+      </div>
 
-      <div>
+      <div *ngIf="columnTitle !== 'archive'">
         <button fxFlex.sm="100" fxFlex.xs="100" mat-stroked-button [disabled]="!allowSwitch" color="primary" (click)="onConfirmSwitch($event)">
           Confirm Switch
         </button>
