@@ -5,14 +5,26 @@ background: repeating-linear-gradient(3deg,
 #ff0901 1%);
 */
 #editor {
-  padding: 1rem;
+  padding: 0.5rem;
+}
+
+.new {
+  background-image: linear-gradient(to bottom, #bcfff3, #98d6c0, #7aae8f, #5f8860, #476235);
+}
+
+.archive {
+  background-image: linear-gradient(to bottom, #ece59e, #cac17d, #a99e5d, #887d3e, #695d21);
+}
+
+.update {
+  background-image: linear-gradient(to bottom, #bcd9ff, #98b1d5, #768bad, #556787, #354562);
 }
 
 #editor-body {
   min-height: 90vh;
 }
 
-#init-display>div{
+#init-display>div {
   padding: 1rem 0;
 }
 
@@ -26,16 +38,14 @@ section>div:hover, aside>div:hover {
 }
 
 /* #editor-form{} */
-
-
-
 .image-container {
   padding: 0.5rem;
 }
 
 .article-img {
-  max-width: 100%;
-  width: 75%;
+  /* max-width: 100%; */
+  /* width: 75%; */
+  max-height: 40vh;
 }
 
 .n-pm {

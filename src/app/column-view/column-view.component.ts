@@ -51,6 +51,7 @@ export class ColumnViewComponent implements OnInit {
     else this.allowSwitch = false;
 
     this.dataSource = new MatTableDataSource(this.articles);
+    console.log(this.articles )
   }
 
 
@@ -58,9 +59,13 @@ export class ColumnViewComponent implements OnInit {
   *   Buttons
   */
 
-  onEdit(position: any){
-    if(this.edit === true) this.forwardToEditPage(position);
-    else this.handleSwitchSelects(position, true);
+  onEdit(article: any){ // TODO
+
+    if(this.edit === true) this.forwardToEditPage(article._id);
+    else {
+      let position = article.position;
+      this.handleSwitchSelects(position, true);
+    }
   }
 
   onSwitch(position: number){
@@ -83,11 +88,12 @@ export class ColumnViewComponent implements OnInit {
   *   Navigation
   */
 
-  forwardToEditPage(position: number){
+  forwardToEditPage(articleId: string){ //TODO
     const current: string = location.pathname;
-    const articleId: string = this.articles[position - 1]._id;
     const navigateTo: string = `${current}/editor/${articleId}`;
     this.router.navigate([navigateTo]);
+
+    // console.log(this.articles[position-1])
   }
 
   onAddNewArticle(){

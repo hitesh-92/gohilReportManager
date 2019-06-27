@@ -22,24 +22,23 @@ export class ArticleEditorComponent implements OnInit {
 
   pageTitle: string;
   article: any = {
-    title: '',
-    url: '',
-    image: '',
-    position: '',
+    title:     '',
+    url:       '',
+    image:     '',
+    position:  '',
     createdAt: '',
     updatedAt: '',
-    status: '',
-    _id: '',
-    column: ''
+    status:    '',
+    _id:       '',
+    column:    ''
   }
 
   input_title: string;
   input_url: string;
   input_image: string;
 
-  // actionUpdate: boolean = false;
   actionType: string;
-  actions: string[] = ['Update', 'Delete', 'Archive'];
+  actions: string[];
 
   selectedColumn: string;
   columns: any = [
@@ -62,11 +61,14 @@ export class ArticleEditorComponent implements OnInit {
     this.pathFrom = routeUrls.appUrl;
     this.defaultColumn = routeUrls.column;
 
+    // console.log(` ${routeUrls.appUrl} | ${routeUrls.column} | app/${column}`)
+
     this.fetchColumnIds(); //get all ids to assign to this.columns
     //update this.fetchColumnIds to behave as expected
+    // console.log('route::: ' + routeUrls.column)
 
     if( id === 'new' ) this.setUpCreateNewArticle();
-
+    // else if( routeUrls === 'Archive' ) {console.log('AAA');this.setUpArchived(id)}
     else this.setUpEditExistingArticle(id)
       //if articles does not exist route to overview / check token valid
       //get article and update current
@@ -79,7 +81,7 @@ export class ArticleEditorComponent implements OnInit {
 
   getRouteUrl(route: string){
     let url: string = 'http://localhost:8000/column/';
-    let appUrl: string = '/app/route'
+    let appUrl: string = `/app/${route}`;
     switch(route){
 
       case 'left-column':
@@ -127,13 +129,24 @@ export class ArticleEditorComponent implements OnInit {
   setUpEditExistingArticle(id: string){
     this.articleType = 'existing';
     this.pageTitle = `#${id}`;
-
-    this.setExisitingArticle(id)
+    this.setExisitingArticle(id);
+    // console.log('###', this.defaultColumn === 'Archive')
+    if( this.defaultColumn === 'Archive' ){
+      this.actions = ['Update', 'Delete', 'unArchive'];
+    } else {
+      this.actions = ['Update', 'Delete', 'Archive'];
+    }
 
     return;
+  }
 
-    // const article = this.fetchArticle(id)
+  setUpArchived(id: string){
+    console.log(111111)
+    this.articleType = 'archive';
+    this.pageTitle = `#${id}`;
+    this.setExisitingArticle(id);
 
+    return;
   }
 
   // -----
@@ -204,8 +217,11 @@ export class ArticleEditorComponent implements OnInit {
 
   }
 
-  onArchiveExisting(){
-    console.log('DO you really want to ARCHIVE this?');
+  onArchiveArticle(){
+    // console.log('DO you really want to ARCHIVE this?');
+    const id: string = this.article._id;
+    this.submitArchiveArticle(id);
+
   }
 
   onDeleteExisting(){
@@ -293,6 +309,21 @@ export class ArticleEditorComponent implements OnInit {
 
   }
 
+  private submitArchiveArticle(id: string){
+    const token: string = window.sessionStorage.getItem('token');
+
+    const url: string = 'http://localhost:8000/article/archive';
+    const body: any = { id: id };
+    const headers: any = new HttpHeaders({'x-auth': token, 'Content-Type': 'application/json'});
+
+    this.http.post(url, body, { headers })
+    .subscribe( (resp: any) => {
+      console.log('Article Archived: ', resp);
+    })
+
+    this.router.navigate([this.pathFrom])
+  }
+
   // -----
 
   /*
@@ -316,8 +347,7 @@ export class ArticleEditorComponent implements OnInit {
     const id: string = this.article._id;
     const idValidation: string = this.article._id.slice(id.length-4, id.length);
     if(input === idValidation) this.allowButtonAuthApply = true;
-
-    console.log(`id:${idValidation}, input:${input}`)
+    else this.allowButtonAuthApply = false;
   }
 
   // -----

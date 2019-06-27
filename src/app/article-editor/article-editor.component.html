@@ -1,8 +1,9 @@
-<div id="editor">
+<div id="editor" [ngClass]="{archive:defaultColumn==='archive', new:articleType==='new', update:defaultColumn!=='archive'&&articleType!=='new'}">
   <mat-card id="editor-body" fxLayout="column">
 
     <header fxFlexFill fxLayoutAlign="center">
       <p class="mat-title">{{ pageTitle }}</p>
+      
     </header>
 
     <main fxFlex="100" gdColumns.gt-sm="1fr 1fr" fxLayout.lt-md="column" gdInline>
@@ -23,32 +24,29 @@
         </section>
 
 
-        <section id="button-auth" *ngIf="actionType === 'Delete' || actionType==='Archive'">
-          <div *ngIf="articleType === 'existing'">
+        <section id="button-auth" *ngIf="actionType === 'Delete' || actionType==='Archive' || defaultColumn==='Archive'">
+          <div *ngIf="articleType === 'existing' || defaultColumn==='Archive'">
 
             <div fxLayout="column">
               <p>Please enter the last 4 characters of the id:</p>
               <p fxLayoutAlign="center">{{article._id}}</p>
               <mat-form-field>
-                <input matInput placeholder="Enter here"  (input)="buttonAtuhValidate($event)">
+                <input matInput placeholder="Enter here" (input)="[buttonAtuhValidate($event)]">
               </mat-form-field>
-              <p>{{ [buttonAuthValidation] }}</p>
             </div>
 
             <div id="buttons-auth-apply" fxLayout="row" fxLayoutAlign="space-evenly">
 
-              <button *ngIf="actionType === 'Delete'"
-                      mat-flat-button color="warn"
-                      (click)="onDeleteExisting()"
-                      [disabled]="!allowButtonAuthApply" >
+              <button *ngIf="actionType === 'Delete'" mat-flat-button color="warn" (click)="onDeleteExisting()" [disabled]="!allowButtonAuthApply">
                 Delete
               </button>
 
-              <button *ngIf="actionType === 'Archive'"lass="textInput"
-                      mat-stroked-button color="warn"
-                      (click)="onArchiveExisting()"
-                      [disabled]="!allowButtonAuthApply" >
+              <button *ngIf="actionType === 'Archive'" lass="textInput" mat-stroked-button color="warn" (click)="onArchiveArticle()" [disabled]="!allowButtonAuthApply">
                 Archive
+              </button>
+
+              <button *ngIf="defaultColumn === 'Archive'" lass="textInput" mat-stroked-button color="warn" (click)="onArchiveArticle()" [disabled]="!allowButtonAuthApply">
+                un-Archive
               </button>
 
             </div>
@@ -153,7 +151,8 @@
       <aside id="info" fxLayout="column">
 
         <div class="image-container" fxLayoutAlign="center center">
-          <img class="article-img" src="https://tinyurl.com/y2kabrx3" alt="" />
+          <!-- <img class="article-img" src="https://tinyurl.com/y2kabrx3" alt="" /> -->
+          <img class="article-img" src="https://steemitimages.com/DQmNTHyDT5uiLzCw3RLt1gM16YUH4Xqe8aRzw2bZZjhJ9HG/1-PYHrigdx0JOpNbZGuSPtdQ.png" alt="" />
         </div>
 
         <div class="info" fxLayout="row" fxLayoutAlign="space-between center">

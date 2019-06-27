@@ -9,7 +9,7 @@
 
       <div fxFlex.sm="50" fxFlex.xs="50" class="mat-body-strong">Total Articles: {{articles.length}}</div>
 
-      <button fxFlex.sm="50" fxFlex.xs="50" mat-flat-button color="primary" (click)="onAddNewArticle()">Add new Article</button>
+      <button *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" mat-flat-button color="primary" (click)="onAddNewArticle()">Add new Article</button>
 
       <div fxFlex.sm="100" fxFlex.xs="100">
         <small>Click switch on selected article to undo</small>
@@ -19,21 +19,15 @@
       </div>
 
 
-      <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{selected: switch !== -1}" >
+      <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{selected: switch !== -1}">
         switch select: {{ switchPositionDisplay('selected') }}
       </div>
 
-      <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{moveTo: moveTo !== -1}" >
-        switch to: {{  switchPositionDisplay('moveTo') }} </div>
+      <div fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{moveTo: moveTo !== -1}">
+        switch to: {{ switchPositionDisplay('moveTo') }} </div>
 
       <div>
-        <button
-        fxFlex.sm="100" fxFlex.xs="100"
-        mat-stroked-button
-        [disabled]="!allowSwitch"
-        color="primary"
-        (click)="onConfirmSwitch($event)"
-        >
+        <button fxFlex.sm="100" fxFlex.xs="100" mat-stroked-button [disabled]="!allowSwitch" color="primary" (click)="onConfirmSwitch($event)">
           Confirm Switch
         </button>
       </div>
@@ -83,10 +77,10 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let article">
             <div fxLayoutGap="10px" fxLayoutAlign="end center">
-              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onEdit(article.position)" class="edit-btn btn">{{ [leftButtonRender()] }}</mat-icon>
+              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onEdit(article)" class="edit-btn btn">{{ [leftButtonRender()] }}</mat-icon>
               <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onSwitch(article.position)" class="switch-btn btn">{{ [rightButtonRender(article.position)] }}</mat-icon>
             </div>
-           </td>
+          </td>
         </ng-container>
 
       </table>
