@@ -51,7 +51,6 @@ export class ColumnViewComponent implements OnInit {
     else this.allowSwitch = false;
 
     this.dataSource = new MatTableDataSource(this.articles);
-    console.log(this.articles )
   }
 
 

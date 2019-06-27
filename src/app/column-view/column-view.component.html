@@ -78,7 +78,7 @@
           <td mat-cell *matCellDef="let article">
             <div fxLayoutGap="10px" fxLayoutAlign="end center">
               <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onEdit(article)" class="edit-btn btn">{{ [leftButtonRender()] }}</mat-icon>
-              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onSwitch(article.position)" class="switch-btn btn">{{ [rightButtonRender(article.position)] }}</mat-icon>
+              <mat-icon *ngIf="columnTitle !== 'archive'" aria-hidden="false" aria-label="Example home icon" (click)="onSwitch(article.position)" class="switch-btn btn">{{ [rightButtonRender(article.position)] }}</mat-icon>
             </div>
           </td>
         </ng-container>
