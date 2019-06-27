@@ -3,7 +3,7 @@
 
     <header fxFlexFill fxLayoutAlign="center">
       <p class="mat-title">{{ pageTitle }}</p>
-      
+
     </header>
 
     <main fxFlex="100" gdColumns.gt-sm="1fr 1fr" fxLayout.lt-md="column" gdInline>
@@ -24,12 +24,13 @@
         </section>
 
 
-        <section id="button-auth" *ngIf="actionType === 'Delete' || actionType==='Archive' || defaultColumn==='Archive'">
+        <section id="button-auth" *ngIf="actionType === 'Delete' || actionType==='Archive' || actionType === 'unArchive'">
           <div *ngIf="articleType === 'existing' || defaultColumn==='Archive'">
 
             <div fxLayout="column">
               <p>Please enter the last 4 characters of the id:</p>
               <p fxLayoutAlign="center">{{article._id}}</p>
+
               <mat-form-field>
                 <input matInput placeholder="Enter here" (input)="[buttonAtuhValidate($event)]">
               </mat-form-field>
@@ -41,20 +42,15 @@
                 Delete
               </button>
 
-              <button *ngIf="actionType === 'Archive'" lass="textInput" mat-stroked-button color="warn" (click)="onArchiveArticle()" [disabled]="!allowButtonAuthApply">
+              <button *ngIf="actionType === 'Archive'" mat-stroked-button color="warn" (click)="onArchiveArticle()" [disabled]="!allowButtonAuthApply">
                 Archive
               </button>
 
-              <button *ngIf="defaultColumn === 'Archive'" lass="textInput" mat-stroked-button color="warn" (click)="onArchiveArticle()" [disabled]="!allowButtonAuthApply">
+              <button *ngIf="actionType === 'unArchive'" mat-stroked-button color="accent" (click)="onUn_ArchiveArticle()" [disabled]="!allowButtonAuthApply">
                 un-Archive
               </button>
 
             </div>
-
-            <!-- <div *ngIf="articleType === 'archive'">
-              <div>delete</div>
-              <div>unarchive</div>
-            </div> -->
 
           </div>
         </section>
@@ -64,6 +60,7 @@
 
           <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
             <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Title</p>
+            <p>{{actionType}}</p>
             <p fxFlex="70" fxLayoutAlign="center center">{{article.title}}</p>
           </div>
 

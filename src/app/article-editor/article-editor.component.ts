@@ -228,8 +228,11 @@ export class ArticleEditorComponent implements OnInit {
     console.log('DO you really want to DELETE this?');
   }
 
-  onUnarchive(){
-    console.log('DO you really want to UN-ARCHIVE this?')
+  onUn_ArchiveArticle(){
+    // console.log('DO you really want to UN-ARCHIVE this?');
+    // console.log(this.article);
+    const id: string = this.article._id;
+    this.submitUn_ArchiveArticle(id);
   }
 
   // -----
@@ -319,6 +322,21 @@ export class ArticleEditorComponent implements OnInit {
     this.http.post(url, body, { headers })
     .subscribe( (resp: any) => {
       console.log('Article Archived: ', resp);
+    })
+
+    this.router.navigate([this.pathFrom])
+  }
+
+  private submitUn_ArchiveArticle(id: string){
+    const token: string = window.sessionStorage.getItem('token');
+
+    const url: string = 'http://localhost:8000/article/archive/unarchive';
+    const body: any = { id: id };
+    const headers: any = new HttpHeaders({'x-auth': token, 'Content-Type': 'application/json'});
+
+    this.http.patch(url, body, { headers })
+    .subscribe( (resp: any) => {
+      console.log('Article UN__Archived: ', resp);
     })
 
     this.router.navigate([this.pathFrom])
