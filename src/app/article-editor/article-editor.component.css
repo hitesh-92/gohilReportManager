@@ -28,6 +28,14 @@ background: repeating-linear-gradient(3deg,
   padding: 1rem 0;
 }
 
+#button-auth{
+  background-color: #ffe4e1
+}
+
+#button-auth>mat-card{
+  background-color: #ffe4e1;
+}
+
 section>div, aside>div {
   padding: 2rem 0.5rem;
   transition: 0.3s ease-in-out;
@@ -37,21 +45,17 @@ section>div:hover, aside>div:hover {
   background-color: #f4f4f4;
 }
 
-/* #editor-form{} */
 .image-container {
   padding: 0.5rem;
 }
 
 .article-img {
-  /* max-width: 100%; */
-  /* width: 75%; */
   max-height: 40vh;
 }
 
 .n-pm {
   margin: 0;
   padding: 0;
-  /* border:1px solid red */
 }
 
 .btn-create {

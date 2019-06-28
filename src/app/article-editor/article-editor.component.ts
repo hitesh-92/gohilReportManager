@@ -158,17 +158,12 @@ export class ArticleEditorComponent implements OnInit {
 
   onCreateNewArticle(){
     //this.selectedColumn==undefind if not selected
-    console.log('ABOUT TO CREATE NEW ARTICLE')
-
-    //add validations
+    // console.log('ABOUT TO CREATE NEW ARTICLE')
 
     const column: string = this.selectedColumn===undefined
-    ? this.article.column // set to same as pathFrom
+    ? this.getColumnIdUsingPathFrom(this.pathFrom) //this.article.column // set to same as pathFrom
     : this.selectedColumn;
 
-    const token: string = window.sessionStorage.getItem('token');
-
-    const url: string = 'http://localhost:8000/article';
     const body: any = {
       title: this.input_title,
       url: this.input_url,
@@ -177,15 +172,8 @@ export class ArticleEditorComponent implements OnInit {
       position: 1
     };
 
-    const headers: any = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
 
-    this.http
-    .post(url,body,{headers})
-    .subscribe((resp: any) => {
-      console.log(resp)
-      console.log('now navigate back to column view')
-    })
-
+    this.submitCreateNewArticle(body);
   }
 
   onUpdateExisting(){
@@ -226,6 +214,9 @@ export class ArticleEditorComponent implements OnInit {
 
   onDeleteExisting(){
     console.log('DO you really want to DELETE this?');
+    const id: string = this.article._id;
+    // console.log(id)
+    this.submitDeleteRequest(id);
   }
 
   onUn_ArchiveArticle(){
@@ -312,6 +303,19 @@ export class ArticleEditorComponent implements OnInit {
 
   }
 
+  private submitCreateNewArticle(body: any){
+
+    const url: string = 'http://localhost:8000/article';
+    const token: string = window.sessionStorage.getItem('token');
+    const headers: any = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
+
+    this.http.post(url, body, { headers })
+    .subscribe( (resp: any) => {
+      console.log('Article Saved ==> ', resp);
+      this.navigateBackToPathFrom()
+    });
+  }
+
   private submitArchiveArticle(id: string){
     const token: string = window.sessionStorage.getItem('token');
 
@@ -324,7 +328,8 @@ export class ArticleEditorComponent implements OnInit {
       console.log('Article Archived: ', resp);
     })
 
-    this.router.navigate([this.pathFrom])
+    // this.router.navigate([this.pathFrom])
+    this.navigateBackToPathFrom()
   }
 
   private submitUn_ArchiveArticle(id: string){
@@ -336,10 +341,43 @@ export class ArticleEditorComponent implements OnInit {
 
     this.http.patch(url, body, { headers })
     .subscribe( (resp: any) => {
-      console.log('Article UN__Archived: ', resp);
+      // console.log('Article UN__Archived: ', resp);
     })
 
-    this.router.navigate([this.pathFrom])
+    // this.router.navigate([this.pathFrom]);
+    this.navigateBackToPathFrom()
+  }
+
+  private submitDeleteRequest(id: string){
+    const token: string = window.sessionStorage.getItem('token');
+
+
+
+    // const url: string = 'http://localhost:8000/article';
+    const url: string = `http://localhost:8000/article/${id}`;
+    // const body: any = { id: id };
+    const headers: any = new HttpHeaders({'x-auth': token});
+
+    console.log('DELETINGGGGG', token, headers)
+
+    this.http.delete(url, { headers })
+    .subscribe( (resp: any) => {
+      console.log('Article DELETED: ', resp);
+      this.navigateBackToPathFrom()
+    })
+
+    // this.router.navigate([this.pathFrom]);
+
+  }
+
+  // -----
+
+  /*
+  * Navigation
+  */
+
+  navigateBackToPathFrom(){
+    this.router.navigate([this.pathFrom]);
   }
 
   // -----
@@ -369,5 +407,36 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   // -----
+
+  /*
+  *   Logic
+  */
+
+  getColumnIdUsingPathFrom(path: string){
+    let foundColumn: any;
+    path = path.split('/')[2];
+
+    switch(path){
+      case 'left-column':
+        foundColumn = this.columnIds.filter(({title}) => title === 'left');
+        break;
+      case 'center-column':
+        foundColumn = this.columnIds.filter(({title}) => title === 'center');
+        break;
+      case 'right-column':
+        foundColumn = this.columnIds.filter(({title}) => title === 'right');
+        break;
+      case 'alerts':
+        foundColumn = this.columnIds.filter(({title}) => title === 'alert');
+        break;
+      case 'archives':
+        foundColumn = this.columnIds.filter(({title}) => title === 'archive');
+        break;
+      default: return 'somethingIsVeryWrong-checoutOut-function->getColumnIdUsingPathFrom';
+    }
+    return foundColumn[0]._id;
+  }
+
+
 
 }

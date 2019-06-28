@@ -25,6 +25,7 @@
 
 
         <section id="button-auth" *ngIf="actionType === 'Delete' || actionType==='Archive' || actionType === 'unArchive'">
+          <mat-card>
           <div *ngIf="articleType === 'existing' || defaultColumn==='Archive'">
 
             <div fxLayout="column">
@@ -53,6 +54,7 @@
             </div>
 
           </div>
+          </mat-card>
         </section>
 
 
@@ -60,7 +62,6 @@
 
           <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-evenly">
             <p class="mat-title n-pm" fxFlex="30" fxLayoutAlign="center center">Title</p>
-            <p>{{actionType}}</p>
             <p fxFlex="70" fxLayoutAlign="center center">{{article.title}}</p>
           </div>
 
