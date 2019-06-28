@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule, MatGridListModule, MatCardModule, MatMenuModule, MatRadioModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,6 +83,7 @@ import { AlertsComponent } from './alerts/alerts.component';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
     MatSortModule,
   ],
   providers: [],

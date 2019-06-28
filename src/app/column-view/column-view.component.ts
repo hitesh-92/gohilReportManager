@@ -74,13 +74,32 @@ export class ColumnViewComponent implements OnInit {
   onConfirmSwitch(event:any){
     // console.log(`TYPE:${this.requestType}, selected:${this.selected}, moveTo:${this.moveTo}`);
 
-    const body: any = {
-      selected: this.articles[this.selected - 1]._id,
-      moveTo: this.articles[this.moveTo - 1]._id
-    };
+    // const body: any = {
+    //   selected: this.articles[this.selected - 1]._id,
+    //   moveTo: this.articles[this.moveTo - 1]._id
+    // };
 
-    if( this.requestType === 'switch' ) this.handleSwitchRequest(body);
-    else if ( this.requestType === 'insert' ) this.handleInsertRequest(body);
+    const selectedArticle: any = this.articles[this.selected - 1];
+    const moveTo: any = this.articles[this.moveTo-1];
+
+    if( this.requestType === 'switch' ){
+
+      const body: any = {
+        selected: selectedArticle._id,
+        moveTo: moveTo._id
+      };
+      this.handleSwitchRequest(body);
+
+    }
+    else if ( this.requestType === 'insert' ){
+
+      const body: any = {
+        id: selectedArticle._id,
+        position: moveTo.position
+      };
+      this.handleInsertRequest(body);
+
+    }
   }
 
   /*
@@ -120,11 +139,12 @@ export class ColumnViewComponent implements OnInit {
   }
 
   private handleInsertRequest(body: any){
-    const url: string = 'http://localhost:8000/article/insert';
+    const url: string = 'http://localhost:8000/article/insertposition';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-auth': window.sessionStorage.getItem('token')
     });
+    console.log('req.body ==> ', body)
 
     this.http.patch(url, body, { headers })
     .subscribe( (resp:any) => {
@@ -241,6 +261,19 @@ export class ColumnViewComponent implements OnInit {
     if( this.selected === position ) return 'clear';
     else if( this.edit ) return 'swap_vertical_circle';
     else return 'swap_vert';
+  }
+
+  leftButtonToolTip(){
+    return this.edit ? 'Edit' :'Insert';
+  }
+
+  rightButtonToolTip(position: any){
+    if(this.seleced === -1) return 'Switch/Insert';
+
+    if( this.selected === position ) return 'Clear';
+    else if( this.edit ) return 'Switch/Insert';
+    else return 'Switch';
+
   }
 
 }

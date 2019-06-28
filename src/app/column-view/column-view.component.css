@@ -43,6 +43,10 @@ table {
   color: grey;
 }
 
+.clear{
+  color: red !important;
+}
+
 #rowww: hover{
   color: red !important;
 }
