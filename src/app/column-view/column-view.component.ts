@@ -21,7 +21,7 @@ export class ColumnViewComponent implements OnInit {
 
   totalArticles: number = 0;
   switch_selected: any = null;
-  switch_moveTo: any =null;
+  switch_moveTo: any = null;
 
   allowSwitch: boolean = false;
 
@@ -30,6 +30,7 @@ export class ColumnViewComponent implements OnInit {
   moveTo: number = -1;
   edit: boolean = true;
   requestType: any = '';
+  bothSelected: boolean = false;
 
   //table
   displayedColumns: string[] = ['position', 'title', 'url', 'image', '_id'];
@@ -106,12 +107,10 @@ export class ColumnViewComponent implements OnInit {
   *   Navigation
   */
 
-  forwardToEditPage(articleId: string){ //TODO
+  forwardToEditPage(articleId: string){
     const current: string = location.pathname;
     const navigateTo: string = `${current}/editor/${articleId}`;
     this.router.navigate([navigateTo]);
-
-    // console.log(this.articles[position-1])
   }
 
   onAddNewArticle(){
@@ -134,6 +133,7 @@ export class ColumnViewComponent implements OnInit {
     this.http.patch(url, body, { headers })
     .subscribe( (resp:any) => {
       console.log('Switch Success ==> ', resp);
+      this.resetPickedArticles();
       this.resetColumnArticles();
     });
   }
@@ -149,6 +149,7 @@ export class ColumnViewComponent implements OnInit {
     this.http.patch(url, body, { headers })
     .subscribe( (resp:any) => {
       console.log('Insert Success ==> ', resp);
+      this.resetPickedArticles();
       this.resetColumnArticles();
     });
   }
@@ -180,7 +181,7 @@ export class ColumnViewComponent implements OnInit {
       : `${this.selected}`
     } else {
       return this.moveTo === -1
-      ? '0'
+      ? ''
       : `${this.moveTo}`
     }
 
@@ -193,6 +194,8 @@ export class ColumnViewComponent implements OnInit {
   }
 
   handleSwitchSelects(position: number, toInsert: boolean){
+
+    // if(this.selected!==-1 && this.moveTo!==-1) return this.resetPickedArticles();
 
     if( toInsert === false ){
       // handleInitialSelect then handleSwitchArticles
@@ -254,7 +257,10 @@ export class ColumnViewComponent implements OnInit {
   }
 
   leftButtonRender(){
-    return this.edit ? 'edit' :'keyboard_backspace';
+    // return this.edit ? 'edit' :'keyboard_backspace';
+
+    if(this.edit) return 'edit';
+    else return 'keyboard_backspace';
   }
 
   rightButtonRender(position: any){
@@ -268,12 +274,17 @@ export class ColumnViewComponent implements OnInit {
   }
 
   rightButtonToolTip(position: any){
-    if(this.seleced === -1) return 'Switch/Insert';
-
     if( this.selected === position ) return 'Clear';
     else if( this.edit ) return 'Switch/Insert';
     else return 'Switch';
 
+  }
+
+  resetPickedArticles(){
+    this.selected = -1;
+    this.moveTo = -1;
+    this.edit = !this.edit;
+    this.requestType = '';
   }
 
 }

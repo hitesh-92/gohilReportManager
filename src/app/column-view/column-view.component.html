@@ -11,23 +11,14 @@
 
       <button *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" mat-flat-button color="primary" (click)="onAddNewArticle()">Add new Article</button>
 
-      <!-- <div *ngIf="columnTitle !== 'archive'" fxFlex.sm="100" fxFlex.xs="100"> -->
-        <!-- <small> -->
-          <!-- <mat-icon class="edit-btn btn">edit</mat-icon>=edit -->
-        <!-- </small> -->
-        <!-- <small>Click switch on selected article to undo</small> -->
-        <!-- render message conditionally to help user -->
-        <!-- 1. Begin switching articles using icon  -->
-        <!-- 2. Insert or Switch. Select again to undo -->
-      <!-- </div> -->
-
-
       <div *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{selected: switch !== -1}">
-        switch select: {{ switchPositionDisplay('selected') }}
+        <p *ngIf="edit===true">Select Switch/Insert to rearrange positions</p>
+        <p *ngIf="edit===false">Selected #{{ switchPositionDisplay('selected') }}</p>
       </div>
 
       <div *ngIf="columnTitle !== 'archive'" fxFlex.sm="50" fxFlex.xs="50" [ngClass]="{moveTo: moveTo !== -1}">
-        switch to: {{ switchPositionDisplay('moveTo') }}
+        <p *ngIf="requestType==='switch'">Switch with #{{ switchPositionDisplay('moveTo') }}</p>
+        <p *ngIf="requestType==='insert'">Insert to #{{ switchPositionDisplay('moveTo') }}</p>
       </div>
 
       <div *ngIf="columnTitle !== 'archive'">
@@ -35,10 +26,8 @@
           Confirm Switch
         </button>
       </div>
+
     </section>
-
-
-
   </mat-card>
 
   <mat-card fxFlexLayout="row" id="column-table">
@@ -81,7 +70,17 @@
           <td mat-cell *matCellDef="let article">
             <div fxLayoutGap="10px" fxLayoutAlign="end center">
 
-              <mat-icon *ngIf="selected !== article.position"
+                <!-- *ngIf="selected !== article.position" -->
+                <mat-icon *ngIf="edit"
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  (click)="forwardToEditPage(article._id)"
+                  [matTooltip]="[leftButtonToolTip()]"
+                  class="edit-btn btn" >
+                  edit
+                </mat-icon>
+
+              <mat-icon *ngIf="!edit && requestType === '' || requestType==='insert' && moveTo === article.position"
                 aria-hidden="false"
                 aria-label="Example home icon"
                 (click)="onEdit(article)"
@@ -89,7 +88,7 @@
                 class="edit-btn btn" >
                 {{ [leftButtonRender()] }}
               </mat-icon>
-
+<!-- {{[requestType]}} | {{[moveTo]}} -->
               <mat-icon *ngIf="columnTitle !== 'archive'"
                 aria-hidden="false"
                 aria-label="Example home icon"
