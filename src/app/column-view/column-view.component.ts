@@ -193,7 +193,8 @@ export class ColumnViewComponent implements OnInit {
 
   handleSwitchSelects(position: number, toInsert: boolean){
 
-    // if(this.selected!==-1 && this.moveTo!==-1) return this.resetPickedArticles();
+    //clear button clicked when both positions selected
+    if(this.requestType !== '' && this.moveTo !== -1 && this.selected == position) return this.resetPickedArticles();
 
     if( toInsert === false ){
       // handleInitialSelect then handleSwitchArticles
