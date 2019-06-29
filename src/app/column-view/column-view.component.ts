@@ -284,6 +284,7 @@ export class ColumnViewComponent implements OnInit {
     this.moveTo = -1;
     this.edit = !this.edit;
     this.requestType = '';
+    if(this.allowSwitch === true) this.allowSwitch = false;
   }
 
   displayLeftButtonIcon(position: any){
