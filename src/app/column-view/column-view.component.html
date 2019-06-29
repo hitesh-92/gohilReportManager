@@ -23,7 +23,7 @@
 
       <div *ngIf="columnTitle !== 'archive'">
         <button fxFlex.sm="100" fxFlex.xs="100" mat-stroked-button [disabled]="!allowSwitch" color="primary" (click)="onConfirmSwitch($event)">
-          Confirm Switch
+          {{ [confirmButtonText(requestType)] }}
         </button>
       </div>
 

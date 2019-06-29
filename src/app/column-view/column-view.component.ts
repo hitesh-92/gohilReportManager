@@ -244,8 +244,6 @@ export class ColumnViewComponent implements OnInit {
 
     }
 
-    // console.log(`TYPE:${this.requestType}, selected:${this.selected}, moveTo:${this.moveTo}`);
-
     this.handleAllowConfirm();
     this.updateSwitchIcons();
   }
@@ -318,6 +316,12 @@ export class ColumnViewComponent implements OnInit {
     else if( noMoveTo && !moveToSelected ) return true;
     else if( toSwitch && moveToIsPosition ) return true;
     else return false;
+  }
+
+  confirmButtonText(type: string){
+    if( type === 'switch' ) return 'Confirm Switch';
+    else if( type === 'insert' ) return 'Confirm Insert';
+    else return 'Confirm';
   }
 
 }
