@@ -41,9 +41,7 @@ export class ColumnViewComponent implements OnInit {
 
   constructor(private http: HttpClient, private location: Location, private router: Router) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   ngOnChanges(){
     if(this.articles.length > 0) this.totalArticles = this.articles.length;
@@ -270,12 +268,14 @@ export class ColumnViewComponent implements OnInit {
   }
 
   leftButtonToolTip(){
-    return this.edit ? 'Edit' :'Insert';
+    if(this.requestType !== '' && this.moveTo !== -1) return 'Undo';
+    return this.edit ? 'Edit' : 'Insert';
   }
 
   rightButtonToolTip(position: any){
     if( this.selected === position ) return 'Clear';
     else if( this.edit ) return 'Switch/Insert';
+    else if( this.requestType !== '' && this.moveTo !== -1 ) return 'Undo';
     else return 'Switch';
 
   }
@@ -288,7 +288,7 @@ export class ColumnViewComponent implements OnInit {
   }
 
   displayLeftButtonIcon(position: any){
-    //return true to show;
+
     const sameAsSelected = this.selected !== position && this.requestType === '';
     const insertAndSameAsMoveTo = this.requestType === 'insert' && this.moveTo === position ;
 
@@ -297,7 +297,6 @@ export class ColumnViewComponent implements OnInit {
   }
 
   displayRightButtonIcon(position: any){
-    // *ngIf="columnTitle !== 'archive'"
 
     const isNotArchive = this.columnTitle !== 'archive';
     const noSelects = this.selected === -1 && this.moveTo === -1;
@@ -318,10 +317,6 @@ export class ColumnViewComponent implements OnInit {
     else if( noMoveTo && !moveToSelected ) return true;
     else if( toSwitch && moveToIsPosition ) return true;
     else return false;
-  }
-
-  test(){
-    // return typeof this.selected
   }
 
 }
