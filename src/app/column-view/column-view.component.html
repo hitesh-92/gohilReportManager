@@ -71,32 +71,33 @@
             <div fxLayoutGap="10px" fxLayoutAlign="end center">
 
                 <!-- *ngIf="selected !== article.position" -->
-                <mat-icon *ngIf="edit"
+                <!-- <mat-icon *ngIf="edit"
                   aria-hidden="false"
                   aria-label="Example home icon"
                   (click)="forwardToEditPage(article._id)"
                   [matTooltip]="[leftButtonToolTip()]"
                   class="edit-btn btn" >
                   edit
-                </mat-icon>
-
-              <mat-icon *ngIf="!edit && requestType === '' || requestType==='insert' && moveTo === article.position"
+                </mat-icon> -->
+              <!-- *ngIf="!edit && requestType === '' || requestType==='insert' && moveTo === article.position" -->
+              <mat-icon *ngIf="displayLeftButtonIcon(article.position)"
                 aria-hidden="false"
                 aria-label="Example home icon"
                 (click)="onEdit(article)"
                 [matTooltip]="[leftButtonToolTip()]"
                 class="edit-btn btn" >
-                {{ [leftButtonRender()] }}
+                {{ [leftButtonRenderIcon()] }}
               </mat-icon>
-<!-- {{[requestType]}} | {{[moveTo]}} -->
-              <mat-icon *ngIf="columnTitle !== 'archive'"
+
+              <!-- *ngIf="columnTitle !== 'archive' -->
+              <mat-icon *ngIf="displayRightButtonIcon(article.position)"
                 aria-hidden="false"
                 aria-label="Example home icon"
                 (click)="onSwitch(article.position)"
                 class="switch-btn btn"
                 [matTooltip]="[rightButtonToolTip(article.position)]"
                 [ngClass]="{clear: selected === article.position}">
-                {{ [rightButtonRender(article.position)] }}
+                {{ [rightButtonRenderIcon(article.position)] }}
               </mat-icon>
 
             </div>
@@ -106,7 +107,7 @@
       </table>
 
     </div>
-
+reqType:{{[requestType]}}, selected:{{[selected]}}, mTo:{{[moveTo]}}, 
   </mat-card>
 
 </div>

@@ -256,14 +256,14 @@ export class ColumnViewComponent implements OnInit {
     else this.allowSwitch = false;
   }
 
-  leftButtonRender(){
+  leftButtonRenderIcon(){
     // return this.edit ? 'edit' :'keyboard_backspace';
 
     if(this.edit) return 'edit';
     else return 'keyboard_backspace';
   }
 
-  rightButtonRender(position: any){
+  rightButtonRenderIcon(position: any){
     if( this.selected === position ) return 'clear';
     else if( this.edit ) return 'swap_vertical_circle';
     else return 'swap_vert';
@@ -285,6 +285,43 @@ export class ColumnViewComponent implements OnInit {
     this.moveTo = -1;
     this.edit = !this.edit;
     this.requestType = '';
+  }
+
+  displayLeftButtonIcon(position: any){
+    //return true to show;
+    const sameAsSelected = this.selected !== position && this.requestType === '';
+    const insertAndSameAsMoveTo = this.requestType === 'insert' && this.moveTo === position ;
+
+    if( insertAndSameAsMoveTo ) return true; //shows only selected <--
+    return sameAsSelected ;
+  }
+
+  displayRightButtonIcon(position: any){
+    // *ngIf="columnTitle !== 'archive'"
+
+    const isNotArchive = this.columnTitle !== 'archive';
+    const noSelects = this.selected === -1 && this.moveTo === -1;
+
+    const toSwitch = this.requestType === 'switch';
+    const toInsert = this.requestType === 'insert';
+    const noMoveTo = this.requestType === '';
+
+    const showClear = this.selected === position;
+
+    const moveToSelected = this.moveTo !== -1;
+    const moveToIsPosition = this.moveTo === position;
+
+    if( !isNotArchive ) return false;
+
+    if( isNotArchive && noSelects ) return true;
+    else if( showClear ) return true;
+    else if( noMoveTo && !moveToSelected ) return true;
+    else if( toSwitch && moveToIsPosition ) return true;
+    else return false;
+  }
+
+  test(){
+    // return typeof this.selected
   }
 
 }
