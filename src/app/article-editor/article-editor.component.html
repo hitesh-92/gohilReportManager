@@ -135,7 +135,12 @@
             <!-- {{input_imageToggle}} -->
 
             <section fxLayout="row" fxLayoutAlign="end">
-              <mat-checkbox color="accent" [(ngModel)]="input_imageToggle">Add Image Link</mat-checkbox>
+              <mat-checkbox color="accent" [(ngModel)]="input_imageToggle">
+                <!-- {{ articleType==='new' && 'Add Image Link' }}
+                {{articleType}} -->
+                <p *ngIf="articleType==='new'">Add Image Link</p>
+                <p *ngIf="articleType==='existing'">Inlucde Image Link</p>
+              </mat-checkbox>
             </section>
 
             <div id="form-image" *ngIf="input_imageToggle" fxFlex="100" fxLayout="column">

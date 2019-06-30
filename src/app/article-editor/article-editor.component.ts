@@ -302,6 +302,8 @@ export class ArticleEditorComponent implements OnInit {
       this.article._id = resp.article._id;
       this.article.status = resp.article.status;
       this.article.column = resp.article.column;
+
+      if(resp.article.image !== null) this.input_imageToggle = true;
     });
 
   }
