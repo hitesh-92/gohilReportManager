@@ -113,12 +113,39 @@
             </mat-form-field>
           </div>
 
-          <div id="form-image" fxFlex="100" fxLayout="column">
+          <!-- <div id="form-image" fxFlex="100" fxLayout="column">
             <p fxFlex="100" class="mat-h3">{{article.image || articleImage}}</p>
             <mat-form-field fxFlex="100">
               <textarea matInput placeholder="Enter article image url" class="textInput" [(ngModel)]="input_image" name="image">
               </textarea>
             </mat-form-field>
+          </div> -->
+
+          <div id="form-image-main" fxFlex="100" fxLayout="column">
+            <!-- <div>
+              <mat-slide-toggle
+                 class="example-marginasdsadsad"
+                 color="primary"
+                 [checked]="[input_imageToggle]"
+              >
+              Include Image
+             </mat-slide-toggle>
+            </div> -->
+
+            <!-- {{input_imageToggle}} -->
+
+            <section fxLayout="row" fxLayoutAlign="end">
+              <mat-checkbox color="accent" [(ngModel)]="input_imageToggle">Add Image Link</mat-checkbox>
+            </section>
+
+            <div id="form-image" *ngIf="input_imageToggle" fxFlex="100" fxLayout="column">
+              <p fxFlex="100" class="mat-h3">{{article.image || articleImage}}</p>
+              <mat-form-field fxFlex="100">
+                <textarea matInput placeholder="Enter article image url" class="textInput" [(ngModel)]="input_image" name="image">
+                </textarea>
+              </mat-form-field>
+            </div>
+
           </div>
 
           <div id="buttons">

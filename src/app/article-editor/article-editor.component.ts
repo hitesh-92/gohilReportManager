@@ -35,6 +35,7 @@ export class ArticleEditorComponent implements OnInit {
 
   input_title: string;
   input_url: string;
+  input_imageToggle: boolean = false;
   input_image: string;
 
   actionType: string;
