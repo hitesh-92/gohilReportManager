@@ -19,6 +19,7 @@ export class ArticleEditorComponent implements OnInit {
   defaultColumn: string;
   postRoute: string;
   columnIds: any;
+  // highestColumnArticlePosition: number;
 
   pageTitle: string;
   article: any = {
@@ -37,6 +38,7 @@ export class ArticleEditorComponent implements OnInit {
   input_url: string;
   input_imageToggle: boolean = false;
   input_image: string;
+  // input_position: number = this.highestColumnArticlePosition;
 
   actionType: string;
   actions: string[];
@@ -159,20 +161,20 @@ export class ArticleEditorComponent implements OnInit {
 
   onCreateNewArticle(){
     //this.selectedColumn==undefind if not selected
-    // console.log('ABOUT TO CREATE NEW ARTICLE')
 
-    const column: string = this.selectedColumn===undefined
+    const imageUrl: string = this.input_imageToggle ? imageUrl = this.input_image : null;
+
+    const column: string = this.selectedColumn === undefined
     ? this.getColumnIdUsingPathFrom(this.pathFrom) //this.article.column // set to same as pathFrom
     : this.selectedColumn;
 
     const body: any = {
       title: this.input_title,
       url: this.input_url,
-      image: 'www.testimage.com',
+      image: imageUrl,
       column: column,
       position: 1
     };
-
 
     this.submitCreateNewArticle(body);
   }
