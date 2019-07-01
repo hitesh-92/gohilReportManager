@@ -162,7 +162,7 @@ export class ArticleEditorComponent implements OnInit {
   onCreateNewArticle(){
     //this.selectedColumn==undefind if not selected
 
-    const imageUrl: string = this.input_imageToggle ? imageUrl = this.input_image : null;
+    var imageUrl: string = this.input_imageToggle ? imageUrl = this.input_image : null;
 
     const column: string = this.selectedColumn === undefined
     ? this.getColumnIdUsingPathFrom(this.pathFrom) //this.article.column // set to same as pathFrom
@@ -183,28 +183,36 @@ export class ArticleEditorComponent implements OnInit {
 
     // console.log('DO you really want to UPDATE this?');
     // ADD VALIDATIONS
-
     // console.log(this.input_title, this.input_url, this.input_image);
 
     let body: any = {};
     body.id = this.article._id;
-    console.log(this.article._id)
+    // console.log(this.article._id)
     if(this.input_title !== undefined) body.title = this.input_title;
     if(this.input_url   !== undefined) body.url = this.input_url;
-    if(this.input_image !== undefined) body.image = this.input_image;
+    // if( this.input_imageToggle ){
+    //   if( this.input_image !== undefined ) body.image = this.input_image;
+    // } else {
+    //   body.image = null;
+    // }
 
-    const column: string = this.selectedColumn===undefined
-    ? this.article.column
-    : this.selectedColumn;
 
-    const token = window.sessionStorage.getItem('token');
-    const url: string = 'http://localhost:8000/article/';
-    const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'})
+    // if image exists and want to remove use /article/removeimage
+    // then send updateRequest without an image property
 
-    this.http.patch(url, body, {headers})
-    .subscribe( (resp:any) => {
-      console.log('PATCHED ==> ', resp)
-    });
+    if( this.article.image !== null && this.input_imageToggle === false ){
+      const onlyRemoveImage = this.input_title===undefined && this.input_url===undefined;
+      if( onlyRemoveImage ){
+        return this.subimtRemoveArticleImage(this.article._id, true);
+      } else {
+        this.subimtRemoveArticleImage(this.article._id, false);
+      }
+
+    }
+    else if( this.input_image !== undefined ) body.image = this.input_image;
+
+
+    this.submitUdateExistingArticle(body);
 
   }
 
@@ -319,6 +327,40 @@ export class ArticleEditorComponent implements OnInit {
       console.log('Article Saved ==> ', resp);
       this.navigateBackToPathFrom()
     });
+  }
+
+  private submitUdateExistingArticle(body: any){
+
+    const token = window.sessionStorage.getItem('token');
+    const url: string = 'http://localhost:8000/article/';
+    const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
+
+    console.log(body)
+
+    this.http.patch(url, body, {headers})
+    .subscribe( (resp:any) => {
+      console.log('PATCHED ==> ', resp)
+      this.navigateBackToPathFrom();
+    });
+
+  }
+
+  private subimtRemoveArticleImage(id: string, navigateBack: boolean){
+
+    const token = window.sessionStorage.getItem('token');
+    const url: string = 'http://localhost:8000/article/removeimage';
+    const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
+
+    const body: any = { id: id };
+
+    this.http.patch(url, body, {headers})
+    .subscribe( (resp:any) => {
+      console.log('Image Deleted ==> ', resp)
+      if( navigateBack ){
+        this.navigateBackToPathFrom();
+      }
+    });
+
   }
 
   private submitArchiveArticle(id: string){

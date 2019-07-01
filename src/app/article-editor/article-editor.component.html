@@ -144,7 +144,7 @@
             </section>
 
             <div id="form-image" *ngIf="input_imageToggle" fxFlex="100" fxLayout="column">
-              <p fxFlex="100" class="mat-h3">{{article.image || articleImage}}</p>
+              <p fxFlex="100" class="mat-h3">{{ article.image || articleImage }}</p>
               <mat-form-field fxFlex="100">
                 <textarea matInput placeholder="Enter article image url" class="textInput" [(ngModel)]="input_image" name="image">
                 </textarea>
