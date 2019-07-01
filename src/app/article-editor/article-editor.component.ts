@@ -19,7 +19,13 @@ export class ArticleEditorComponent implements OnInit {
   defaultColumn: string;
   postRoute: string;
   columnIds: any;
-  // highestColumnArticlePosition: number;
+  columnArticleCount: any = {
+    left: null,
+    center: null,
+    right: null,
+    alert: null,
+    archive: null
+  }
 
   pageTitle: string;
   article: any = {
@@ -38,7 +44,8 @@ export class ArticleEditorComponent implements OnInit {
   input_url: string;
   input_imageToggle: boolean = false;
   input_image: string;
-  // input_position: number = this.highestColumnArticlePosition;
+  input_positionToggle: boolean = false;
+  input_position: number; // = this.highestColumnArticlePosition;
 
   actionType: string;
   actions: string[];
@@ -251,13 +258,10 @@ export class ArticleEditorComponent implements OnInit {
 
     this.http.get('http://localhost:8000/column/ids', { headers })
     .subscribe((resp:any) => {
-      // this.tmpColumnId = resp.columnData._id
-      // console.log('IDS ==> ', resp)
 
       if(resp.error) return; //HANDLE ERROR
 
       this.columnIds = resp.columns;
-      // console.log(resp)
 
       resp.columns.forEach(column => {
         const id = column._id
@@ -265,24 +269,38 @@ export class ArticleEditorComponent implements OnInit {
         if(column.title == 'left') {
           this.columns[0].value = id;
           this.columnIds.left = id;
+          this.columnArticleCount.left = column.count;
         }
         else if(column.title == 'center') {
           this.columns[1].value = id;
           this.columnIds.center = id;
+          this.columnArticleCount.center = column.count;
         }
         else if(column.title == 'right') {
           this.columns[2].value = id;
           this.columnIds.right = id;
+          this.columnArticleCount.right = column.count;
         }
         else if(column.title == 'alert') {
           this.columns[3].value = id;
           this.columnIds.alert = id;
+          this.columnArticleCount.alert = column.count;
         }
         else if(column.title == 'archive') {
           this.columnIds.archive = id;
+          this.columnArticleCount.archive = column.count;
         }
 
-      })
+      });
+
+      //if creating new article place at bottom on column by default
+      if( this.articleType === 'new' ){
+        this.input_position = this.getColumnLengthMax(this.defaultColumn);
+      }
+      else if( this.articleType === 'existing' ){
+        this.input_position = this.article.position;
+      }
+
 
     })
 
@@ -482,6 +500,12 @@ export class ArticleEditorComponent implements OnInit {
       default: return 'somethingIsVeryWrong-checoutOut-function->getColumnIdUsingPathFrom';
     }
     return foundColumn[0]._id;
+  }
+
+  getColumnLengthMax(name: string){
+    name = name.toLowerCase();
+    if( this.columnArticleCount.hasOwnProperty(name) ) return this.columnArticleCount[name] + 1;
+    else  console.log('LOGIC ERRRRRRRRRRRRR ==> getColumnLength')
   }
 
 
