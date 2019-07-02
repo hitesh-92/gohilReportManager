@@ -11,31 +11,93 @@
         <p class="mat-title">Article Count</p>
       </div>
 
-      <section gdColumns.xl="repeat(5, 1fr)" gdColumns.lg="repeat(5, 1fr)" gdColumns.md="repeat(5, 1fr)" fxLayout.xs="column" gdGap="0.5rem">
+      <section fxHide.lt-md fxShow.gt-sm gdColumns="repeat(5, 1fr)" gdGap="0.5rem" >
         <mat-card>
-          <div> <span>Alert - </span> <span *ngIf="counts.alert !== null">{{ [counts.alert] }}</span> </div>
+          <div> <span class="countTitle">Alert: </span> <span *ngIf="counts.alert !== null" class="countValue">{{ [counts.alert] }}</span> </div>
+        </mat-card>
+
+        <mat-card>
+          <div> <span class="countTitle">Left: </span> <span *ngIf="counts.left !== null" class="countValue">{{ [counts.left] }}</span> </div>
+        </mat-card>
+
+        <mat-card>
+          <div> <span class="countTitle">Center: </span> <span *ngIf="counts.center !== null" class="countValue">{{ [counts.center] }}</span> </div>
+        </mat-card>
+
+        <mat-card>
+          <div> <span class="countTitle">Right: </span> <span *ngIf="counts.right !== null" class="countValue">{{ [counts.right] }}</span> </div>
+        </mat-card>
+
+        <mat-card>
+          <div> <span class="countTitle">Archive: </span> <span *ngIf="counts.archive !== null" class="countValue">{{ [counts.archive] }}</span> </div>
+        </mat-card>
+
+      </section>
+
+      <section fxHide.lt-md fxShow.gt-sm gdColumns="repeat(5,1fr)" gdGap="0.5rem">
+        <mat-card>
+          <span class="countTitle">New: </span> <span class="countValue">{{ [status.new] }}</span>
         </mat-card>
         <mat-card>
-          <div> <span>Left - </span> <span *ngIf="counts.left !== null">{{ [counts.left] }}</span> </div>
+          <span class="countTitle">1 month+ </span> <span class="countValue">{{ [status.oneMonth] }}</span>
         </mat-card>
         <mat-card>
-          <div> <span>center - </span> <span *ngIf="counts.center !== null">{{ [counts.center] }}</span> </div>
+          <span class="countTitle">3 months+ </span> <span class="countValue"> {{ [status.threeMonth] }}</span>
         </mat-card>
         <mat-card>
-          <div> <span>right - </span> <span *ngIf="counts.right !== null">{{ [counts.right] }}</span> </div>
+          <span  class="countTitle">6 months+ </span> <span class="countValue">{{ [status.sixMonth] }}</span>
         </mat-card>
-        <mat-card>
-          <div> <span>archive - </span> <span *ngIf="counts.archive !== null">{{ [counts.archive] }}</span> </div>
+        <mat-card>Total: {{[counts.total]}}</mat-card>
+      </section>
+
+      <!-- sm/xs -->
+
+      <section fxHide.gt-sm fxShow.lt-md fxLayout="column">
+
+        <mat-card fxFlex="100" fxLayoutAlign="center">
+          <div> <span class="countTitle">Alert: </span> <span *ngIf="counts.alert !== null" class="countValue">{{ [counts.alert] }}</span> </div>
+        </mat-card>
+
+        <mat-card fxLayout="row" fxLayoutAlign="space-between" fxFlex="100">
+          <div fxLayoutAlign="start"> <span class="countTitle">Left: </span> <span *ngIf="counts.left !== null" class="countValue">{{ [counts.left] }}</span> </div>
+          <div fxLayoutAlign="center"> <span class="countTitle">Center: </span> <span *ngIf="counts.center !== null" class="countValue">{{ [counts.center] }}</span> </div>
+          <div fxLayoutAlign="end"> <span class="countTitle">Right: </span> <span *ngIf="counts.right !== null" class="countValue">{{ [counts.right] }}</span> </div>
+        </mat-card>
+
+        <mat-card fxFlex="100" fxLayoutAlign="center">
+          <div> <span class="countTitle">Archive: </span> <span *ngIf="counts.archive !== null" class="countValue">{{ [counts.archive] }}</span> </div>
+        </mat-card>
+
+      </section>
+
+      <section fxHide.gt-sm fxShow.lt-md fxLayout="column">
+
+        <mat-card fxFlex="100" fxLayout="row">
+          <div fxFlex="50" fxLayoutAlign="start" >
+            <span class="countTitle">New: </span> <span class="countValue">{{ [status.new] }}</span>
+          </div>
+          <div fxFlex="50" fxLayoutAlign="end">
+            <span class="countTitle">1 month+ </span> <span class="countValue">{{ [status.oneMonth] }}</span>
+          </div>
+        </mat-card>
+
+        <mat-card fxFlex="100" fxLayout="row">
+          <div fxFlex="50" fxLayoutAlign="start">
+            <span class="countTitle">3 months+ </span> <span class="countValue">{{ [status.threeMonth] }}</span>
+          </div>
+          <div fxFlex="50" fxLayoutAlign="end">
+            <span class="countTitle">6 months+ </span> <span class="countValue">{{ [status.sixMonth] }}</span>
+          </div>
+        </mat-card>
+
+      </section>
+
+      <section fxHide.gt-sm fxShow.lt-md fxLayout="column">
+        <mat-card fxLayoutAlign="center">
+          <p>Total: {{[counts.total]}}</p>
         </mat-card>
       </section>
 
-      <section gdColumns.xl="repeat(5, 1fr)" gdColumns.lg="repeat(5, 1fr)" gdColumns.md="repeat(5, 1fr)" fxLayout.xs="column" gdGap="0.5rem">
-        <mat-card>new : {{ [status.new] }}</mat-card>
-        <mat-card>1 month+ : {{ [status.oneMonth] }}</mat-card>
-        <mat-card>3 month+ : {{ [status.threeMonth] }}</mat-card>
-        <mat-card>6 month+ : {{ [status.sixMonth] }}</mat-card>
-        <mat-card>Total: {{[counts.total]}}</mat-card>
-      </section>
     </div>
 
     <div id="alert" gdColumns="repeat(2, 1fr)" gdColumns.sm="" gdColumns.xs="" gdRows.sm="repeat(2, 1fr)" gdRows.xs="repeat(2, 1fr)" gdGap="0.5rem">
@@ -89,14 +151,6 @@
       </section>
 
     </div>
-
-    <!-- <div class="links" fxLayout="row" fxLayoutAlign="space-evenly" fxLayout.sm="column" fxLayout.xs="column">
-      <p> <a href="http://www.gohilreport.com">Gohil Report</a> </p>
-      <p> <a href="https://github.com/hitesh-92/archReport">Gohil Report source code</a></p>
-      <p>REST API url : ---- </p>
-      <p> <a href="https://github.com/hitesh-92/gohilReport-api">REST API source code</a> </p>
-      <p> <a href="https://github.com/hitesh-92/gohilReportManager">Gohil Report Manager source code</a> </p>
-    </div> -->
 
   </div>
 </main>
