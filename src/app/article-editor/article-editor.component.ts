@@ -175,13 +175,26 @@ export class ArticleEditorComponent implements OnInit {
     ? this.getColumnIdUsingPathFrom(this.pathFrom) //this.article.column // set to same as pathFrom
     : this.selectedColumn;
 
+    var position: number;
+    const maxPosition: number = this.getColumnLengthMax(this.defaultColumn);
+
+    if( this.input_positionToggle ){
+      this.input_position < maxPosition
+      ? position = this.input_position
+      : position = maxPosition;
+    } else {
+      position = maxPosition
+    };
+
     const body: any = {
       title: this.input_title,
       url: this.input_url,
       image: imageUrl,
       column: column,
-      position: 1
+      position: position
     };
+
+    console.log(body)
 
     this.submitCreateNewArticle(body);
   }
@@ -194,19 +207,12 @@ export class ArticleEditorComponent implements OnInit {
 
     let body: any = {};
     body.id = this.article._id;
-    // console.log(this.article._id)
     if(this.input_title !== undefined) body.title = this.input_title;
     if(this.input_url   !== undefined) body.url = this.input_url;
-    // if( this.input_imageToggle ){
-    //   if( this.input_image !== undefined ) body.image = this.input_image;
-    // } else {
-    //   body.image = null;
-    // }
 
 
     // if image exists and want to remove use /article/removeimage
     // then send updateRequest without an image property
-
     if( this.article.image !== null && this.input_imageToggle === false ){
       const onlyRemoveImage = this.input_title===undefined && this.input_url===undefined;
       if( onlyRemoveImage ){
@@ -218,6 +224,9 @@ export class ArticleEditorComponent implements OnInit {
     }
     else if( this.input_image !== undefined ) body.image = this.input_image;
 
+    if( this.input_positionToggle ) body.position = this.input_position;
+
+    console.log('updateExisting toSubmit ==> ', body);
 
     this.submitUdateExistingArticle(body);
 
@@ -330,6 +339,7 @@ export class ArticleEditorComponent implements OnInit {
       this.article.column = resp.article.column;
 
       if(resp.article.image !== null) this.input_imageToggle = true;
+      this.input_position = resp.article.position;
     });
 
   }

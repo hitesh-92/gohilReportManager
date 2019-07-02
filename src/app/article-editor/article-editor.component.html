@@ -100,7 +100,7 @@
           <div id="form-title" fxFlex="100" fxLayout="column">
             <p fxFlex="100" class="mat-h3">{{ article.title || articleTitle}}</p>
             <mat-form-field fxFlex="100">
-              <textarea matInput placeholder="Enter article Title" [(ngModel)]="input_title" name="title">
+              <textarea matInput placeholder="Enter article Title. Min length - 7" [(ngModel)]="input_title" name="title">
               </textarea>
             </mat-form-field>
           </div>
@@ -137,7 +137,7 @@
             <section id="edit-position" fxLayout="row" fxLayoutAlign="center space-evenly">
               <p fxFlex="50" fxLayoutAlign="start">Position: {{ input_position }}</p>
               <mat-checkbox fxFlex="50" color="accent" [(ngModel)]="input_positionToggle" fxLayoutAlign="end" >
-                <p *ngIf="articleType==='new'">Edit Position</p>
+                <p>Edit Position</p>
               </mat-checkbox>
             </section>
 
