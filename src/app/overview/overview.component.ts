@@ -15,6 +15,7 @@ export class OverviewComponent implements OnInit {
 
   newAlert_title: string = '';
   newAlert_url: string = '';
+  newAlert_image: string = '';
 
   data: any = {
     left: {},
@@ -95,40 +96,49 @@ export class OverviewComponent implements OnInit {
   }
 
   submitNewAlertArticle(){
-    let columnId = '';
-    if( this.data.hasOwnProperty('alert') ) columnId = this.data.alert.columnData._id
 
-    const body: { title: string, url:string, position: number, column: string } = {
-      title: this.newAlert_title.trim(),
-      url: this.newAlert_url.trim(),
-      position: 1,
-      column: columnId
+    var body: any = {};
+
+    const title = this.newAlert_title.trim();
+    const url = this.newAlert_url.trim();
+    const image = this.newAlert_image.trim();
+
+    if( this.data.hasOwnProperty('alert') ){
+      const alertColumnId: string = this.data.alert.columnData._id;
+      body.column = alertColumnId;
     }
-    const token: string = window.sessionStorage.getItem('token')
+    else return;
 
-    this.http
-    .post(
-      'http://localhost:8000/article/',
-      body,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'x-auth': window.sessionStorage.getItem('token')
-        })
-      }
-    )
-    .subscribe((resp:any) => {
-      console.log('success ==> ', resp)
+    if( title === '' || url === '' ) return;
+    body.title = title;
+    body.url = url;
 
-      if(!resp.articleSaved) return;
+    if( image !== '' ) body.image = image;
+
+    body.position = 1;
+
+    this.postNewAlert(body);
+
+    // this.fetchColumn('alert');
+    this.newAlert_title = '';
+    this.newAlert_url = '';
+    this.newAlert_image = '';
+
+  };
+
+  private postNewAlert(body: any){
+    const token: string = window.sessionStorage.getItem('token');
+    const url: string = 'http://localhost:8000/article/';
+    const headers: any = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-auth': token
+    });
+
+    this.http.post(url, body, { headers })
+    .subscribe( (resp: any) => {
+      console.log('New Alert Success ==> ', resp);
       this.fetchColumn('alert');
-      // console.log(this.data.alert.articles);
-
-      this.newAlert_title = '';
-      this.newAlert_url = '';
-    })
-
-    return;
+    });
   }
 
 }
