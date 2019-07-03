@@ -1,20 +1,34 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+<mat-sidenav-container id="nav">
+  <mat-sidenav #drawer id="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar class="title"><a href="http://www.gohilreport.com" target="_blank">Gohil Report</a></mat-toolbar>
-    <mat-nav-list class="links">
-      <a mat-list-item class="link" routerLink="/app/overview" routerLinkActive="activeLink" >Overview</a>
-      <!-- <a mat-list-item class="link" routerLink="/app/editor" routerLinkActive="activeLink" >Editor</a> -->
-      <a mat-list-item class="link" routerLink="/app/alerts" routerLinkActive="activeLink" >Alerts</a>
-      <!-- <p mat-list-item>Columns</p> -->
-      <a mat-list-item class="link" routerLink="/app/left-column"   routerLinkActive="activeLink">Left</a>
-      <a mat-list-item class="link" routerLink="/app/center-column" routerLinkActive="activeLink">Center</a>
-      <a mat-list-item class="link" routerLink="/app/right-column"  routerLinkActive="activeLink">Right</a>
-      <a mat-list-item class="link" routerLink="/app/archives"      routerLinkActive="activeLink">Archives</a>
+      <main>
+        <mat-toolbar id="title">
+          <a href="http://www.gohilreport.com" target="_blank">Gohil Report</a>
+        </mat-toolbar>
+        <mat-toolbar fxLayoutAlign="center">
+          <small>{{ username }}</small>
+        </mat-toolbar>
+        <mat-nav-list class="links">
+          <a mat-list-item routerLink="/app/overview"      routerLinkActive="activeLink">Overview</a>
+          <a mat-list-item routerLink="/app/alerts"        routerLinkActive="activeLink">Alerts</a>
+          <a mat-list-item routerLink="/app/left-column"   routerLinkActive="activeLink">Left</a>
+          <a mat-list-item routerLink="/app/center-column" routerLinkActive="activeLink">Center</a>
+          <a mat-list-item routerLink="/app/right-column"  routerLinkActive="activeLink">Right</a>
+          <a mat-list-item routerLink="/app/archives"      routerLinkActive="activeLink">Archives</a>
+        </mat-nav-list>
+      </main>
 
-    </mat-nav-list>
+      <div>
+        <mat-toolbar fxLayoutAlign="center center">
+          <button mat-raised-button color="warn">
+            Logout
+          </button>
+        </mat-toolbar>
+      </div>
+
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -28,7 +42,6 @@
       </button>
       <span>Gohil Report Manager</span>
     </mat-toolbar>
-    <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

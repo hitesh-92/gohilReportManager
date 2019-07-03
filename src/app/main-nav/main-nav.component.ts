@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 })
 export class MainNavComponent {
 
+  username: string = sessionStorage.getItem('email').split('@')[0];
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

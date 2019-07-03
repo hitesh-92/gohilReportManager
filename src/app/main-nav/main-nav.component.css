@@ -1,4 +1,4 @@
-.sidenav-container {
+/* .sidenav-container {
   height: 100%;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .link:hover{
-  background-color: rgba(155, 184, 196, 0.25)
+  background-color: rgba(155, 184, 196, 0.25);
 }
 
 a{
@@ -50,5 +50,46 @@ a:hover{
 
 .activeLink{
   color: rgba(2, 48, 84, 0.75) !important;
+  background-color: rgba(237, 231, 238, 0.3);
+} */
+
+/* --------------------------------------- */
+
+#sidenav{
+  background: linear-gradient(#3eabdd, #5d6bff);
+
+}
+main{
+  min-height: 90vh;
+}
+
+mat-toolbar{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#title>a{
+  color: white;
+  text-decoration: underline;
+  transition: 0.2s ease-in-out;
+}
+
+#title>a:hover{
+  text-decoration: none;
+  text-shadow: 2px 2px 2px #005b9a;
+}
+
+.links>a{
+  color: white !important;
+  transition: 0.4s ease-in-out;
+  font-weight: 100;
+  letter-spacing: 0.05rem;
+}
+
+.links>a:hover{
+  color: rgb(0, 128, 192) !important;
+  text-shadow: 1px 0px 1px #032cf7;
+}
+
+.activeLink{
   background-color: rgba(237, 231, 238, 0.3);
 }
