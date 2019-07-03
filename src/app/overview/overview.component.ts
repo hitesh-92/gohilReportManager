@@ -109,7 +109,7 @@ export class OverviewComponent implements OnInit {
     }
     else return;
 
-    if( title === '' || url === '' ) return;
+    if( title === '' || url === '' ) return console.log('need title or url');
     body.title = title;
     body.url = url;
 
