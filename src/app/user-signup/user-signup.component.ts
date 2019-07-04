@@ -44,12 +44,15 @@ export class UserSignupComponent {
         name, password
       } = {}) => {
 
-        this.password = password;
-        this.name = name;
+        password = password.trim();
+        name = name.trim();
+
+        if( name==='' || password==='' ) return console.log('Validate Name/Password');
+        if( password.length < 8 ) return console.log('Validate Password - 8 chars min');
 
         const userData: {email: string, password: string} = {
-          email: this.name.trim(),
-          password: this.password.trim()
+          email: name,
+          password: password
         }
 
         this.onSignUp(userData);

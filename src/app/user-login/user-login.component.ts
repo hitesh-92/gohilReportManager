@@ -47,12 +47,14 @@ export class UserLoginComponent implements OnInit {
       name, password
     } = {}) => {
 
-      this.name = name;
-      this.password = password;
+      name = name.trim();
+      password = password.trim();
+
+      if( name==='' || password==='' ) return console.log('LogIn: Validate Nmae/Password');
 
       const userData: { email: string, password: string } = {
-        email: this.name.trim(),
-        password: this.password.trim()
+        email: name,
+        password: password
       }
 
       this.onLogin(userData);
