@@ -27,12 +27,18 @@ export class MainNavComponent {
 
     const url: string = 'http://localhost:8000/user/logout';
     const token: string = sessionStorage.getItem('token');
-    const body: any = { token: token };
+    const email: string = sessionStorage.getItem('email');
+    const body: any = { email: email };
     const headers: any = new HttpHeaders({ 'x-auth': token });
 
-    console.log('Add Logout functionality. main-nav.ts ==> ', body);
+    // console.log('Add Logout functionality. main-nav.ts ==> ', body);
 
-    // this.http.post(url, body, { headers })
+    this.http.patch(url, body, { headers })
+    .subscribe( (resp: any) => {
+      console.log('loggedOut ==> ', resp);
+      this.router.navigate(['/']);
+    });
+
   }
 
 }
