@@ -36,6 +36,8 @@ export class MainNavComponent {
     this.http.patch(url, body, { headers })
     .subscribe( (resp: any) => {
       console.log('loggedOut ==> ', resp);
+
+      window.sessionStorage.clear();
       this.router.navigate(['/']);
     });
 

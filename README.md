@@ -4,4 +4,4 @@
  - [ ] Add route guards
  - [ ] Add vaidations
  - [ ] Rewrite ALL any types
- 
+ - [ ] Handle HTTP errors
