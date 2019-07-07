@@ -35,7 +35,7 @@ export default class ApiService{
     const url: string = `${this.api}/user/logout`;
     const headers = new HttpHeaders({ 'x-auth': token });
 
-    return this.http.post(url, body, { headers });
+    return this.http.patch(url, body, { headers });
   }
 
   // ****************
@@ -125,8 +125,5 @@ export default class ApiService{
 
     return this.http.delete(url, { headers });
   }
-
-
-
 
 }
