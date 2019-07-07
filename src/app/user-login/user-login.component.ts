@@ -4,13 +4,13 @@ import {
   Inject
 } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { Router } from '@angular/router';
+import ApiService from '../api.service';
 
 import {
   MatDialog,
@@ -34,7 +34,12 @@ export class UserLoginComponent implements OnInit {
   password: string = 'password';
   loginuUrl: string = 'http://localhost:8000/user/login';
 
-  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient) {}
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private http: HttpClient,
+    private apiService: ApiService
+  ) {}
 
   openDialog(): void {
 
@@ -67,23 +72,24 @@ export class UserLoginComponent implements OnInit {
   }
 
   private onLogin(body: {email: string, password: string}){
-    this.http
-    .post<{loggedIn: boolean, email: string, token: string}>('http://localhost:8000/user/login', body)
-    .subscribe(resp => {
 
-      if(!resp.loggedIn){
-        // Handle log in error
+    this.apiService.user_logIn(body)
+    .subscribe( (resp: any) => {
+      if( resp.loggedIn ) this.handleLogInSuccess(resp);
+      else this.handleLogInError();
+    });
 
-        this.name = '';
-        this.password = '';
-        return;
-      }
+  }
 
-      //Log in success
-      window.sessionStorage.setItem('token', resp.token);
-      window.sessionStorage.setItem('email', resp.email);
-      this.router.navigate(['/app/overview']);
-    })
+  handleLogInSuccess(data: any){
+    window.sessionStorage.setItem('token', data.token);
+    window.sessionStorage.setItem('email', data.email);
+    this.router.navigate(['/app/overview']);
+  }
+
+  handleLogInError(){
+    this.name = '';
+    this.password = '';
   }
 
 }

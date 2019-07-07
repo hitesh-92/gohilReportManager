@@ -16,6 +16,8 @@ import {
   MAT_DIALOG_DATA
 } from '@angular/material';
 
+import ApiService from '../api.service';
+
 export interface DialogData {
   password: string;
   name: string;
@@ -31,7 +33,11 @@ export class UserSignupComponent {
     name: string = '';
     password: string = '';
 
-    constructor(public dialog: MatDialog, private http: HttpClient) {}
+    constructor(
+      public dialog: MatDialog,
+      private http: HttpClient,
+      private apiService: ApiService
+    ) {}
 
     openDialog(): void {
 
@@ -57,6 +63,8 @@ export class UserSignupComponent {
 
         this.onSignUp(userData);
 
+        // this.apiService(userData).subscribe( (resp:) )
+
       });
     };
 
@@ -64,11 +72,16 @@ export class UserSignupComponent {
     }
 
     private onSignUp(body: {email: string, password: string}){
-      this.http
-      .post('http://localhost:8000/user/signup', body)
-      .subscribe(resp => {
-        console.log('signup/ ==> ', resp);
-      })
+      // this.http
+      // .post('http://localhost:8000/user/signup', body)
+      // .subscribe(resp => {
+      //   console.log('signup/ ==> ', resp);
+      // })
+
+      this.apiService.user_signup(body)
+      .subscribe( (resp: any) => {
+        console.log('signed up ==> ', resp);
+      });
 
     }
 
