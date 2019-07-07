@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 
 export default class ApiService{
-  // url = 'https://gohilreport-api.herokuapp.com';
-  api = 'http://localhost:8000';
+  api = 'https://gohilreport-api.herokuapp.com';
+  // api = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
 
@@ -55,9 +55,6 @@ export default class ApiService{
 
     return this.http.get(url, { headers });
   }
-
-
-
 
   // ****************
   //   ARTICLE

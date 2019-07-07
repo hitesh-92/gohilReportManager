@@ -8,11 +8,6 @@ import ApiService from '../api.service';
 })
 export class OverviewComponent implements OnInit {
 
-  articles: any = [
-    {title: "Beijing pioneering citizens' 'points' system critics brand 'Orwellian'"},
-    {title: "Almost Half of U.S. Births Happen Outside Marriage, Signaling Cultural Shift"}
-  ]
-
   newAlert_title: string = '';
   newAlert_url: string = '';
   newAlert_image: string = '';
@@ -70,7 +65,7 @@ export class OverviewComponent implements OnInit {
   private fetchColumn(title: string){
     const token: string = window.sessionStorage.getItem('token');
 
-    return this.apiService.column_fetchByTitle(title, token)
+    this.apiService.column_fetchByTitle(title, token)
     .subscribe((resp:any) => {
       this.data[title] = resp
       this.counts[title] = resp.articles.length;
