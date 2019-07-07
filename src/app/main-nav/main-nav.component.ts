@@ -30,7 +30,7 @@ export class MainNavComponent {
 
     const token: string = sessionStorage.getItem('token');
     const body: any = {
-      email: sessionStorage.getItem('email')
+      email: window.sessionStorage.getItem('email')
      };
 
     this.apiService.user_logout(body, token)

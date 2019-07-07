@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import ApiService from '../api.service';
 
 @Component({
   selector: 'app-overview',
@@ -41,11 +41,10 @@ export class OverviewComponent implements OnInit {
     sixMonth: 0
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.fetchAllColumns();
-    // console.log(this.data)
   }
 
   ngOnChanges(){
@@ -69,11 +68,9 @@ export class OverviewComponent implements OnInit {
   }
 
   private fetchColumn(title: string){
-    const url: string = `http://localhost:8000/column/${title}`;
-    const headers: any = new HttpHeaders({ 'x-auth': window.sessionStorage.getItem('token') });
+    const token: string = window.sessionStorage.getItem('token');
 
-    return this.http
-    .get(url, { headers })
+    return this.apiService.column_fetchByTitle(title, token)
     .subscribe((resp:any) => {
       this.data[title] = resp
       this.counts[title] = resp.articles.length;
@@ -128,15 +125,9 @@ export class OverviewComponent implements OnInit {
 
   private postNewAlert(body: any){
     const token: string = window.sessionStorage.getItem('token');
-    const url: string = 'http://localhost:8000/article/';
-    const headers: any = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-auth': token
-    });
 
-    this.http.post(url, body, { headers })
+    this.apiService.article_post_create(body, token)
     .subscribe( (resp: any) => {
-      console.log('New Alert Success ==> ', resp);
       this.fetchColumn('alert');
     });
   }
