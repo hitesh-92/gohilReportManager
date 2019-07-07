@@ -27,7 +27,7 @@ export class LeftColumnComponent implements OnInit {
     const title: string = 'left';
     const token: string = window.sessionStorage.getItem('token');
 
-    this.column_fetchByTitle(title)
+    this.apiService.column_fetchByTitle(title)
     .subscribe( (resp: any) => {
       if( resp.error ) return this.handleFetchColumnError(resp);
       else this.handleFetchedColumnData(resp);

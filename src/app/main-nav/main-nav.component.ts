@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import ApiService from '../api.service';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -21,22 +20,21 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private http: HttpClient) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private apiService: ApiService
+  ) {}
 
   onHandleLogout(){
 
-    const url: string = 'http://localhost:8000/user/logout';
     const token: string = sessionStorage.getItem('token');
-    const email: string = sessionStorage.getItem('email');
-    const body: any = { email: email };
-    const headers: any = new HttpHeaders({ 'x-auth': token });
+    const body: any = {
+      email: sessionStorage.getItem('email')
+     };
 
-    // console.log('Add Logout functionality. main-nav.ts ==> ', body);
-
-    this.http.patch(url, body, { headers })
+    this.apiService.user_logout(body, token)
     .subscribe( (resp: any) => {
-      console.log('loggedOut ==> ', resp);
-
       window.sessionStorage.clear();
       this.router.navigate(['/']);
     });
