@@ -105,7 +105,7 @@
       <section id="alert-display">
         <h4 class="mat-title">Alerts</h4>
         <mat-card>
-          <div *ngIf="data.alert.articles">
+          <div *ngIf="data.hasOwnProperty('alerts')">
             <p>{{ [data.alert.articles[0].title] }}</p>
             <p>{{ [data.alert.articles[1].title] }}</p>
             <p>{{ [data.alert.articles[2].title] }}</p>
