@@ -67,7 +67,6 @@ export default class ApiService{
     return this.http.get(url, { headers });
   }
 
-
   article_post_create(body: any, token: string){
     const url: string = `${this.api}/article`;
     const headers = new HttpHeaders({'x-auth':token});
@@ -95,6 +94,21 @@ export default class ApiService{
 
     return this.http.patch(url, body, { headers });
   }
+
+  article_patch_switchPositions(body: any, token: string){
+    const url: string = `${this.api}/article/switch`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.patch(url, body, { headers });
+  }
+
+  article_patch_insertToPosition(body: any, token: string){
+    const url: string = `${this.api}/article/insertposition`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.patch(url, body, { headers });
+  }
+
 
   article_patch_unArchive(body: any, token: string){
     const url: string = `${this.api}/article/unarchive`;

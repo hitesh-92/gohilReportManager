@@ -2,7 +2,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { HttpClient, HttpHeaders } from '@angular/common/http';
+import ApiService from '../api.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -39,7 +40,12 @@ export class ColumnViewComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private http: HttpClient, private location: Location, private router: Router) { }
+  constructor(
+    // private http: HttpClient,
+    private apiService: ApiService,
+    private location: Location,
+    private router: Router
+  ) { }
 
   ngOnInit() { }
 
@@ -122,41 +128,40 @@ export class ColumnViewComponent implements OnInit {
   */
 
   private handleSwitchRequest(body: any){
-    const url: string = 'http://localhost:8000/article/switch';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-auth': window.sessionStorage.getItem('token')
-    });
+    // const url: string = 'http://localhost:8000/article/switch';
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'x-auth': window.sessionStorage.getItem('token')
+    // });
+    const token: string = window.sessionStorage.getItem('token');
 
-    this.http.patch(url, body, { headers })
+    // this.http.patch(url, body, { headers })
+    this.apiService.article_patch_switchPositions(body, token)
     .subscribe( (resp:any) => {
-      console.log('Switch Success ==> ', resp);
+      // console.log('Switch Success ==> ', resp);
       this.resetPickedArticles();
       this.resetColumnArticles();
     });
   }
 
   private handleInsertRequest(body: any){
-    const url: string = 'http://localhost:8000/article/insertposition';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-auth': window.sessionStorage.getItem('token')
-    });
-    console.log('req.body ==> ', body)
 
-    this.http.patch(url, body, { headers })
+    const token: string = window.sessionStorage.getItem('token');
+
+    this.apiService.article_patch_insertToPosition(body, token)
     .subscribe( (resp:any) => {
-      console.log('Insert Success ==> ', resp);
+      // console.log('Insert Success ==> ', resp);
       this.resetPickedArticles();
       this.resetColumnArticles();
     });
   }
 
   private resetColumnArticles(){
-    const url: string = `http://localhost:8000/column/${this.columnTitle}`;
-    const headers = new HttpHeaders({ 'x-auth': window.sessionStorage.getItem('token') });
 
-    this.http.get(url, { headers })
+    const title: string = this.columnTitle;
+    const token: string = window.sessionStorage.getItem('token');
+
+    this.apiService.column_fetchByTitle(title, token)
     .subscribe( (resp: any) => {
       this.articles = [...resp.articles];
       // ADD IN LOADING

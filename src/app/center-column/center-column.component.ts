@@ -36,13 +36,13 @@ export class CenterColumnComponent implements OnInit {
   }
 
   handleFetchedColumnData(data: any){
-    this.articles = [...resp.articles];
-    this.columnTitle = resp.columnData.title;
-    this.columnId = resp.columnData._id;
+    this.articles = [...data.articles];
+    this.columnTitle = data.columnData.title;
+    this.columnId = data.columnData._id;
   }
 
   handleFetchColumnError(data: any){
-    console.error('center-column, ERROR, fetchColumn()');
+    console.error('center-column, ERROR, fetchColumn()', data);
   }
 
 }
