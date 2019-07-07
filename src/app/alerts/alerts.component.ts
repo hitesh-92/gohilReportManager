@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import ApiService from '../api.service';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-alerts',
@@ -13,7 +12,6 @@ export class AlertsComponent implements OnInit {
   columnId: string = ''
   articles: any = [];
 
-  // constructor(private http: HttpClient) { }
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {

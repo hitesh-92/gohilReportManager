@@ -9,6 +9,10 @@ export default class ApiService{
 
   constructor(private http: HttpClient) {}
 
+  // ****************
+  //   USER
+  //
+
   user_signup(body: any){
     const url: string = `${this.api}/user/signup`;
     return this.http.post(url, body);
@@ -31,12 +35,82 @@ export default class ApiService{
     const url: string = `${this.api}/user/logout`;
   }
 
+  // ****************
+  //   COLUMN
+  //
+
   column_fetchByTitle(title: string, token: string){
     const url: string = `${this.api}/column/${title}`;
     const headers = new HttpHeaders({ 'x-auth': token });
 
     return this.http.get(url, { headers });
   }
+
+  column_get_columnIds(token: string){
+    const url: string = `${this.api}/column/ids`;
+    const headers: any = new HttpHeaders({'x-auth': token});
+
+    return this.http.get(url, { headers });
+  }
+
+
+
+
+  // ****************
+  //   ARTICLE
+  //
+
+  article_get_byId(id: string, token: string){
+    const url: string = `${this.api}/article/${id}`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.get(url, { headers });
+  }
+
+
+  article_post_create(body: any, token: string){
+    const url: string = `${this.api}/article`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.post(url, body, { headers });
+  }
+
+  article_post_archive(body: any, token: string){
+    const url: string = `${this.api}/article/archive`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.post(url, body, { headers });
+  }
+
+  article_patch_updateExisting(body, token){
+    const url: string = `${this.api}/article`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.patch(url, body, { headers });
+  }
+
+  article_patch_removeImage(body: any, token: string){
+    const url: string = `${this.api}/article/removeimage`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.patch(url, body, { headers });
+  }
+
+  article_patch_unArchive(body: any, token: string){
+    const url: string = `${this.api}/article/unarchive`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.patch(url, body, { headers });
+  }
+
+  article_delete_destroy(id: string, token: string){
+    const url: string = `${this.api}/article/${id}`;
+    const headers = new HttpHeaders({'x-auth':token});
+
+    return this.http.delete(url, { headers });
+  }
+
+
 
 
 }

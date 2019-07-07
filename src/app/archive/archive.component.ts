@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import ApiService from '../api.service';
 
 @Component({
   selector: 'app-archive',
@@ -12,7 +12,7 @@ export class ArchiveComponent implements OnInit {
   columnId: string = ''
   articles: any = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.fetchColumn()
@@ -23,25 +23,24 @@ export class ArchiveComponent implements OnInit {
   }
 
   fetchColumn(){
-    this.http
-    .get(
-      'http://localhost:8000/column/archive',
-      {
-        headers: new HttpHeaders({
-          'x-auth': window.sessionStorage.getItem('token')
-        })
-      }
-    )
+    const title: string = 'archive';
+    const token: string = window.sessionStorage.getItem('token');
+
+    this.apiService.column_fetchByTitle(title, token)
     .subscribe( (resp: any) => {
-      // console.log('/archive succes ==> ', resp)
-
-      if (resp.error) return console.error('left-column, ERROR, fetchColumn()');
-
-      this.articles = [...resp.articles];
-      this.columnTitle = resp.columnData.title;
-      this.columnId = resp.columnData._id;
+      if( resp.error ) this.handleFetchColumnError(resp);
+      else this.handleFetchedColumnData(resp);
     });
+  }
 
+  handleFetchedColumnData(data: any){
+    this.articles = [...data.articles];
+    this.columnTitle = data.columnData.title;
+    this.columnId = data.columnData._id;
+  }
+
+  handleFetchColumnError(data: any){
+    console.log('Error. Column: Alert ==> ', data);
   }
 
 }

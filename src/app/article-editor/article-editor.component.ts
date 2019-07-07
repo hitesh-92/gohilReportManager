@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { HttpClient, HttpHeaders } from '@angular/common/http';
+import ApiService from '../api.service';
 
 @Component({
   selector: 'app-article-editor',
@@ -10,7 +11,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ArticleEditorComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    // private http: HttpClient
+    private apiService: ApiService
+  ) { }
 
   // ----
 
@@ -45,7 +51,7 @@ export class ArticleEditorComponent implements OnInit {
   input_imageToggle: boolean = false;
   input_image: string;
   input_positionToggle: boolean = false;
-  input_position: number; // = this.highestColumnArticlePosition;
+  input_position: number;
 
   actionType: string;
   actions: string[];
@@ -263,9 +269,10 @@ export class ArticleEditorComponent implements OnInit {
   private fetchColumnIds(){
 
     const token: string = window.sessionStorage.getItem('token');
-    const headers: any = new HttpHeaders({'x-auth': token})
+    // const headers: any = new HttpHeaders({'x-auth': token})
 
-    this.http.get('http://localhost:8000/column/ids', { headers })
+    // this.http.get('http://localhost:8000/column/ids', { headers })
+    this.apiService.column_get_columnIds(token)
     .subscribe((resp:any) => {
 
       if(resp.error) return; //HANDLE ERROR
@@ -318,10 +325,11 @@ export class ArticleEditorComponent implements OnInit {
   private setExisitingArticle(id:string){
 
     const token: string = window.sessionStorage.getItem('token');
-    const url: string = `http://localhost:8000/article/${id}`;
-    const headers = new HttpHeaders({'x-auth':token});
+    // const url: string = `http://localhost:8000/article/${id}`;
+    // const headers = new HttpHeaders({'x-auth':token});
 
-    this.http.get(url, {headers})
+    // this.http.get(url, {headers})
+    this.apiService.article_get_byId(id, token)
     .subscribe( (resp:any) => {
       // console.log('GOT ARTICLE ==> ', resp)
       if(!resp.found) return; //HANDLE ERROR
@@ -346,11 +354,12 @@ export class ArticleEditorComponent implements OnInit {
 
   private submitCreateNewArticle(body: any){
 
-    const url: string = 'http://localhost:8000/article';
+    // const url: string = 'http://localhost:8000/article';
     const token: string = window.sessionStorage.getItem('token');
-    const headers: any = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
+    // const headers: any = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
 
-    this.http.post(url, body, { headers })
+    // this.http.post(url, body, { headers })
+    this.apiService.article_post_create(body, token)
     .subscribe( (resp: any) => {
       console.log('Article Saved ==> ', resp);
       this.navigateBackToPathFrom()
@@ -360,14 +369,15 @@ export class ArticleEditorComponent implements OnInit {
   private submitUdateExistingArticle(body: any){
 
     const token = window.sessionStorage.getItem('token');
-    const url: string = 'http://localhost:8000/article/';
-    const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
+    // const url: string = 'http://localhost:8000/article/';
+    // const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
 
-    console.log(body)
+    // console.log(body)
 
-    this.http.patch(url, body, {headers})
+    // this.http.patch(url, body, {headers})
+    this.apiService.article_patch_updateExisting(body, token)
     .subscribe( (resp:any) => {
-      console.log('PATCHED ==> ', resp)
+      // console.log('PATCHED ==> ', resp)
       this.navigateBackToPathFrom();
     });
 
@@ -376,14 +386,15 @@ export class ArticleEditorComponent implements OnInit {
   private subimtRemoveArticleImage(id: string, navigateBack: boolean){
 
     const token = window.sessionStorage.getItem('token');
-    const url: string = 'http://localhost:8000/article/removeimage';
-    const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
+    // const url: string = 'http://localhost:8000/article/removeimage';
+    // const headers = new HttpHeaders({'x-auth':token, 'Content-Type':'application/json'});
 
     const body: any = { id: id };
 
-    this.http.patch(url, body, {headers})
+    // this.http.patch(url, body, {headers})
+    this.apiService.article_patch_removeImage(body, token)
     .subscribe( (resp:any) => {
-      console.log('Image Deleted ==> ', resp)
+      // console.log('Image Deleted ==> ', resp)
       if( navigateBack ){
         this.navigateBackToPathFrom();
       }
@@ -394,33 +405,32 @@ export class ArticleEditorComponent implements OnInit {
   private submitArchiveArticle(id: string){
     const token: string = window.sessionStorage.getItem('token');
 
-    const url: string = 'http://localhost:8000/article/archive';
+    // const url: string = 'http://localhost:8000/article/archive';
     const body: any = { id: id };
-    const headers: any = new HttpHeaders({'x-auth': token, 'Content-Type': 'application/json'});
+    // const headers: any = new HttpHeaders({'x-auth': token, 'Content-Type': 'application/json'});
 
-    this.http.post(url, body, { headers })
+    // this.http.post(url, body, { headers })
+    this.apiService.article_post_archive(body, token)
     .subscribe( (resp: any) => {
-      console.log('Article Archived: ', resp);
+      // console.log('Article Archived: ', resp);
+      return this.navigateBackToPathFrom();
     })
-
-    // this.router.navigate([this.pathFrom])
-    this.navigateBackToPathFrom()
   }
 
   private submitUn_ArchiveArticle(id: string){
     const token: string = window.sessionStorage.getItem('token');
 
-    const url: string = 'http://localhost:8000/article/archive/unarchive';
+    // const url: string = 'http://localhost:8000/article/archive/unarchive';
     const body: any = { id: id };
-    const headers: any = new HttpHeaders({'x-auth': token, 'Content-Type': 'application/json'});
+    // const headers: any = new HttpHeaders({'x-auth': token, 'Content-Type': 'application/json'});
 
-    this.http.patch(url, body, { headers })
+    // this.http.patch(url, body, { headers })
+    this.apiService.article_patch_unArchive(body, token)
     .subscribe( (resp: any) => {
       // console.log('Article UN__Archived: ', resp);
-    })
+      this.navigateBackToPathFrom()
+    });
 
-    // this.router.navigate([this.pathFrom]);
-    this.navigateBackToPathFrom()
   }
 
   private submitDeleteRequest(id: string){
@@ -429,13 +439,14 @@ export class ArticleEditorComponent implements OnInit {
 
 
     // const url: string = 'http://localhost:8000/article';
-    const url: string = `http://localhost:8000/article/${id}`;
+    // const url: string = `http://localhost:8000/article/${id}`;
     // const body: any = { id: id };
-    const headers: any = new HttpHeaders({'x-auth': token});
+    // const headers: any = new HttpHeaders({'x-auth': token});
 
-    console.log('DELETINGGGGG', token, headers)
+    // console.log('DELETINGGGGG', token, headers)
 
-    this.http.delete(url, { headers })
+    // this.http.delete(url, { headers })
+    this.apiService.article_delete_destroy(id, token)
     .subscribe( (resp: any) => {
       console.log('Article DELETED: ', resp);
       this.navigateBackToPathFrom()
