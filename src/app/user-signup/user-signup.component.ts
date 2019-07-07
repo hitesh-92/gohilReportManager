@@ -63,8 +63,6 @@ export class UserSignupComponent {
 
         this.onSignUp(userData);
 
-        // this.apiService(userData).subscribe( (resp:) )
-
       });
     };
 

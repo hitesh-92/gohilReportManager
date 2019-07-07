@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 
@@ -17,6 +17,12 @@ export default class ApiService{
   user_logIn(body: any){
     const url: string = `${this.api}/user/login`;
     return this.http.post(url, body);
+  }
+
+  user_logInWithToken(token: string){
+    const url: string = `${this.api}/user/login`;
+    const headers = new HttpHeaders({ 'x-auth': token });
+    return this.http.post(url, {}, { headers });
   }
 
   user_logout(body: any){

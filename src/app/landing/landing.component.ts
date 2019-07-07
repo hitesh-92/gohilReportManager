@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import ApiService from '../api.service';
 
 @Component({
   selector: 'app-landing',
@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(
+    private router: Router,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit() {
     const token: any = sessionStorage.getItem('token');
@@ -19,24 +22,19 @@ export class LandingComponent implements OnInit {
   }
 
   private attemptSignIn(token: string){
-
-    const url: string = 'http://localhost:8000/user/login';
-    const body: {} = {};
-    const headers = new HttpHeaders({'x-auth': token});
-
-    this.http.post(url, body, { headers })
+    this.apiService.user_logInWithToken(token)
     .subscribe( (resp: any) => {
-
-      if( resp.loggedIn === true ){
-        this.setToken(resp.token);
-        this.router.navigate(['/app/overview']);
-      }
+      if( resp.loggedIn ) this.handleTokenLogInSuccess(resp.token);
     });
-
   }
 
   setToken(token: string){
     window.sessionStorage.setItem('token', token);
+  }
+
+  handleTokenLogInSuccess(token: string){
+    this.setToken(token);
+    this.router.navigate(['/app/overview']);
   }
 
 }
