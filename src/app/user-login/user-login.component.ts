@@ -3,8 +3,6 @@ import {
   OnInit,
   Inject
 } from '@angular/core';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
@@ -37,7 +35,6 @@ export class UserLoginComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private http: HttpClient,
     private apiService: ApiService
   ) {}
 
