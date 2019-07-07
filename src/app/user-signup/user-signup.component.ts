@@ -4,9 +4,6 @@ import {
   Inject
 } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -35,7 +32,6 @@ export class UserSignupComponent {
 
     constructor(
       public dialog: MatDialog,
-      private http: HttpClient,
       private apiService: ApiService
     ) {}
 
@@ -70,12 +66,6 @@ export class UserSignupComponent {
     }
 
     private onSignUp(body: {email: string, password: string}){
-      // this.http
-      // .post('http://localhost:8000/user/signup', body)
-      // .subscribe(resp => {
-      //   console.log('signup/ ==> ', resp);
-      // })
-
       this.apiService.user_signup(body)
       .subscribe( (resp: any) => {
         console.log('signed up ==> ', resp);

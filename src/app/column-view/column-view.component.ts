@@ -2,8 +2,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
 import ApiService from '../api.service';
+
 import { MatTableDataSource } from '@angular/material/table';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -26,7 +26,6 @@ export class ColumnViewComponent implements OnInit {
 
   allowSwitch: boolean = false;
 
-  //stores index of article in articles array
   selected: number = -1;
   moveTo: number = -1;
   edit: boolean = true;
@@ -41,7 +40,6 @@ export class ColumnViewComponent implements OnInit {
   }
 
   constructor(
-    // private http: HttpClient,
     private apiService: ApiService,
     private location: Location,
     private router: Router
@@ -63,7 +61,7 @@ export class ColumnViewComponent implements OnInit {
   *   Buttons
   */
 
-  onEdit(article: any){ // TODO
+  onEdit(article: any){
 
     if(this.edit === true) this.forwardToEditPage(article._id);
     else {
@@ -77,12 +75,6 @@ export class ColumnViewComponent implements OnInit {
   }
 
   onConfirmSwitch(event:any){
-    // console.log(`TYPE:${this.requestType}, selected:${this.selected}, moveTo:${this.moveTo}`);
-
-    // const body: any = {
-    //   selected: this.articles[this.selected - 1]._id,
-    //   moveTo: this.articles[this.moveTo - 1]._id
-    // };
 
     const selectedArticle: any = this.articles[this.selected - 1];
     const moveTo: any = this.articles[this.moveTo-1];
@@ -128,17 +120,11 @@ export class ColumnViewComponent implements OnInit {
   */
 
   private handleSwitchRequest(body: any){
-    // const url: string = 'http://localhost:8000/article/switch';
-    // const headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'x-auth': window.sessionStorage.getItem('token')
-    // });
+
     const token: string = window.sessionStorage.getItem('token');
 
-    // this.http.patch(url, body, { headers })
     this.apiService.article_patch_switchPositions(body, token)
     .subscribe( (resp:any) => {
-      // console.log('Switch Success ==> ', resp);
       this.resetPickedArticles();
       this.resetColumnArticles();
     });
@@ -150,7 +136,6 @@ export class ColumnViewComponent implements OnInit {
 
     this.apiService.article_patch_insertToPosition(body, token)
     .subscribe( (resp:any) => {
-      // console.log('Insert Success ==> ', resp);
       this.resetPickedArticles();
       this.resetColumnArticles();
     });
@@ -164,7 +149,6 @@ export class ColumnViewComponent implements OnInit {
     this.apiService.column_fetchByTitle(title, token)
     .subscribe( (resp: any) => {
       this.articles = [...resp.articles];
-      // ADD IN LOADING
       this.selected = -1;
       this.moveTo = -1;
       this.dataSource = new MatTableDataSource(this.articles);
@@ -259,7 +243,6 @@ export class ColumnViewComponent implements OnInit {
   }
 
   leftButtonRenderIcon(){
-    // return this.edit ? 'edit' :'keyboard_backspace';
 
     if(this.edit) return 'edit';
     else return 'keyboard_backspace';
